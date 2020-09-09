@@ -1,3 +1,3 @@
 <?php
-$db = new mysqli("localhost", "root", "", "loginsys");
-// $db=new mysqli("localhost","root","password","loginsys");
+// $db = new mysqli("localhost", "root", "", "hiyamee");
+$db = new mysqli("localhost", "hiyameen_recruit", "hiyameen_recruiterdashboard", "hiyameen_recruiterdashboard");
