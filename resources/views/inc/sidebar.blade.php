@@ -11,6 +11,34 @@
                             <span class="title">Dashboard</span>
                         </a>
                     </li>
+
+
+                    <li class="nav-item dropdown @yield('companies')">
+                        <a class="dropdown-toggle" href="javascript:void(0);">
+                            <span class="icon-holder">
+                                <i class="anticon anticon-build"></i>
+                            </span>
+                            <span class="title">Companies</span>
+                            <span class="arrow">
+                                <i class="arrow-icon"></i>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="@yield('companies-add')">
+                                <a href="/companies/">Add</a>
+                            </li>
+                            <li>
+                                <a href="index-crm.html">CRM</a>
+                            </li>
+                            <li>
+                                <a href="index-e-commerce.html">E-commerce</a>
+                            </li>
+                            <li>
+                                <a href="index-projects.html">Projects</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="nav-item dropdown ">
                         <a class="dropdown-toggle" href="/logout">
                             <span class="icon-holder">

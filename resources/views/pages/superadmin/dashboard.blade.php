@@ -888,3 +888,8 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+<script src="/assets/vendors/chartjs/Chart.min.js"></script>
+<script src="/assets/js/pages/dashboard-default.js"></script>
+@endsection

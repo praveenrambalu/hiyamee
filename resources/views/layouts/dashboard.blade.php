@@ -11,9 +11,10 @@
     <link rel="shortcut icon" href="/assets/images/logo/favicon.png">
 
     <!-- page css -->
-
+    @yield('styles')
     <!-- Core css -->
     <link href="/assets/css/app.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 
 </head>
 
@@ -217,18 +218,31 @@
             <!-- Quick View END -->
         </div>
     </div>
-
     
     <!-- Core Vendors JS -->
     <script src="/assets/js/vendors.min.js"></script>
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- page js -->
-    <script src="/assets/vendors/chartjs/Chart.min.js"></script>
-    <script src="/assets/js/pages/dashboard-default.js"></script>
-
+    @yield('scripts')
     <!-- Core JS -->
     <script src="/assets/js/app.min.js"></script>
+    @if (session('success'))
+    {{-- <script>swal('Good Job !',"@php echo session('success') @endphp" , 'success');</script> --}}
+    <script>
+    toastr["success"]("@php echo session('success') @endphp")
+    </script>
+    @endif
+    @if (session('error'))
+    <script>
+    toastr["error"]("@php echo session('error') @endphp")
+    </script>
+    {{-- <script>swal('Oops !',"@php echo session('error') @endphp" , 'error');</script> --}}
+    @endif
 
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( '.ckeditor' );
+    </script>
 </body>
 
 </html>

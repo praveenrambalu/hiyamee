@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +20,17 @@ Route::get('/logout', function () {
     Auth::logout();
     return redirect('/login');
 });
+Route::get('/', function () {
+    return redirect('/login');
+});
 
 Auth::routes();
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'superadmin'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
+
+Route::group(['prefix' => '/companies', 'middleware' => ['auth', 'superadmin']], function () {
+    Route::get('/', [CompanyController::class, 'addCompany']);
+    Route::post('/', [CompanyController::class, 'addCompanyPost']);
+    Route::get('/{id}/add-admin', [CompanyController::class, 'addCompanyAdmin']);
+    Route::post('/{id}/add-admin', [CompanyController::class, 'addCompanyAdminPost']);
+});
