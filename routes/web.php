@@ -22,4 +22,4 @@ Route::get('/logout', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'superadmin'])->name('dashboard');

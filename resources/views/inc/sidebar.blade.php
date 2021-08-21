@@ -1,7 +1,28 @@
 <div class="side-nav">
     <div class="side-nav-inner">
         <ul class="side-nav-menu scrollable">
-            <li class="nav-item dropdown open">
+           @switch(Auth::user()->user_type)
+               @case('superadmin')
+                    <li class="nav-item dropdown active">
+                        <a class="dropdown-toggle" href="/dashboard">
+                            <span class="icon-holder">
+                                <i class="anticon anticon-dashboard"></i>
+                            </span>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown ">
+                        <a class="dropdown-toggle" href="/logout">
+                            <span class="icon-holder">
+                                <i class="anticon anticon-lock"></i>
+                            </span>
+                            <span class="title">Logout</span>
+                        </a>
+                    </li>
+                @break
+           
+               @default
+               <li class="nav-item dropdown open">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
                         <i class="anticon anticon-dashboard"></i>
@@ -306,7 +327,10 @@
                         <a href="error-2.html">Error 2</a>
                     </li>
                 </ul>
-            </li>
+                </li>   
+                @break
+           @endswitch
+
         </ul>
     </div>
 </div>
