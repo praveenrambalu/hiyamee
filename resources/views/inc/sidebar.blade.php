@@ -48,6 +48,44 @@
                         </a>
                     </li>
                 @break
+               @case('admin')
+                    <li class="nav-item dropdown active">
+                        <a class="dropdown-toggle" href="/dashboard">
+                            <span class="icon-holder">
+                                <i class="anticon anticon-dashboard"></i>
+                            </span>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item dropdown @yield('jobs')">
+                        <a class="dropdown-toggle" href="javascript:void(0);">
+                            <span class="icon-holder">
+                                <i class="fas fa-briefcase"></i>
+                            </span>
+                            <span class="title">Jobs</span>
+                            <span class="arrow">
+                                <i class="arrow-icon"></i>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="@yield('jobs-add')">
+                                <a href="/jobs/">Add</a>
+                            </li>
+                           
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown ">
+                        <a class="dropdown-toggle" href="/logout">
+                            <span class="icon-holder">
+                                <i class="anticon anticon-lock"></i>
+                            </span>
+                            <span class="title">Logout</span>
+                        </a>
+                    </li>
+                @break
            
                @default
                <li class="nav-item dropdown open">

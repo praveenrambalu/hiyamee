@@ -15,7 +15,7 @@
                     <div class="col-md-8 align-self-center">
                         <h4 class="m-b-10">{{$company->company_name}}</h4>
                         <div class="d-flex align-items-center m-t-5 m-b-15">
-                            <div class="m-l-10">
+                            <div class="">
                                 <span class="text-gray font-weight-semibold">{{$company->location}}</span>
                                 <span class="m-h-5 text-gray">-</span>
                                 <span class="text-gray">{{$company->pincode}}</span>

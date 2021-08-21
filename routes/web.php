@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,10 @@ Route::group(['prefix' => '/companies', 'middleware' => ['auth', 'superadmin']],
     Route::post('/', [CompanyController::class, 'addCompanyPost']);
     Route::get('/{id}/add-admin', [CompanyController::class, 'addCompanyAdmin']);
     Route::post('/{id}/add-admin', [CompanyController::class, 'addCompanyAdminPost']);
+});
+
+
+Route::group(['prefix' => '/jobs', 'middleware' => ['auth']], function () {
+    Route::get('/', [JobController::class, 'addJob']);
+    Route::post('/', [JobController::class, 'addJobPost']);
 });

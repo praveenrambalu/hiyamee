@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('content')
+@section('contenst')
 <div class="row">
     <div class="col-md-6 col-lg-3">
         <div class="card">
