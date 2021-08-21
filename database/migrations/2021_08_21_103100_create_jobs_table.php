@@ -23,6 +23,7 @@ class CreateJobsTable extends Migration
             $table->string('primary_skill')->nullable();
             $table->string('skills_required')->nullable();
             $table->string('how_many_hires')->nullable();
+            $table->string('annual_ctc')->nullable();
             $table->string('status')->default('active')->nullable();
             $table->string('created_by')->nullable();
             $table->timestamps();

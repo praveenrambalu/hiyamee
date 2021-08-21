@@ -12,6 +12,7 @@
 
     <!-- page css -->
     @yield('styles')
+    <link href="/assets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
     <!-- Core css -->
     <link href="/assets/css/app.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
@@ -240,8 +241,11 @@
     @endif
 
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script src="/assets/vendors/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
     <script>
         CKEDITOR.replace( '.ckeditor' );
+        $('.datatable').DataTable();
     </script>
 </body>
 

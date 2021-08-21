@@ -71,6 +71,12 @@
                             <input type="number" required class="form-control"  placeholder="Ex: 2" min="1" name="how_many_hires">
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label >Annual CTC</label>
+                            <input type="text" required class="form-control"  placeholder="Ex: 3.2 LPA" name="annual_ctc">
+                        </div>
+                    </div>
                  
                     <div class="form-group ">
                         <label >Description</label>

@@ -73,6 +73,9 @@
                             <li class="@yield('jobs-add')">
                                 <a href="/jobs/">Add</a>
                             </li>
+                            <li class="@yield('jobs-view')">
+                                <a href="/jobs/view">View</a>
+                            </li>
                            
                         </ul>
                     </li>

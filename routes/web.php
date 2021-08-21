@@ -40,4 +40,5 @@ Route::group(['prefix' => '/companies', 'middleware' => ['auth', 'superadmin']],
 Route::group(['prefix' => '/jobs', 'middleware' => ['auth']], function () {
     Route::get('/', [JobController::class, 'addJob']);
     Route::post('/', [JobController::class, 'addJobPost']);
+    Route::get('/view', [JobController::class, 'viewJobs']);
 });
