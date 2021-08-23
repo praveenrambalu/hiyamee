@@ -76,6 +76,25 @@
                             <label >Annual CTC</label>
                             <input type="text" required class="form-control"  placeholder="Ex: 3.2 LPA" name="annual_ctc">
                         </div>
+                        <div class="form-group col-md-6">
+                            <label >Zoom link</label>
+                            <input type="text" required class="form-control"  placeholder="Ex: https://us04web.zoom.us/j/123456789" name="zoomlink">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label >Feedback</label>
+                            <br>
+                            <br>
+                            <label for="linkorfilelink" class="mr-3"><input type="radio" name="linkorfile"  id="linkorfilelink"> Link</label>
+                            <label for="linkorfilefile" class="mr-3"><input type="radio" name="linkorfile"  id="linkorfilefile"> File</label>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label >Zoom link</label>
+                            <div id="linkorfile">
+
+                            </div>
+                        </div>
                     </div>
                  
                     <div class="form-group ">
@@ -90,4 +109,22 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            $("#linkorfilelink").change(function(){
+                linkorfilecheck();
+            });
+            $("#linkorfilefile").change(function(){
+                linkorfilecheck();
+            });
+
+            function linkorfilecheck() {
+              
+            }
+
+        })
+    </script>
 @endsection

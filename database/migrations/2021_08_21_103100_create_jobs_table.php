@@ -24,6 +24,9 @@ class CreateJobsTable extends Migration
             $table->string('skills_required')->nullable();
             $table->string('how_many_hires')->nullable();
             $table->string('annual_ctc')->nullable();
+            $table->string('linkorfile')->nullable();
+            $table->string('feedback')->nullable();
+            $table->string('zoomlink')->nullable();
             $table->string('status')->default('active')->nullable();
             $table->string('created_by')->nullable();
             $table->timestamps();

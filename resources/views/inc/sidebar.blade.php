@@ -80,6 +80,27 @@
                         </ul>
                     </li>
 
+                    <li class="nav-item dropdown @yield('employees')">
+                        <a class="dropdown-toggle" href="javascript:void(0);">
+                            <span class="icon-holder">
+                                <i class="fas fa-briefcase"></i>
+                            </span>
+                            <span class="title">Employees</span>
+                            <span class="arrow">
+                                <i class="arrow-icon"></i>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="@yield('employees-add')">
+                                <a href="/employees/">Add</a>
+                            </li>
+                            <li class="@yield('e-view')">
+                                <a href="/employees/view">View</a>
+                            </li>
+                           
+                        </ul>
+                    </li>
+
                     <li class="nav-item dropdown ">
                         <a class="dropdown-toggle" href="/logout">
                             <span class="icon-holder">
