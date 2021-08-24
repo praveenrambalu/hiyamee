@@ -101,16 +101,17 @@
                     <i class="anticon anticon-close"></i>
                 </button>
             </div>
-            <form action="/candidates/bulk" method="post" enctype="multipart/form-data">
+            <form action="/candidates/bulk/{{$job->id}}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="text-center">
                         <a href="/assets/sample-candidate-form.csv">Download Sample Document</a>
                         <br>
                     </div>
+                    @csrf
                     <input type="file" name="bulkfile" required  accept=".csv" class="form-control">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Upload</button>
+                    <button type="submit" class="btn btn-primary">Upload</button>
                 </div>
             </form>
         </div>

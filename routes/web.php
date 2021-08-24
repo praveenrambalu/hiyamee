@@ -47,4 +47,5 @@ Route::group(['prefix' => '/jobs', 'middleware' => ['auth']], function () {
 Route::group(['prefix' => '/candidates', 'middleware' => ['auth']], function () {
     Route::get('/add/{id}', [CandidateController::class, 'addCandidate']);
     Route::post('/add/{id}', [CandidateController::class, 'addCandidatePost']);
+    Route::post('/bulk/{id}', [CandidateController::class, 'addCandidateBulkPost']);
 });

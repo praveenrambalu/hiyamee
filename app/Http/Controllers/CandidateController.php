@@ -64,4 +64,56 @@ class CandidateController extends Controller
             return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
         }
     }
+    public function addCandidateBulkPost(Request $request, $id)
+    {
+        if (Auth::user()->user_type == 'superadmin') {
+            $job = Job::where('status', 'active')->where('id', $id)->first();
+        } else if (Auth::user()->user_type == 'admin') {
+            $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+            $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $id)->first();
+        } else if (Auth::user()->user_type == 'recruiter') {
+            $job = Job::where('status', 'active')->where('id', $id)->first();
+        } else {
+            abort(401);
+        }
+
+        if ($job) {
+            $company = Company::find($job->company_id);
+
+
+
+            $row = 1;
+            $defective = '';
+            $emailexists = '';
+            if (($handle = fopen($request->bulkfile, "r")) !== FALSE) {
+                while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                    $num = count($data);
+                    if ($row != 1) {
+                        $candidate = new Candidate;
+                        $candidate->candidate_name = $data[0];
+                        $candidate->candidate_email = $data[1];
+                        $candidate->candidate_phone = $data[2];
+                        $candidate->job_id = $job->id;
+                        $candidate->job_position = $job->job_title;
+                        $candidate->job_company = $company->company_name;
+                        $candidate->uploaded_by = Auth::user()->id;
+                        $candidate->update_history = '*' . now() . ' : Candidate Uploaded Via Bulk Upload  by ' . Auth::user()->name . '<br>';
+                        $candidate->save();
+                    }
+
+                    $row++;
+                }
+
+
+                fclose($handle);
+            }
+
+
+
+
+            return redirect()->back()->with('success', 'Candidate added Successfully ');
+        } else {
+            return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
+        }
+    }
 }
