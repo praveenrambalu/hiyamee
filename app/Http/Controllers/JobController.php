@@ -33,6 +33,24 @@ class JobController extends Controller
             $job->how_many_hires = $request->how_many_hires;
             $job->annual_ctc = $request->annual_ctc;
             $job->created_by = Auth::user()->id;
+            $job->linkorfile = $request->linkorfile;
+            if ($request->linkorfile == 'link') {
+                $job->feedback = $request->feedback;
+            } else {
+                if ($feedback = $request->feedback) {
+                    $filenameWithExt = $feedback->getClientOriginalName();
+                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                    $extension = $feedback->getClientOriginalExtension();
+                    $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                    $path = $feedback->storeAs('public/feedback/', $fileNameToStore);
+                    $storagename = '/storage/feedback/' . $fileNameToStore;
+                    $job->feedback = $storagename;
+                }
+            }
+            $job->zoomlink = $request->zoomlink;
+
+
+
             $job->save();
             return redirect()->back()->with('success', 'Job Posted Successfully');
         } else {

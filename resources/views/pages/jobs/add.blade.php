@@ -86,13 +86,12 @@
                             <label >Feedback</label>
                             <br>
                             <br>
-                            <label for="linkorfilelink" class="mr-3"><input type="radio" name="linkorfile"  id="linkorfilelink"> Link</label>
-                            <label for="linkorfilefile" class="mr-3"><input type="radio" name="linkorfile"  id="linkorfilefile"> File</label>
+                            <label for="linkorfilelink" class="mr-3"><input type="radio" checked name="linkorfile" value="link" id="linkorfilelink"> Link</label>
+                            <label for="linkorfilefile" class="mr-3"><input type="radio" name="linkorfile" value="file" id="linkorfilefile"> File</label>
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Zoom link</label>
+                            <label >Feedback </label>
                             <div id="linkorfile">
-
                             </div>
                         </div>
                     </div>
@@ -114,6 +113,7 @@
 @section('scripts')
     <script>
         $(document).ready(function(){
+            linkorfilecheck();
             $("#linkorfilelink").change(function(){
                 linkorfilecheck();
             });
@@ -122,7 +122,12 @@
             });
 
             function linkorfilecheck() {
-              
+               var value = $('input[name="linkorfile"]:checked').val();
+               if(value==='file'){
+                $("#linkorfile").html('<input type="file" name="feedback" required  class="form-control">');
+               }else{
+                $("#linkorfile").html('<input type="url" name="feedback" required  class="form-control">');
+               }
             }
 
         })
