@@ -27,14 +27,8 @@
                             <li class="@yield('companies-add')">
                                 <a href="/companies/">Add</a>
                             </li>
-                            <li>
-                                <a href="index-crm.html">CRM</a>
-                            </li>
-                            <li>
-                                <a href="index-e-commerce.html">E-commerce</a>
-                            </li>
-                            <li>
-                                <a href="index-projects.html">Projects</a>
+                            <li class="@yield('companies-view')">
+                                <a href="/companies/view">View</a>
                             </li>
                         </ul>
                     </li>

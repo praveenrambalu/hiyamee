@@ -69,6 +69,16 @@ class JobController extends Controller
             return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');
         }
     }
+    public function viewJobsCompany(Request $request, $id)
+    {
+        $company = Company::where('status', 'active')->where('id', $id)->first();
+        if ($company) {
+            $jobs = Job::where('company_id', $company->id)->where('status', 'active')->get();
+            return view('pages.jobs.view')->with(['company' => $company, 'jobs' => $jobs]);
+        } else {
+            return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');
+        }
+    }
     public function viewJobDetail(Request $request, $id)
     {
         if (Auth::user()->user_type == 'superadmin') {

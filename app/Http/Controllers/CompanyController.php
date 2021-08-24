@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\User;
 use App\Notifications\AdminAssignNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class CompanyController extends Controller
@@ -90,5 +91,13 @@ class CompanyController extends Controller
         }
 
         // return view('pages.companies.add');
+    }
+    public function viewCompanies()
+    {
+        if (Auth::user()->user_type != 'superadmin') {
+            abort(401);
+        }
+        $companies = Company::where('status', 'active')->get();
+        return view('pages.companies.view')->with('companies', $companies);
     }
 }

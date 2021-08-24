@@ -35,6 +35,7 @@ Route::group(['prefix' => '/companies', 'middleware' => ['auth', 'superadmin']],
     Route::post('/', [CompanyController::class, 'addCompanyPost']);
     Route::get('/{id}/add-admin', [CompanyController::class, 'addCompanyAdmin']);
     Route::post('/{id}/add-admin', [CompanyController::class, 'addCompanyAdminPost']);
+    Route::get('/view', [CompanyController::class, 'viewCompanies']);
 });
 
 
@@ -42,6 +43,7 @@ Route::group(['prefix' => '/jobs', 'middleware' => ['auth']], function () {
     Route::get('/', [JobController::class, 'addJob']);
     Route::post('/', [JobController::class, 'addJobPost']);
     Route::get('/view', [JobController::class, 'viewJobs']);
+    Route::get('/view/{id}', [JobController::class, 'viewJobsCompany']);
     Route::get('/{id}', [JobController::class, 'viewJobDetail']);
 });
 Route::group(['prefix' => '/candidates', 'middleware' => ['auth']], function () {

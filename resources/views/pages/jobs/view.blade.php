@@ -36,7 +36,7 @@
                 <h3 class="card-title">View Job Posts</h3>
             </div>
             <div class="card-body">
-                <table  class="table datatable">
+                <table  class="table datatable dt-responsive nowrap" style="width: 100%">
                     <thead>
                         <tr>
                             <th>#</th>
