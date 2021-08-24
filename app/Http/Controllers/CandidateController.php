@@ -116,4 +116,38 @@ class CandidateController extends Controller
             return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
         }
     }
+    public function candidateDetail(Request $request, $id)
+    {
+        $candidate = Candidate::find($id);
+        $job_id = $candidate->job_id;
+        if (Auth::user()->user_type == 'superadmin') {
+            $job = Job::where('status', 'active')->where('id', $job_id)->first();
+        } else if (Auth::user()->user_type == 'admin') {
+            $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+            $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $job_id)->first();
+        } else if (Auth::user()->user_type == 'recruiter') {
+            $job = Job::where('status', 'active')->where('id', $job_id)->first();
+        } else {
+            abort(401);
+        }
+
+        if ($job) {
+            $company = Company::find($job->company_id);
+            $job_creator = User::find($job->created_by);
+            $candidate_creator = User::find($candidate->uploaded_by);
+
+            return view('pages.candidates.viewDetail')->with([
+                'company' => $company,
+                'job' => $job,
+                'job_creator' => $job_creator,
+                'candidate_creator' => $candidate_creator,
+                'candidate' => $candidate,
+                ''
+            ]);
+
+            // return redirect()->back()->with('success', 'Candidate added Successfully ');
+        } else {
+            return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
+        }
+    }
 }

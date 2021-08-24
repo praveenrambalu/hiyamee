@@ -93,16 +93,16 @@
                                     <td>{{$candidate->location}}</td>
                                     @switch($candidate->interview_outcome)
                                         @case('Ready')
-                                            <td><span class="badge badge-primary">Yet to be Interviewed</span></td>
+                                            <td><span class="badge badge-pill  badge-blue">Yet to be Interviewed</span></td>
                                             @break
                                         @case('Selected')
-                                            <td><span class="badge badge-success">{{$candidate->interview_outcome}}</span></td>
+                                            <td><span class="badge badge-pill  badge-cyan">{{$candidate->interview_outcome}}</span></td>
                                             @break
                                         @case('Interviewed')
-                                            <td><span class="badge badge-warning">{{$candidate->interview_outcome}}</span></td>
+                                            <td><span class="badge badge-pill  badge-orange">{{$candidate->interview_outcome}}</span></td>
                                             @break
                                         @case('Rejected')
-                                            <td><span class="badge badge-rejected">{{$candidate->interview_outcome}}</span></td>
+                                            <td><span class="badge badge-pill  badge-red">{{$candidate->interview_outcome}}</span></td>
                                             @break
                                         @default
                                         <td></td>
@@ -110,7 +110,7 @@
                                     <td>{{$updater->name}}</td>
                                     <td>{{date('Y-m-d', strtotime($candidate->created_at))}}</td>
                                     <td>
-                                        <a href="#" onclick="alert('Not Implemented')" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                        <a href="/candidates/{{$candidate->id}}"  class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                         <a href="#" onclick="alert('Not Implemented')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                     </td>
 
