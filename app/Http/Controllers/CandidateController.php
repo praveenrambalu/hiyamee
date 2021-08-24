@@ -60,7 +60,6 @@ class CandidateController extends Controller
             $candidate->update_history = '*' . now() . ' : Candidate Uploaded Via Single Upload  by ' . Auth::user()->name . '<br>';
             $candidate->save();
             return redirect()->back()->with('success', 'Candidate added Successfully ');
-
         } else {
             return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
         }

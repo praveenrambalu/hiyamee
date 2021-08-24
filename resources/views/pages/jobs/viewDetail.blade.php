@@ -78,26 +78,45 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @if (count($jobs)>0)
+                        @if (count($candidates)>0)
                             @php $i=1; @endphp
-                            @foreach ($jobs as $job)
+                            @foreach ($candidates as $candidate)
+                            @php
+                                $updater = \App\Models\User::find($candidate->uploaded_by);
+                            @endphp
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td><span class="badge badge-danger">{{$job->employment_type}}</span> {{$job->job_title}} </td>
-                                    <td><span class="badge badge-dark">{{$job->primary_skill}}</span> {{$job->skills_required}} </td>
-                                    <td>{{$job->location}}</td>
-                                    <td>{{$job->annual_ctc}}</td>
-                                    <td>{{$job->how_many_hires}}</td>
-                                    <td>{{$job->status}}</td>
+                                    <td>-</td>
+                                    <td>{{$candidate->candidate_name}}</td>
+                                    <td>{{$candidate->candidate_email}}</td>
+                                    <td>{{$candidate->candidate_phone}}</td>
+                                    <td>{{$candidate->location}}</td>
+                                    @switch($candidate->interview_outcome)
+                                        @case('Ready')
+                                            <td><span class="badge badge-primary">Yet to be Interviewed</span></td>
+                                            @break
+                                        @case('Selected')
+                                            <td><span class="badge badge-success">{{$candidate->interview_outcome}}</span></td>
+                                            @break
+                                        @case('Interviewed')
+                                            <td><span class="badge badge-warning">{{$candidate->interview_outcome}}</span></td>
+                                            @break
+                                        @case('Rejected')
+                                            <td><span class="badge badge-rejected">{{$candidate->interview_outcome}}</span></td>
+                                            @break
+                                        @default
+                                        <td></td>
+                                    @endswitch
+                                    <td>{{$updater->name}}</td>
+                                    <td>{{date('Y-m-d', strtotime($candidate->created_at))}}</td>
                                     <td>
                                         <a href="#" onclick="alert('Not Implemented')" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                         <a href="#" onclick="alert('Not Implemented')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-
                                     </td>
 
                                 </tr>
                             @endforeach
-                        @endif --}}
+                        @endif
                        
                     </tbody>
                 </table>
