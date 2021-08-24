@@ -4,6 +4,7 @@ use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\RecruiterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -52,4 +53,11 @@ Route::group(['prefix' => '/candidates', 'middleware' => ['auth']], function () 
     Route::post('/bulk/{id}', [CandidateController::class, 'addCandidateBulkPost']);
     Route::get('/{id}', [CandidateController::class, 'candidateDetail']);
     Route::post('/{id}', [CandidateController::class, 'candidateDetailPost']);
+});
+
+
+Route::group(['prefix' => '/recruiter', 'middleware' => ['auth', 'superadmin']], function () {
+    Route::get('/', [RecruiterController::class, 'addRecruiter']);
+    Route::post('/', [RecruiterController::class, 'addRecruiterPost']);
+    Route::get('/view', [RecruiterController::class, 'viewRecruiter']);
 });
