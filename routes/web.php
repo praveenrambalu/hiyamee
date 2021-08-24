@@ -49,4 +49,5 @@ Route::group(['prefix' => '/candidates', 'middleware' => ['auth']], function () 
     Route::post('/add/{id}', [CandidateController::class, 'addCandidatePost']);
     Route::post('/bulk/{id}', [CandidateController::class, 'addCandidateBulkPost']);
     Route::get('/{id}', [CandidateController::class, 'candidateDetail']);
+    Route::post('/{id}', [CandidateController::class, 'candidateDetailPost']);
 });

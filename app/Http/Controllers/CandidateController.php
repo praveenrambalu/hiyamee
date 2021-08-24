@@ -135,6 +135,11 @@ class CandidateController extends Controller
             $company = Company::find($job->company_id);
             $job_creator = User::find($job->created_by);
             $candidate_creator = User::find($candidate->uploaded_by);
+            if ($candidate->interviewer_id != NULL) {
+                $interviewer = User::find($candidate->interviewer_id);
+            } else {
+                $interviewer = [];
+            }
 
             return view('pages.candidates.viewDetail')->with([
                 'company' => $company,
@@ -142,7 +147,7 @@ class CandidateController extends Controller
                 'job_creator' => $job_creator,
                 'candidate_creator' => $candidate_creator,
                 'candidate' => $candidate,
-                ''
+                'interviewer' => $interviewer
             ]);
 
             // return redirect()->back()->with('success', 'Candidate added Successfully ');

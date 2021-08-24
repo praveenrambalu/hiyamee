@@ -85,8 +85,9 @@
                         
                                 <p class="text-dark ">{{$job->job_title}} <span class="text-opacity font-size-13">@ {{$company->company_name}}</span></p>
                                 
-
-                                <button class="btn btn-primary btn-tone">Status Update</button>
+                                @if (Auth::user()->user_type=='recruiter' || Auth::user()->user_type=='superadmin')
+                                    <button class="btn btn-primary btn-tone" type="button" data-toggle="modal" data-target="#InterViewStatus">Status Update</button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -116,6 +117,13 @@
                                         </p>
                                         <p class="col font-weight-semibold"> {{$candidate->location}}</p>
                                     </li>
+                                    <li class="row">
+                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                            <i class="m-r-10 text-primary anticon anticon-area-chart"></i>
+                                            <span>Experience: </span> 
+                                        </p>
+                                        <p class="col font-weight-semibold"> {{$candidate->experience}}</p>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -125,6 +133,12 @@
                             <div class="d-md-block d-none border-left col-1"></div>
                             <div class="col">
                                 <ul class="list-unstyled m-t-10">
+                                    <li class="row">
+                                        <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
+                                            <span>Interviewer : </span> 
+                                        </p>
+                                        <p class="col font-weight-semibold">{{$interviewer->name ?? ''}}</p>
+                                    </li>
                                     <li class="row">
                                         <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
                                             <span>Uploaded By: </span> 
@@ -189,4 +203,32 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="modal fade" id="InterViewStatus">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="InterViewStatusTitle">Candidate Status Update</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="anticon anticon-close"></i>
+                </button>
+            </div>
+            <form action="/candidates/bulk/{{$job->id}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        div
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 @endsection
