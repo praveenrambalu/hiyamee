@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobController;
@@ -42,4 +43,8 @@ Route::group(['prefix' => '/jobs', 'middleware' => ['auth']], function () {
     Route::post('/', [JobController::class, 'addJobPost']);
     Route::get('/view', [JobController::class, 'viewJobs']);
     Route::get('/{id}', [JobController::class, 'viewJobDetail']);
+});
+Route::group(['prefix' => '/candidates', 'middleware' => ['auth']], function () {
+    Route::get('/add/{id}', [CandidateController::class, 'addCandidate']);
+    Route::post('/add/{id}', [CandidateController::class, 'addCandidatePost']);
 });
