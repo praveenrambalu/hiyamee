@@ -44,7 +44,9 @@
                         <div class="col-md-4  align-self-center">
                         </div>
                         <div class="col-md-8 align-self-center ">
-                            <a href="/candidates/add-bulk/{{$job->id}}" target="" class="btn btn-dark">Bulk Upload Candidates </a>
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#bulkAdd">
+                                Bulk Upload Candidates
+                            </button>
                         </div>
                     </div>
 
@@ -88,4 +90,32 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="bulkAdd">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bulkAddTitle">Bulk Candidate</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="anticon anticon-close"></i>
+                </button>
+            </div>
+            <form action="/candidates/bulk" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <a href="/assets/sample-candidate-form.csv">Download Sample Document</a>
+                        <br>
+                    </div>
+                    <input type="file" name="bulkfile" required  accept=".csv" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 @endsection
