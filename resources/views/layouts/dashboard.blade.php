@@ -13,6 +13,8 @@
     <!-- page css -->
     @yield('styles')
     <link href="/assets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
     <!-- Core css -->
     <link href="/assets/css/app.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
@@ -243,9 +245,13 @@
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <script src="/assets/vendors/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script>
         CKEDITOR.replace( '.ckeditor' );
-        $('.datatable').DataTable();
+        $('.datatable').DataTable({
+        responsive: true
+        } );
     </script>
 </body>
 

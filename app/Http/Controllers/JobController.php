@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Candidate;
 use App\Models\Company;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,6 +67,32 @@ class JobController extends Controller
             return view('pages.jobs.view')->with(['company' => $company, 'jobs' => $jobs]);
         } else {
             return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');
+        }
+    }
+    public function viewJobDetail(Request $request, $id)
+    {
+        if (Auth::user()->user_type == 'superadmin') {
+            $job = Job::where('status', 'active')->where('id', $id)->first();
+        } else if (Auth::user()->user_type == 'admin') {
+            $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+            $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $id)->first();
+        } else if (Auth::user()->user_type == 'recruiter') {
+            $job = Job::where('status', 'active')->where('id', $id)->first();
+        } else {
+            abort(401);
+        }
+
+
+
+
+
+        if ($job) {
+            $candidates = Candidate::where('job_id', $job->id)->get();
+            $company = Company::find($job->company_id);
+            $creator = User::find($job->created_by);
+            return view('pages.jobs.viewDetail')->with(['creator' => $creator, 'company' => $company, 'job' => $job, 'candidates' => $candidates]);
+        } else {
+            return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
         }
     }
 }

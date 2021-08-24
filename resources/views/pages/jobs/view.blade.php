@@ -62,7 +62,7 @@
                                     <td>{{$job->how_many_hires}}</td>
                                     <td>{{$job->status}}</td>
                                     <td>
-                                        <a href="#" onclick="alert('Not Implemented')" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                        <a href="/jobs/{{$job->id}}"  class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                         <a href="#" onclick="alert('Not Implemented')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
 
                                     </td>
