@@ -179,6 +179,7 @@ class CandidateController extends Controller
             $candidate->experience = $request->experience;
             $candidate->notes = $candidate->notes . '<br>  ' .  $request->notes;
             $candidate->additional_notes = $candidate->additional_notes . '<br>   ' .   $request->additional_notes;
+            $candidate->interviewer_id = Auth::user()->id;
             $candidate->updated_by = Auth::user()->id;
             $candidate->update_history = $candidate->update_history . ' <br> *' . now() . ' : Candidate Updated by ' . Auth::user()->name . '   with status  ' . $request->interview_outcome . ' <br>';
             $candidate->save();
