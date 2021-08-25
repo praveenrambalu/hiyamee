@@ -18,6 +18,9 @@ class CandidateController extends Controller
         } else if (Auth::user()->user_type == 'admin') {
             $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
             $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $id)->first();
+        } else if (Auth::user()->user_type == 'employee') {
+            $company = Company::where('id', Auth::user()->company_id)->where('status', 'active')->first();
+            $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $id)->first();
         } else if (Auth::user()->user_type == 'recruiter') {
             $job = Job::where('status', 'active')->where('id', $id)->first();
         } else {
@@ -39,6 +42,9 @@ class CandidateController extends Controller
             $job = Job::where('status', 'active')->where('id', $id)->first();
         } else if (Auth::user()->user_type == 'admin') {
             $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+            $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $id)->first();
+        } else if (Auth::user()->user_type == 'employee') {
+            $company = Company::where('id', Auth::user()->company_id)->where('status', 'active')->first();
             $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $id)->first();
         } else if (Auth::user()->user_type == 'recruiter') {
             $job = Job::where('status', 'active')->where('id', $id)->first();
@@ -70,6 +76,9 @@ class CandidateController extends Controller
             $job = Job::where('status', 'active')->where('id', $id)->first();
         } else if (Auth::user()->user_type == 'admin') {
             $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+            $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $id)->first();
+        } else if (Auth::user()->user_type == 'employee') {
+            $company = Company::where('id', Auth::user()->company_id)->where('status', 'active')->first();
             $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $id)->first();
         } else if (Auth::user()->user_type == 'recruiter') {
             $job = Job::where('status', 'active')->where('id', $id)->first();
@@ -124,6 +133,9 @@ class CandidateController extends Controller
             $job = Job::where('status', 'active')->where('id', $job_id)->first();
         } else if (Auth::user()->user_type == 'admin') {
             $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+            $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $job_id)->first();
+        } else if (Auth::user()->user_type == 'employee') {
+            $company = Company::where('id', Auth::user()->company_id)->where('status', 'active')->first();
             $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $job_id)->first();
         } else if (Auth::user()->user_type == 'recruiter') {
             $job = Job::where('status', 'active')->where('id', $job_id)->first();

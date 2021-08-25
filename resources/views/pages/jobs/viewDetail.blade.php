@@ -111,7 +111,9 @@
                                     <td>{{date('Y-m-d', strtotime($candidate->created_at))}}</td>
                                     <td>
                                         <a href="/candidates/{{$candidate->id}}"  class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                                        <a href="#" onclick="alert('Not Implemented')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                        @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='admin')
+                                          <a href="#" onclick="alert('Not Implemented')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                        @endif
                                     </td>
 
                                 </tr>
