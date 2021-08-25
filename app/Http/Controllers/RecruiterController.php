@@ -47,5 +47,7 @@ class RecruiterController extends Controller
         if (Auth::user()->user_type != 'superadmin') {
             return redirect('/dashboard')->with('error', 'Unauthorized');
         }
+        $recruiters = User::where('user_type', 'recruiter')->where('status', 'active')->get();
+        return view('pages.recruiter.view')->with('recruiters', $recruiters);
     }
 }

@@ -40,7 +40,10 @@
                                     <td>{{$company->status}}</td>
                                     <td>
                                         <a href="/jobs/view/{{$company->id}}"  class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                        @if (Auth::user()->user_type=='superadmin')
+                                            
                                         <a href="#" onclick="alert('Not Implemented')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
