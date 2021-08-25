@@ -171,7 +171,7 @@
                         <div class="d-md-flex align-items-center">
                             <div class="text-center text-sm-left m-v-15 p-l-30">
                                 <h2 class="m-b-5">Notes</h2>
-                                <p class="text-dark ">{{$candidate->notes}}</p>
+                                <p class="text-dark ">{!!$candidate->notes!!}</p>
                             </div>
                         </div>
                     </div>
@@ -181,7 +181,7 @@
                             <div class="col">
                                 <div class="text-center text-sm-left m-v-15 p-l-30">
                                     <h2 class="m-b-5">Additional Notes</h2>
-                                    <p class="text-dark ">{{$candidate->additional_notes}}</p>
+                                    <p class="text-dark ">{!!$candidate->additional_notes!!}</p>
                                 </div>
                             </div>
                         </div>
@@ -215,11 +215,40 @@
                     <i class="anticon anticon-close"></i>
                 </button>
             </div>
-            <form action="/candidates/bulk/{{$job->id}}" method="post" enctype="multipart/form-data">
+            <form action="" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="row">
-                        div
+                        <div class="form-group col-sm-12">
+                            <label for="">Interview Outcome</label>
+                            <input type="hidden" name="id" value="{{$candidate->id}}" id="">
+                            <select type="text" name="interview_outcome" id="" class="form-control">
+                                <option value="Ready">Ready</option>
+                                <option value="Interviewed">Interviewed</option>
+                                <option value="Selected">Selected</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="">Location</label>
+                            <input type="text" name="location" id="" value="{{$candidate->location}}" required class="form-control">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="">Expected CTC</label>
+                            <input type="text" name="expected_ctc"  value="{{$candidate->expected_ctc}}" id="" required class="form-control">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="">Experience</label>
+                            <input type="number" name="experience"  value="{{$candidate->experience}}" id="" required step="0.1" min="0" max="50" class="form-control">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="">Notes</label>
+                            <textarea type="text" name="notes" id="" required class="form-control"></textarea>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="">Additional Notes</label>
+                            <textarea type="text" name="additional_notes" id="" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

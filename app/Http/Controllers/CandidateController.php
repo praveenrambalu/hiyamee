@@ -155,4 +155,36 @@ class CandidateController extends Controller
             return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
         }
     }
+    public function candidateStatusUpdate(Request $request, $id)
+    {
+        // return $request;
+        $candidate = Candidate::find($id);
+        $job_id = $candidate->job_id;
+        if (Auth::user()->user_type == 'superadmin') {
+            $job = Job::where('status', 'active')->where('id', $job_id)->first();
+        } else if (Auth::user()->user_type == 'admin') {
+            $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+            $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $job_id)->first();
+        } else if (Auth::user()->user_type == 'recruiter') {
+            $job = Job::where('status', 'active')->where('id', $job_id)->first();
+        } else {
+            abort(401);
+        }
+
+        if ($job) {
+            $company = Company::find($job->company_id);
+            $candidate->interview_outcome = $request->interview_outcome;
+            $candidate->location = $request->location;
+            $candidate->expected_ctc = $request->expected_ctc;
+            $candidate->experience = $request->experience;
+            $candidate->notes = $candidate->notes . '<br>  ' .  $request->notes;
+            $candidate->additional_notes = $candidate->additional_notes . '<br>   ' .   $request->additional_notes;
+            $candidate->updated_by = Auth::user()->id;
+            $candidate->update_history = $candidate->update_history . ' <br> *' . now() . ' : Candidate Updated by ' . Auth::user()->name . '   with status  ' . $request->interview_outcome . ' <br>';
+            $candidate->save();
+            return redirect()->back()->with('success', 'Candidate Updated Successfully ');
+        } else {
+            return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
+        }
+    }
 }
