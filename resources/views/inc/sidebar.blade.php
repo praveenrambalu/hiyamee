@@ -55,6 +55,7 @@
                     </li>
 
                 
+
                 @break
                 @case('admin')
 
@@ -83,7 +84,7 @@
                     <li class="nav-item dropdown @yield('employees')">
                         <a class="dropdown-toggle" href="javascript:void(0);">
                             <span class="icon-holder">
-                                <i class="fas fa-briefcase"></i>
+                                <i class="fas fa-users"></i>
                             </span>
                             <span class="title">Employees</span>
                             <span class="arrow">
@@ -94,7 +95,7 @@
                             <li class="@yield('employees-add')">
                                 <a href="/employees/">Add</a>
                             </li>
-                            <li class="@yield('e-view')">
+                            <li class="@yield('employees-view')">
                                 <a href="/employees/view">View</a>
                             </li>
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RecruiterController;
 use Illuminate\Support\Facades\Auth;
@@ -60,4 +61,9 @@ Route::group(['prefix' => '/recruiter', 'middleware' => ['auth', 'superadmin']],
     Route::get('/', [RecruiterController::class, 'addRecruiter']);
     Route::post('/', [RecruiterController::class, 'addRecruiterPost']);
     Route::get('/view', [RecruiterController::class, 'viewRecruiter']);
+});
+Route::group(['prefix' => '/employees', 'middleware' => ['auth']], function () {
+    Route::get('/', [EmployeeController::class, 'addEmployee']);
+    Route::post('/', [EmployeeController::class, 'addEmployeePost']);
+    Route::get('/view', [EmployeeController::class, 'viewEmployee']);
 });
