@@ -13,10 +13,16 @@ class CompanyController extends Controller
 {
     public function addCompany()
     {
+        if (Auth::user()->user_type != 'superadmin') {
+            abort(401);
+        }
         return view('pages.companies.add');
     }
     public function addCompanyPost(Request $request)
     {
+        if (Auth::user()->user_type != 'superadmin') {
+            abort(401);
+        }
         // return $request;
         $company = new Company;
         $company->company_name = $request->company_name;
@@ -45,6 +51,9 @@ class CompanyController extends Controller
     }
     public function addCompanyAdmin(Request $request, $id)
     {
+        if (Auth::user()->user_type != 'superadmin') {
+            abort(401);
+        }
         // return $request;
         $company = Company::where('id', $id)->where('status', 'active')->first();
         if ($company) {
@@ -61,6 +70,9 @@ class CompanyController extends Controller
     }
     public function addCompanyAdminPost(Request $request, $id)
     {
+        if (Auth::user()->user_type != 'superadmin') {
+            abort(401);
+        }
         // return $request;
         $company = Company::where('id', $id)->where('status', 'active')->first();
         if ($company) {
@@ -94,9 +106,11 @@ class CompanyController extends Controller
     }
     public function viewCompanies()
     {
-        if (Auth::user()->user_type != 'superadmin') {
+        // return Auth::user()->user_type;
+        if (Auth::user()->user_type != 'recruiter' &&  Auth::user()->user_type != 'superadmin') {
             abort(401);
         }
+
         $companies = Company::where('status', 'active')->get();
         return view('pages.companies.view')->with('companies', $companies);
     }

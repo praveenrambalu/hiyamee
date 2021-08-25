@@ -31,7 +31,7 @@ Auth::routes();
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
-Route::group(['prefix' => '/companies', 'middleware' => ['auth', 'superadmin']], function () {
+Route::group(['prefix' => '/companies', 'middleware' => ['auth']], function () {
     Route::get('/', [CompanyController::class, 'addCompany']);
     Route::post('/', [CompanyController::class, 'addCompanyPost']);
     Route::get('/{id}/add-admin', [CompanyController::class, 'addCompanyAdmin']);
