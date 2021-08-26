@@ -72,6 +72,9 @@
                             <th>Phone No</th>
                             <th>Location</th>
                             <th>Interview Status</th>
+                            {{-- <th>Current CTC</th>
+                            <th>Expected CTC</th>
+                            <th>Negotiable CTC</th> --}}
                             <th>Uploaded By</th>
                             <th>Uploaded On</th>
                             <th>Actions</th>
@@ -107,6 +110,9 @@
                                         @default
                                         <td></td>
                                     @endswitch
+                                    {{-- <td>{{$candidate->current_ctc}}</td>
+                                    <td>{{$candidate->expected_ctc}}</td>
+                                    <td>{{$candidate->neg_ctc}}</td> --}}
                                     <td>{{$updater->name}}</td>
                                     <td>{{date('Y-m-d', strtotime($candidate->created_at))}}</td>
                                     <td>

@@ -81,7 +81,19 @@
                     <div class="col-md-4">
                         <div class="d-md-flex align-items-center">
                             <div class="text-center text-sm-left m-v-15 p-l-30">
-                                <h2 class="m-b-5">{{$candidate->candidate_name}} </h2>
+                                <h2 class="m-b-5">{{$candidate->candidate_name}} 
+                                 <small><small>   @switch($candidate->gender)
+                                    @case('Male')
+                                            <span class="badge badge-primary">{{$candidate->gender}}</span>
+                                        @break
+                                    @case('Female')
+                                            <span class="badge badge-dark">{{$candidate->gender}}</span>
+                                        @break
+                                
+                                    @default
+                                    <span class="badge badge-default">{{$candidate->gender}}</span>
+                                @endswitch</small></small>
+                                </h2>
                         
                                 <p class="text-dark ">{{$job->job_title}} <span class="text-opacity font-size-13">@ {{$company->company_name}}</span></p>
                                 
@@ -124,6 +136,34 @@
                                         </p>
                                         <p class="col font-weight-semibold"> {{$candidate->experience}}</p>
                                     </li>
+                                    <li class="row">
+                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                            <i class="m-r-10 text-primary fas fa-signal"></i>
+                                            <span>RExperience: </span> 
+                                        </p>
+                                        <p class="col font-weight-semibold"> {{$candidate->relexperience}}</p>
+                                    </li>
+                                    <li class="row">
+                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                            <i class="m-r-10 text-primary fas fa-money-check-alt"></i>
+                                            <span>Current CTC: </span> 
+                                        </p>
+                                        <p class="col font-weight-semibold"> {{$candidate->current_ctc}}</p>
+                                    </li>
+                                    <li class="row">
+                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                            <i class="m-r-10 text-primary fas fa-money-bill-wave"></i>
+                                            <span>E CTC: </span> 
+                                        </p>
+                                        <p class="col font-weight-semibold"> {{$candidate->expected_ctc}}</p>
+                                    </li>
+                                    <li class="row">
+                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                            <i class="m-r-10 text-primary fas fa-money-bill"></i>
+                                            <span>N CTC: </span> 
+                                        </p>
+                                        <p class="col font-weight-semibold"> {{$candidate->neg_ctc}}</p>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -133,6 +173,18 @@
                             <div class="d-md-block d-none border-left col-1"></div>
                             <div class="col">
                                 <ul class="list-unstyled m-t-10">
+                                    <li class="row">
+                                        <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
+                                            <span>Current Company : </span> 
+                                        </p>
+                                        <p class="col font-weight-semibold">{{$candidate->current_company ?? ''}}</p>
+                                    </li>
+                                    <li class="row">
+                                        <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
+                                            <span>Notice Period : </span> 
+                                        </p>
+                                        <p class="col font-weight-semibold">{{$candidate->notice_period ?? ''}}</p>
+                                    </li>
                                     <li class="row">
                                         <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
                                             <span>Interviewer : </span> 
@@ -153,9 +205,21 @@
                                     </li>
                                     <li class="row">
                                         <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
-                                            <span>Location: </span> 
+                                            <span>Current Location: </span> 
                                         </p>
                                         <p class="col font-weight-semibold"> {{$candidate->location}}</p>
+                                    </li>
+                                    <li class="row">
+                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                            <span>Preferred Location: </span> 
+                                        </p>
+                                        <p class="col font-weight-semibold"> {{$candidate->location}}</p>
+                                    </li>
+                                    <li class="row">
+                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                            <span>Buyout: </span> 
+                                        </p>
+                                        <p class="col font-weight-semibold"> {{$candidate->buyout}}</p>
                                     </li>
                                 </ul>
                             </div>
@@ -230,17 +294,54 @@
                             </select>
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="">Location</label>
+                            <label for="">Current Location</label>
                             <input type="text" name="location" id="" value="{{$candidate->location}}" required class="form-control">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="">Preferred Location</label>
+                            <input type="text" name="prelocation" id="" value="{{$candidate->prelocation}}" required class="form-control">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="">Current Company</label>
+                            <input type="text" name="current_company"  value="{{$candidate->current_company}}" id=""  class="form-control">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="">Current CTC</label>
+                            <input type="text" name="current_ctc"  value="{{$candidate->current_ctc}}" id="" required class="form-control">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="">Expected CTC</label>
                             <input type="text" name="expected_ctc"  value="{{$candidate->expected_ctc}}" id="" required class="form-control">
                         </div>
                         <div class="form-group col-sm-3">
-                            <label for="">Experience</label>
+                            <label for="">Negotiable CTC</label>
+                            <input type="text" name="neg_ctc"  value="{{$candidate->neg_ctc}}" id="" required class="form-control">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="">Notice Period</label>
+                            <input type="text" name="notice_period"  value="{{$candidate->notice_period}}" id="" required class="form-control">
+                        </div>
+                      
+                      
+                        <div class="form-group col-sm-3">
+                            <label for="">Total Experience</label>
                             <input type="number" name="experience"  value="{{$candidate->experience}}" id="" required step="0.1" min="0" max="50" class="form-control">
                         </div>
+                        <div class="form-group col-sm-3">
+                            <label for="">Relevent Experience</label>
+                            <input type="number" name="relexperience"  value="{{$candidate->relexperience}}" id="" required step="0.1" min="0" max="50" class="form-control">
+                        </div>
+
+                        <div class="form-group col-sm-3">
+                            <label for="">Buyout</label>
+                            <select name="buyout" id="" class="form-control">
+                                <option value="{{$candidate->buyout}}">{{$candidate->buyout}}</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+
+
                         <div class="form-group col-sm-6">
                             <label for="">Notes</label>
                             <textarea type="text" name="notes" id="" required class="form-control"></textarea>

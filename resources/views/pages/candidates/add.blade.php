@@ -79,9 +79,84 @@
                             <label >Phone No</label>
                             <input type="text" required  class="form-control"  name="candidate_phone" placeholder="Ex : 9876543210">
                         </div>
-                       
+                        <div class="form-group col-md-6">
+                            <label >Date of Birth</label>
+                            <input type="date" required  class="form-control"  name="dateofbirth" placeholder="Ex : 04/06/1998">
+                        </div>
+                    </div>
+                 
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label >PAN Card</label>
+                            <input type="text" required  class="form-control"  name="pancard" placeholder="Ex : FAQ123456">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label >Gender</label>
+                            <select name="gender" id="" class="form-control">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
                     </div>
                 
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label >Experience</label>
+                            <input type="number" step="0.1" min="0" required  class="form-control"  name="experience" placeholder="Ex : 2.5">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label >Relevent Experience</label>
+                            <input type="number" step="0.1" min="0" required  class="form-control"  name="relexperience" placeholder="Ex : 2.5">
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label >Current Company</label>
+                            <input type="text"  required  class="form-control"  name="current_company" placeholder="Ex : Apple">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label >Current CTC</label>
+                            <input type="number" step="0.1" min="0" required  class="form-control"  name="current_ctc" placeholder="Ex : 2.5 LPA">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label >Expected  CTC</label>
+                            <input type="number" step="0.1" min="0" required  class="form-control"  name="expected_ctc" placeholder="Ex : 3.0 LPA">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label >Negotiable  CTC</label>
+                            <input type="number" step="0.1" min="0" required  class="form-control"  name="neg_ctc" placeholder="Ex : 2.9 LPA">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label >Notice Period</label>
+                            <input type="number" step="1" min="0" required  class="form-control"  name="notice_period" placeholder="Ex : 30 Days">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label >Buyout</label>
+                            <select name="buyout" id="" class="form-control">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label >Location</label>
+                            <input type="text"  required  class="form-control"  name="location" placeholder="Ex : Chennai, India">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label >Preferred Location</label>
+                            <input type="text"  required  class="form-control"  name="prelocation" placeholder="Ex : Mumbai, India">
+                        </div>
+                    </div>
+
+
                 
                     <button type="submit" class="btn btn-primary">Add Candidate</button>
                 </form>
