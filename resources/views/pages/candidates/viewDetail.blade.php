@@ -97,9 +97,7 @@
                         
                                 <p class="text-dark ">{{$job->job_title}} <span class="text-opacity font-size-13">@ {{$company->company_name}}</span></p>
                                 
-                                @if (Auth::user()->user_type=='recruiter' || Auth::user()->user_type=='superadmin')
                                     <button class="btn btn-primary btn-tone" type="button" data-toggle="modal" data-target="#InterViewStatus">Status Update</button>
-                                @endif
                             </div>
                         </div>
                     </div>
@@ -213,7 +211,7 @@
                                         <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
                                             <span>Preferred Location: </span> 
                                         </p>
-                                        <p class="col font-weight-semibold"> {{$candidate->location}}</p>
+                                        <p class="col font-weight-semibold"> {{$candidate->prelocation}}</p>
                                     </li>
                                     <li class="row">
                                         <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">

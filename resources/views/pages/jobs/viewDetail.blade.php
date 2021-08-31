@@ -68,6 +68,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Application ID</th>
                             <th>-</th>
                             <th>Name</th>
                             <th>Email</th>
@@ -91,6 +92,7 @@
                             @endphp
                                 <tr>
                                     <td>{{$i++}}</td>
+                                    <td>{{$candidate->id}}</td>
                                     <td>
                                         @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin')
                                         @if ($candidate->allocated_to==null)

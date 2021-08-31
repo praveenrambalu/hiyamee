@@ -130,12 +130,13 @@ class JobController extends Controller
 
 
 
-
+        $employee = User::find($request->employee);
 
         $candidates = $request->candidate;
         foreach ($candidates as $candidate) {
             $dbcand = Candidate::find($candidate);
             $dbcand->allocated_to = $request->employee;
+            $dbcand->update_history = $dbcand->update_history . ' <br> *' . now() . ' : Candidate Allocated to ' . $employee->name . ' By ' . Auth::user()->name;
             $dbcand->save();
         }
         return redirect()->back()->with('success', 'The candidates allocated Successfully ');

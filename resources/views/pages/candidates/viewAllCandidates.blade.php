@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
-@section('jobs','open')
-@section('jobs-view','active')
+@section('candidates','open')
+@section('candidates-view','active')
 
 @section('content')
 
@@ -17,6 +17,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Application ID</th>
                             <th>-</th>
                             <th>Company</th>
                             <th>Job Detail</th>
@@ -44,6 +45,7 @@
                             @endphp
                                 <tr>
                                     <td>{{$i++}}</td>
+                                    <td>{{$candidate->id}}</td>
                                     <td>
                                         @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin')
                                         @if ($candidate->allocated_to==null)

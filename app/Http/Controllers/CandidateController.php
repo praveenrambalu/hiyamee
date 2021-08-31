@@ -57,6 +57,7 @@ class CandidateController extends Controller
 
             $candidate = new Candidate;
             $candidate->job_id = $job->id;
+            $candidate->company_id = $job->company_id;
             $candidate->candidate_name = $request->candidate_name;
             $candidate->candidate_email = $request->candidate_email;
             $candidate->candidate_phone = $request->candidate_phone;
@@ -192,6 +193,11 @@ class CandidateController extends Controller
             $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $job_id)->first();
         } else if (Auth::user()->user_type == 'recruiter') {
             $job = Job::where('status', 'active')->where('id', $job_id)->first();
+        } else if (Auth::user()->user_type == 'employee') {
+            $job = Job::where('status', 'active')->where('id', $job_id)->first();
+            if ($candidate->allocated_to != Auth::user()->id) {
+                abort(401);
+            }
         } else {
             abort(401);
         }
@@ -224,11 +230,15 @@ class CandidateController extends Controller
         $employees = [];
         if (Auth::user()->user_type == 'superadmin') {
             $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
+            $candidates = Candidate::all();
         } else if (Auth::user()->user_type == 'admin') {
             $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
             $employees = User::where('status', 'active')->where('user_type', 'employee')->where('company_id', $company->id)->get();
+            $candidates = Candidate::where('company_id', $company->id)->get();
         } else if (Auth::user()->user_type == 'employee') {
+            $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
         } else if (Auth::user()->user_type == 'recruiter') {
+            $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
         } else {
             abort(401);
         }
@@ -237,11 +247,6 @@ class CandidateController extends Controller
 
 
 
-        if (Auth::user()->user_type == 'superadmin' || Auth::user()->user_type == 'admin') {
-            $candidates = Candidate::all();
-        } else {
-            $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
-        }
         return view('pages.candidates.viewAllCandidates')->with(['candidates' => $candidates, 'employees' => $employees]);
     }
 }
