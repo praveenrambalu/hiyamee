@@ -249,4 +249,12 @@ class CandidateController extends Controller
 
         return view('pages.candidates.viewAllCandidates')->with(['candidates' => $candidates, 'employees' => $employees]);
     }
+    public function viewCandidatesbyUser(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'admin' && Auth::user()->user_type != 'superadmin') {
+            abort(401);
+        }
+        $candidates = Candidate::where('allocated_to', $id)->get();
+        return view('pages.candidates.viewAllCandidatesByUser')->with(['candidates' => $candidates]);
+    }
 }

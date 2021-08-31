@@ -18,6 +18,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phoneno</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,6 +30,9 @@
                                     <td>{{$recruiter->name}}</td>
                                     <td>{{$recruiter->email}}</td>
                                     <td>{{$recruiter->phoneno}}</td>
+                                    <td>
+                                        <a href="/candidates/view/{{$recruiter->id}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                    </td>
                                 </tr>
                             @endforeach
                         @endif
