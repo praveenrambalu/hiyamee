@@ -219,4 +219,29 @@ class CandidateController extends Controller
             return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
         }
     }
+    public function viewAllCandidates(Request $request)
+    {
+        $employees = [];
+        if (Auth::user()->user_type == 'superadmin') {
+            $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
+        } else if (Auth::user()->user_type == 'admin') {
+            $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+            $employees = User::where('status', 'active')->where('user_type', 'employee')->where('company_id', $company->id)->get();
+        } else if (Auth::user()->user_type == 'employee') {
+        } else if (Auth::user()->user_type == 'recruiter') {
+        } else {
+            abort(401);
+        }
+
+
+
+
+
+        if (Auth::user()->user_type == 'superadmin' || Auth::user()->user_type == 'admin') {
+            $candidates = Candidate::all();
+        } else {
+            $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
+        }
+        return view('pages.candidates.viewAllCandidates')->with(['candidates' => $candidates, 'employees' => $employees]);
+    }
 }

@@ -47,6 +47,7 @@ Route::group(['prefix' => '/jobs', 'middleware' => ['auth']], function () {
     Route::get('/view', [JobController::class, 'viewJobs']);
     Route::get('/view/{id}', [JobController::class, 'viewJobsCompany']);
     Route::get('/{id}', [JobController::class, 'viewJobDetail']);
+    Route::post('/{id}', [JobController::class, 'allocateCandidates']);
 });
 Route::group(['prefix' => '/candidates', 'middleware' => ['auth']], function () {
     Route::get('/add/{id}', [CandidateController::class, 'addCandidate']);
@@ -54,6 +55,8 @@ Route::group(['prefix' => '/candidates', 'middleware' => ['auth']], function () 
     Route::post('/bulk/{id}', [CandidateController::class, 'addCandidateBulkPost']);
     Route::get('/{id}', [CandidateController::class, 'candidateDetail']);
     Route::post('/{id}', [CandidateController::class, 'candidateStatusUpdate']);
+    Route::get('/', [CandidateController::class, 'viewAllCandidates']);
+    Route::post('/allocate/update', [JobController::class, 'allocateCandidates']);
 });
 
 

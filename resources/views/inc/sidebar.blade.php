@@ -456,6 +456,14 @@
             @endswitch
 
             <li class="nav-item dropdown ">
+                <a class="dropdown-toggle" href="/candidates">
+                    <span class="icon-holder">
+                        <i class="fas fa-tasks"></i>
+                    </span>
+                    <span class="title">Candidates</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown ">
                 <a class="dropdown-toggle" href="/logout">
                     <span class="icon-holder">
                         <i class="anticon anticon-lock"></i>
