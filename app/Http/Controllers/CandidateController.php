@@ -113,14 +113,33 @@ class CandidateController extends Controller
                     $num = count($data);
                     if ($row != 1) {
                         $candidate = new Candidate;
+                        $candidate->job_id = $job->id;
+                        $candidate->company_id = $job->company_id;
+
                         $candidate->candidate_name = $data[0];
                         $candidate->candidate_email = $data[1];
                         $candidate->candidate_phone = $data[2];
-                        $candidate->job_id = $job->id;
+                        $candidate->dateofbirth = $data[3];
+                        $candidate->pancard = $data[4];
+                        $candidate->gender = $data[5];
+                        $candidate->experience = $data[6];
+                        $candidate->relexperience = $data[7];
+                        $candidate->current_company = $data[8];
+                        $candidate->current_ctc = $data[9];
+                        $candidate->expected_ctc = $data[10];
+                        $candidate->neg_ctc = $data[11];
+                        $candidate->notice_period = $data[12];
+                        $candidate->buyout = $data[13];
+                        $candidate->location = $data[14];
+                        $candidate->prelocation = $data[15];
+
                         $candidate->job_position = $job->job_title;
                         $candidate->job_company = $company->company_name;
                         $candidate->uploaded_by = Auth::user()->id;
                         $candidate->update_history = '*' . now() . ' : Candidate Uploaded Via Bulk Upload  by ' . Auth::user()->name . '<br>';
+
+
+
                         $candidate->save();
                     }
 
