@@ -23,6 +23,78 @@ class JobController extends Controller
             return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');
         }
     }
+    public function addJobBySuperadmin(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin') {
+            abort(401);
+        }
+        $company = Company::where('id', $id)->where('status', 'active')->first();
+        if ($company) {
+            $fields = AdditionalField::where('status', 'active')->get();
+            return view('pages.jobs.add')->with(['company' => $company, 'fields' => $fields]);
+        } else {
+            return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');
+        }
+    }
+    public function addJobBySuperadminPost(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin') {
+            abort(401);
+        }
+        $company = Company::where('id', $id)->where('status', 'active')->first();
+        if ($company) {
+            $job = new Job;
+            $job->company_id = $company->id;
+            $job->employment_type = $request->employment_type;
+            $job->job_title = $request->job_title;
+            $job->location = $request->location;
+            $job->description = $request->description;
+            $job->primary_skill = $request->primary_skill;
+            $job->skills_required = $request->skills_required;
+            $job->how_many_hires = $request->how_many_hires;
+            $job->annual_ctc = $request->annual_ctc;
+            $job->created_by = Auth::user()->id;
+            $job->linkorfile = $request->linkorfile;
+            if ($request->linkorfile == 'link') {
+                $job->feedback = $request->feedback;
+            } else {
+                if ($feedback = $request->feedback) {
+                    $filenameWithExt = $feedback->getClientOriginalName();
+                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                    $extension = $feedback->getClientOriginalExtension();
+                    $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                    $path = $feedback->storeAs('public/feedback/', $fileNameToStore);
+                    $storagename = '/storage/feedback/' . $fileNameToStore;
+                    $job->feedback = $storagename;
+                }
+            }
+            $job->zoomlink = $request->zoomlink;
+
+
+
+            $job->save();
+            if ($request->additional_fields != "") {
+                $additional_fields = $request->additional_fields;
+                if (count($additional_fields) > 0) {
+                    foreach ($additional_fields as $additional_field) {
+                        if ($fielddb = AdditionalField::find($additional_field)) {
+
+                            $field = new FieldList;
+                            $field->job_id = $job->id;
+                            $field->field_id = $additional_field;
+                            $field->field_name = $fielddb->name;
+                            $field->field_type = $fielddb->type;
+                            $field->save();
+                        }
+                    }
+                }
+            }
+
+            return redirect()->back()->with('success', 'Job Posted Successfully');
+        } else {
+            return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');
+        }
+    }
     public function addJobPost(Request $request)
     {
         // return $request;

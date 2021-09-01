@@ -49,6 +49,8 @@ Route::group(['prefix' => '/jobs', 'middleware' => ['auth']], function () {
     Route::get('/view/{id}', [JobController::class, 'viewJobsCompany']);
     Route::get('/{id}', [JobController::class, 'viewJobDetail']);
     Route::post('/{id}', [JobController::class, 'allocateCandidates']);
+    Route::get('/add/{id}', [JobController::class, 'addJobBySuperadmin']);
+    Route::post('/add/{id}', [JobController::class, 'addJobBySuperadminPost']);
 });
 Route::group(['prefix' => '/candidates', 'middleware' => ['auth']], function () {
     Route::get('/add/{id}', [CandidateController::class, 'addCandidate']);
