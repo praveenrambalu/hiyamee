@@ -53,8 +53,16 @@
                             </li>
                         </ul>
                     </li>
+                 
 
-                
+                    <li class="nav-item dropdown @yield('fields')">
+                        <a class="dropdown-toggle" href="/fields">
+                            <span class="icon-holder">
+                                <i class="fab fa-wpforms"></i>
+                            </span>
+                            <span class="title">Fields</span>
+                        </a>
+                    </li>
 
                 @break
                 @case('admin')

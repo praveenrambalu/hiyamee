@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdditionalFieldsController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
@@ -71,4 +72,9 @@ Route::group(['prefix' => '/employees', 'middleware' => ['auth']], function () {
     Route::get('/', [EmployeeController::class, 'addEmployee']);
     Route::post('/', [EmployeeController::class, 'addEmployeePost']);
     Route::get('/view', [EmployeeController::class, 'viewEmployee']);
+});
+
+Route::group(['prefix' => '/fields', 'middleware' => ['auth']], function () {
+    Route::get('/', [AdditionalFieldsController::class, 'addFields']);
+    Route::post('/', [AdditionalFieldsController::class, 'addFieldsPost']);
 });
