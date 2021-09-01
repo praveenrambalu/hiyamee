@@ -1,3 +1,3 @@
-name,email,phone,dob(YYYY-MM-DD),pancard,gender,experience,relevent experience,current company,current ctc,expected ctc,negotiable ctc,notice period (in days),buyout (yes/no),location,preferred location
-Fuller Lindsay,naqehada@mailinator.com,9876543210,1983-03-16,FAQ123456,Female,5,3,Travis and Castaneda Traders,2.5,3.5,3.2,30,Yes,Chennai,Mumbai
-Mollie Best,cojucyxyt@mailinator.com,9876543210,1983-05-18,FAQ51234,Male,3,1,Russo and Chen Traders,2.7,3.7,3.5,60,No,Mumbai,Mumbai
+name,email,phone,dob(YYYY-MM-DD),pancard,gender,experience,relevent experience,current company,current ctc,expected ctc,negotiable ctc,notice period (in days),buyout (yes/no),location,preferred location,resume
+Fuller Lindsay,naqehada@mailinator.com,9876543210,1983-03-16,FAQ123456,Female,5,3,Travis and Castaneda Traders,2.5,3.5,3.2,30,Yes,Chennai,Mumbai,http://placehold.it/300
+Mollie Best,cojucyxyt@mailinator.com,9876543210,1983-05-18,FAQ51234,Male,3,1,Russo and Chen Traders,2.7,3.7,3.5,60,No,Mumbai,Mumbai,http://placehold.it/301

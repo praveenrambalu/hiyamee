@@ -37,10 +37,15 @@ class CreateCandidatesTable extends Migration
             $table->string('prelocation')->nullable();
             $table->string('interview_date')->nullable();
             $table->string('interview_time')->nullable();
+            $table->string('interview_completed_at')->nullable();
 
             $table->string('job_position')->nullable();
             $table->string('job_company')->nullable();
             $table->string('interviewer_id')->nullable();
+
+            $table->longText('resume')->nullable();
+
+
             $table->string('linkorfile')->nullable();
             $table->string('feedback')->nullable();
             $table->string('zoomlink')->nullable();

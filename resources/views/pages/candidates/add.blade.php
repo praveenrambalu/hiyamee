@@ -158,13 +158,17 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label >Location</label>
                             <input type="text"  required  class="form-control"  name="location" placeholder="Ex : Chennai, India">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label >Preferred Location</label>
                             <input type="text"  required  class="form-control"  name="prelocation" placeholder="Ex : Mumbai, India">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label >Resume</label>
+                            <input type="file"  required  class="form-control"  name="resume" >
                         </div>
                     </div>
 

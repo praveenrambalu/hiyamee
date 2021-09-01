@@ -92,6 +92,7 @@
                         <div class="d-md-flex align-items-center">
                             <div class="text-center text-sm-left m-v-15 p-l-30">
                                 <h2 class="m-b-5">{{$candidate->candidate_name}} 
+                                    
                                  <small><small>   @switch($candidate->gender)
                                     @case('Male')
                                             <span class="badge badge-primary">{{$candidate->gender}}</span>
@@ -104,10 +105,11 @@
                                     <span class="badge badge-default">{{$candidate->gender}}</span>
                                 @endswitch</small></small>
                                 </h2>
-                        
+                                
                                 <p class="text-dark ">{{$job->job_title}} <span class="text-opacity font-size-13">@ {{$company->company_name}}</span></p>
                                 
-                                    <button class="btn btn-primary btn-tone" type="button" data-toggle="modal" data-target="#InterViewStatus">Status Update</button>
+                                <a href="{{$candidate->resume}}" download>Download Resume</a> <br><br>
+                                <button class="btn btn-primary btn-tone" type="button" data-toggle="modal" data-target="#InterViewStatus">Status Update</button>
                             </div>
                         </div>
                     </div>

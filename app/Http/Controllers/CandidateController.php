@@ -80,6 +80,18 @@ class CandidateController extends Controller
             $candidate->job_company = $company->company_name;
             $candidate->uploaded_by = Auth::user()->id;
             $candidate->update_history = '*' . now() . ' : Candidate Uploaded Via Single Upload  by ' . Auth::user()->name . '<br>';
+            if ($resume = $request->resume) {
+                $filenameWithExt = $resume->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $resume->getClientOriginalExtension();
+                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                $path = $resume->storeAs('public/resume/', $fileNameToStore);
+                $storagename = '/storage/resume/' . $fileNameToStore;
+                $candidate->resume = $storagename;
+            }
+
+
+
             $candidate->save();
             return redirect()->back()->with('success', 'Candidate added Successfully ');
         } else {
@@ -134,6 +146,7 @@ class CandidateController extends Controller
                         $candidate->buyout = $data[13];
                         $candidate->location = $data[14];
                         $candidate->prelocation = $data[15];
+                        $candidate->resume = $data[16];
 
                         $candidate->job_position = $job->job_title;
                         $candidate->job_company = $company->company_name;
