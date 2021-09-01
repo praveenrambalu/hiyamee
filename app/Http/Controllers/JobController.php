@@ -199,8 +199,18 @@ class JobController extends Controller
                         $candidate->interviewer_id = Auth::user()->id;
                         $candidate->updated_by = Auth::user()->id;
                         $candidate->update_history = $candidate->update_history . ' <br> *' . now() . ' : Candidate Updated by ' . Auth::user()->name . '   with status  ' . $candidate->interview_outcome . ' <br>';
-
-                        $candidate->save();
+                        if (Auth::user()->user_type == 'superadmin') {
+                            $candidate->save();
+                        } else if (Auth::user()->user_type == 'admin') {
+                            $company = Company::find($candidate->company_id);
+                            if ($company->admin_id == Auth::user()->id) {
+                                $candidate->save();
+                            }
+                        } else {
+                            if ($candidate->allocated_to == Auth::user()->id) {
+                                $candidate->save();
+                            }
+                        }
                     }
                 }
 
