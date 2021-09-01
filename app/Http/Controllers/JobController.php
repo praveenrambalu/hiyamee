@@ -145,4 +145,72 @@ class JobController extends Controller
             return redirect()->back()->with('error', 'No Candidates Selected ');
         }
     }
+
+    public function BulkStatusUpdate(Request $request)
+    {
+        $row = 1;
+        $defective = '';
+        if (($handle = fopen($request->bulkfile, "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                $num = count($data);
+                if ($row != 1) {
+
+                    if ($candidate = Candidate::find($data[0])) {
+                        $candidate->interview_outcome = $data[1];
+                        if ($data[2] != "") {
+                            $candidate->location = $data[2];
+                        }
+                        if ($data[3] != "") {
+                            $candidate->prelocation = $data[3];
+                        }
+                        if ($data[4] != "") {
+                            $candidate->current_company = $data[4];
+                        }
+                        if ($data[5] != "") {
+                            $candidate->current_ctc = $data[5];
+                        }
+                        if ($data[6] != "") {
+                            $candidate->expected_ctc = $data[6];
+                        }
+                        if ($data[7] != "") {
+                            $candidate->neg_ctc = $data[7];
+                        }
+                        if ($data[8] != "") {
+                            $candidate->notice_period = $data[8];
+                        }
+                        if ($data[9] != "") {
+                            $candidate->experience = $data[9];
+                        }
+                        if ($data[10] != "") {
+                            $candidate->relexperience = $data[10];
+                        }
+                        if ($data[11] != "") {
+                            $candidate->buyout = $data[11];
+                        }
+                        if ($data[12] != "") {
+                            $candidate->notes = $candidate->notes . '<br>  ' .  $data[12];
+                        }
+                        if ($data[13] != "") {
+                            $candidate->additional_notes = $candidate->additional_notes . '<br>   ' .   $data[13];
+                        }
+
+
+
+                        $candidate->interviewer_id = Auth::user()->id;
+                        $candidate->updated_by = Auth::user()->id;
+                        $candidate->update_history = $candidate->update_history . ' <br> *' . now() . ' : Candidate Updated by ' . Auth::user()->name . '   with status  ' . $candidate->interview_outcome . ' <br>';
+
+                        $candidate->save();
+                    }
+                }
+
+                $row++;
+            }
+
+            return redirect()->back()->with('success', 'Candidates Updated Successfully ');
+
+
+            fclose($handle);
+        }
+    }
 }

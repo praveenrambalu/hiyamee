@@ -8,7 +8,8 @@
     <div class="col-md-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">View Candidates</h3>
+                <h3 class="card-title" style="float: left;">View Candidates</h3>
+                <button class="btn btn-dark float-right"  data-toggle="modal" data-target="#bulkUpdate" style="    margin-top: 10px;">Bulk Status Update</button>
             </div>
             <form action="/candidates/allocate/update" method="post">
                 @csrf
@@ -124,6 +125,33 @@
                 </div>
                 @endif
             </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="bulkUpdate">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bulkUpdateTitle">Bulk Update Status</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="anticon anticon-close"></i>
+                </button>
+            </div>
+            <form action="/candidates/bulk-status/update" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <a href="/assets/sample-application-status.csv">Download Sample Document</a>
+                        <br>
+                    </div>
+                    @csrf
+                    <input type="file" name="bulkfile" required  accept=".csv" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
             </form>
         </div>
     </div>
