@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AddFieldData;
 use App\Models\Candidate;
 use App\Models\Company;
+use App\Models\FieldList;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -186,13 +188,17 @@ class CandidateController extends Controller
                 $interviewer = [];
             }
 
+            $addfields = FieldList::where('job_id', $job->id)->where('status', 'active')->get();
+            $fielddatas = AddFieldData::where('job_id', $job->id)->where('candidate_id', $candidate->id)->get();
             return view('pages.candidates.viewDetail')->with([
                 'company' => $company,
                 'job' => $job,
                 'job_creator' => $job_creator,
                 'candidate_creator' => $candidate_creator,
                 'candidate' => $candidate,
-                'interviewer' => $interviewer
+                'interviewer' => $interviewer,
+                'addfields' => $addfields,
+                'fielddatas' => $fielddatas
             ]);
 
             // return redirect()->back()->with('success', 'Candidate added Successfully ');
@@ -239,6 +245,22 @@ class CandidateController extends Controller
             $candidate->updated_by = Auth::user()->id;
             $candidate->update_history = $candidate->update_history . ' <br> *' . now() . ' : Candidate Updated by ' . Auth::user()->name . '   with status  ' . $request->interview_outcome . ' <br>';
             $candidate->save();
+            $fieldLists = FieldList::where('job_id', $job->id)->where('status', 'active')->get();
+
+            if (count($fieldLists) > 0) {
+                foreach ($fieldLists as $fieldList) {
+                    $fielddata = new AddFieldData;
+                    $fielddata->candidate_id = $candidate->id;
+                    $fielddata->job_id = $fieldList->job_id;
+                    $fielddata->field_id = $fieldList->field_id;
+                    $fielddata->field_name = $fieldList->field_name;
+                    $fieldname = $fieldList->field_name;
+                    $fielddata->field_value = $request->$fieldname;
+                    $fielddata->save();
+                    // return $fielddata;
+                }
+            }
+
             return redirect()->back()->with('success', 'Candidate Updated Successfully ');
         } else {
             return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');

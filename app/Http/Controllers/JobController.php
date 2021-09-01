@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdditionalField;
 use App\Models\Candidate;
 use App\Models\Company;
+use App\Models\FieldList;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,13 +17,15 @@ class JobController extends Controller
     {
         $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
         if ($company) {
-            return view('pages.jobs.add')->with('company', $company);
+            $fields = AdditionalField::where('status', 'active')->get();
+            return view('pages.jobs.add')->with(['company' => $company, 'fields' => $fields]);
         } else {
             return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');
         }
     }
     public function addJobPost(Request $request)
     {
+        // return $request;
         $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
         if ($company) {
             $job = new Job;
@@ -54,6 +58,23 @@ class JobController extends Controller
 
 
             $job->save();
+            if ($request->additional_fields != "") {
+                $additional_fields = $request->additional_fields;
+                if (count($additional_fields) > 0) {
+                    foreach ($additional_fields as $additional_field) {
+                        if ($fielddb = AdditionalField::find($additional_field)) {
+
+                            $field = new FieldList;
+                            $field->job_id = $job->id;
+                            $field->field_id = $additional_field;
+                            $field->field_name = $fielddb->name;
+                            $field->field_type = $fielddb->type;
+                            $field->save();
+                        }
+                    }
+                }
+            }
+
             return redirect()->back()->with('success', 'Job Posted Successfully');
         } else {
             return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');

@@ -41,7 +41,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row d-none">
                         <div class="col-md-4  align-self-center">
                                 <a href="{{$job->feedback}}" target="_blank" class="btn btn-danger">Feedback </a>
                                 <a href="{{$job->zoomlink}}" target="_blank" title="{{$job->zoomlink}}" class="btn btn-dark">Meet Link  </a>
@@ -266,6 +266,38 @@
     </div>
 </div>
 
+@if (count($fielddatas)>0)
+    
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <div class="d-md-flex align-items-center">
+                            <div class="text-center text-sm-left m-v-15 p-l-30">
+                                <h2 class="m-b-5">Additional Fields</h2>
+                            </div>
+                        </div>
+                    </div>
+                    @foreach ($fielddatas as $fielddata)
+                        <div class="col-md-4">
+                            <div class="d-md-flex align-items-center">
+                                <div class="text-center text-sm-left m-v-15 p-l-30">
+                                    <p class="text-dark"> <b class="mr-3">{{$fielddata->field_name}} : </b> {{$fielddata->field_value}} </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+               
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
 
 
 <div class="modal fade" id="InterViewStatus">
@@ -338,6 +370,15 @@
                                 <option value="No">No</option>
                             </select>
                         </div>
+
+                        @if (count($addfields)>0)
+                            @foreach ($addfields as $addfield)
+                                <div class="form-group col-sm-6">
+                                    <label for="">{{$addfield->field_name}}</label>
+                                    <input type="{{$addfield->field_type}}" name="{{$addfield->field_name}}"   class="form-control">
+                                </div>
+                            @endforeach
+                        @endif
 
 
                         <div class="form-group col-sm-6">

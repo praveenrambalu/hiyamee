@@ -78,7 +78,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label >Zoom link</label>
-                            <input type="text" required class="form-control"  placeholder="Ex: https://us04web.zoom.us/j/123456789" name="zoomlink">
+                            <input type="url" required class="form-control"  placeholder="Ex: https://us04web.zoom.us/j/123456789" name="zoomlink">
                         </div>
                     </div>
                     <div class="form-row">
@@ -100,6 +100,22 @@
                         <label >Description</label>
                         <textarea type="text" class="form-control ckeditor" required name="description"></textarea>
                         
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label >Additional Fields</label>
+                            <br>
+                            @if (count($fields)>0)
+                                @foreach ($fields as $field)
+                                    <label for="{{$field->name}}" class="mr-3"> <input type="checkbox" name="additional_fields[]" value="{{$field->id}}" id="{{$field->name}}">   {{$field->name}} ({{$field->type}})   </label>
+                                @endforeach
+                            @else
+                                <div class="alert alert-warning">
+                                    <b>No additional Fields added please contact admin to add a additional fields.</b>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 
                     <button type="submit" class="btn btn-primary">Add Job</button>
