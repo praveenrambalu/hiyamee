@@ -3,7 +3,15 @@
 @section('recruiter-view','active')
 
 @section('content')
-
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="/dashboard" class="breadcrumb-item"><i class="anticon anticon-dashboard m-r-5"></i>Dashboard</a>
+            <a class="breadcrumb-item" href="/recruiter">Recruiter</a>
+            <span class="breadcrumb-item active">View</span>
+        </nav>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-12 col-lg-12">
         <div class="card">
