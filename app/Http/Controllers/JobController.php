@@ -318,4 +318,49 @@ class JobController extends Controller
             fclose($handle);
         }
     }
+
+    public function editJob(Request $request, $id)
+    {
+        $job = Job::findOrFail($id);
+        $fields = AdditionalField::where('status', 'active')->get();
+        return view('pages.jobs.edit')->with(['job' => $job, 'fields' => $fields]);
+    }
+
+    public function editJobPost(Request $request, $id)
+    {
+        $job = Job::findOrFail($id);
+        $job->employment_type = $request->employment_type;
+        $job->job_title = $request->job_title;
+        $job->location = $request->location;
+        $job->description = $request->description;
+        $job->primary_skill = $request->primary_skill;
+        $job->skills_required = $request->skills_required;
+        $job->how_many_hires = $request->how_many_hires;
+        $job->annual_ctc = $request->annual_ctc;
+        $job->zoomlink = $request->zoomlink;
+
+        $job->save();
+
+
+        if ($request->additional_fields != "") {
+            $additional_fields = $request->additional_fields;
+            if (count($additional_fields) > 0) {
+                foreach ($additional_fields as $additional_field) {
+                    if ($fielddb = AdditionalField::find($additional_field)) {
+                        if (!$exist = FieldList::where('job_id', $job->id)->where('field_id', $additional_field)->first()) {
+
+                            $field = new FieldList;
+                            $field->job_id = $job->id;
+                            $field->field_id = $additional_field;
+                            $field->field_name = $fielddb->name;
+                            $field->field_type = $fielddb->type;
+                            $field->save();
+                        }
+                    }
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'Job Posted Successfully');
+    }
 }
