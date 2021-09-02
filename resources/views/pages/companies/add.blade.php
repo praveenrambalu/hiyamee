@@ -20,47 +20,47 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Company Name</label>
+                            <label >Company Name <span class="text-danger">*</span> </label>
                             <input type="text" class="form-control" required placeholder="Company Name" name="company_name">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Industry</label>
+                            <label >Industry  <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" required placeholder="Industry" name="industry">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Company Logo</label>
-                            <input type="file" required  class="form-control"  name="logo">
+                            <label >Company Logo  <span class="text-danger">*</span> </label>
+                            <input type="file" required  class="form-control"  name="logo" accept="image/*">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Location</label>
+                            <label >Location  <span class="text-danger">*</span> </label>
                             <input type="text" required  class="form-control"  placeholder="Ex: Banglore, India" name="location">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Website</label>
+                            <label >Website  <span class="text-danger">*</span> </label>
                             <input type="url" required class="form-control"  placeholder="Ex: https://apple.com" name="website">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Email</label>
+                            <label >Email  <span class="text-danger">*</span> </label>
                             <input type="email" required class="form-control"  placeholder="Ex: contact@apple.com" name="email">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label >Contact No</label>
-                            <input type="text" required class="form-control"  placeholder="Ex: 987654**** " name="contactno">
+                            <input type="text"  class="form-control"  placeholder="Ex: 987654**** " name="contactno">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >PinCode</label>
-                            <input type="text" required class="form-control"  placeholder="Ex: 600015" name="pincode">
+                            <label >PinCode  <span class="text-danger">*</span> </label>
+                            <input type="text" required class="form-control"   placeholder="Ex: 600015" name="pincode">
                         </div>
                     </div>
 
                     <div class="form-group ">
-                        <label >Description</label>
+                        <label >Description  <span class="text-danger">*</span> </label>
                         <textarea type="text" class="form-control ckeditor" required name="description"></textarea>
                         
                     </div>

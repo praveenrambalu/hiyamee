@@ -48,64 +48,64 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Employment Type</label>
+                            <label >Employment Type <span class="text-danger">*</span> </label>
                             <select name="employment_type" id="" required class="form-control">
                                 <option value="Full Time">Full Time</option>
                                 <option value="Part Time">Part Time</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Job Title</label>
+                            <label >Job Title <span class="text-danger">*</span> </label>
                             <input type="text" class="form-control" required placeholder="Ex: MERN Stack Developer" name="job_title">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Location</label>
+                            <label >Location <span class="text-danger">*</span>  </label>
                             <input type="text" required  class="form-control"  name="location" placeholder="Ex : Chennai, Tamilnadu">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Primary Skill</label>
+                            <label >Primary Skill <span class="text-danger">*</span> </label>
                             <input type="text" required  class="form-control"  placeholder="Ex: Node JS" name="primary_skill">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Skills Required </label>
+                            <label >Skills Required <span class="text-danger">*</span>  </label>
                             <input type="text" required class="form-control"  placeholder="Ex: MongoDB,NodeJS,ReactJs" name="skills_required">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >How many openings</label>
+                            <label >How many openings <span class="text-danger">*</span> </label>
                             <input type="number" required class="form-control"  placeholder="Ex: 2" min="1" name="how_many_hires">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Annual CTC</label>
+                            <label >Annual CTC <span class="text-danger">*</span> </label>
                             <input type="text" required class="form-control"  placeholder="Ex: 3.2 LPA" name="annual_ctc">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Zoom link</label>
+                            <label >Zoom link <span class="text-danger">*</span> </label>
                             <input type="url" required class="form-control"  placeholder="Ex: https://us04web.zoom.us/j/123456789" name="zoomlink">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Feedback</label>
+                            <label >Feedback <span class="text-danger">*</span> </label>
                             <br>
                             <br>
                             <label for="linkorfilelink" class="mr-3"><input type="radio" checked name="linkorfile" value="link" id="linkorfilelink"> Link</label>
                             <label for="linkorfilefile" class="mr-3"><input type="radio" name="linkorfile" value="file" id="linkorfilefile"> File</label>
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Feedback </label>
+                            <label >Feedback <span class="text-danger">*</span> </label>
                             <div id="linkorfile">
                             </div>
                         </div>
                     </div>
                  
                     <div class="form-group ">
-                        <label >Description</label>
+                        <label >Description <span class="text-danger">*</span> </label>
                         <textarea type="text" class="form-control ckeditor" required name="description"></textarea>
                         
                     </div>

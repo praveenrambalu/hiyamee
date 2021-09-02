@@ -24,12 +24,12 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Employee Name</label>
+                            <label >Employee Name <span class="text-danger">*</span> </label>
                             <input type="text" class="form-control" required placeholder="Ex: John Doe" name="name">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Employee Email</label>
-                            <input type="text" class="form-control" required placeholder="jdoe@gmail.com" name="email">
+                            <label >Employee Email <span class="text-danger">*</span> </label>
+                            <input type="email" class="form-control" required placeholder="jdoe@gmail.com" name="email">
                         </div>
                     </div>
                     <div class="form-row">

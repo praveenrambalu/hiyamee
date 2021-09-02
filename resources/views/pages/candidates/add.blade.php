@@ -78,33 +78,33 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Candidate Name</label>
+                            <label >Candidate Name <span class="text-danger">*</span>  </label>
                             <input type="text" class="form-control" required placeholder="Ex: John Doe" name="candidate_name">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Candidate Email</label>
+                            <label >Candidate Email <span class="text-danger">*</span>  </label>
                             <input type="text" class="form-control" required placeholder="Ex: jdoe@example.com" name="candidate_email">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Phone No</label>
+                            <label >Phone No <span class="text-danger">*</span> </label>
                             <input type="text" required  class="form-control"  name="candidate_phone" placeholder="Ex : 9876543210">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Date of Birth</label>
+                            <label >Date of Birth <span class="text-danger">*</span> </label>
                             <input type="date" required  class="form-control"  name="dateofbirth" placeholder="Ex : 04/06/1998">
                         </div>
                     </div>
                  
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >PAN Card</label>
+                            <label >PAN Card <span class="text-danger">*</span> </label>
                             <input type="text" required  class="form-control"  name="pancard" placeholder="Ex : FAQ123456">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Gender</label>
-                            <select name="gender" id="" class="form-control">
+                            <label >Gender <span class="text-danger">*</span> </label>
+                            <select name="gender" required id="" class="form-control">
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Others">Others</option>
@@ -114,11 +114,11 @@
                 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Experience</label>
+                            <label >Experience <span class="text-danger">*</span>  </label>
                             <input type="number" step="0.1" min="0" required  class="form-control"  name="experience" placeholder="Ex : 2.5">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Relevent Experience</label>
+                            <label >Relevent Experience <span class="text-danger">*</span> </label>
                             <input type="number" step="0.1" min="0" required  class="form-control"  name="relexperience" placeholder="Ex : 2.5">
                         </div>
                     </div>
@@ -126,32 +126,32 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Current Company</label>
-                            <input type="text"  required  class="form-control"  name="current_company" placeholder="Ex : Apple">
+                            <label >Current Company  </label>
+                            <input type="text"    class="form-control"  name="current_company" placeholder="Ex : Apple">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Current CTC</label>
-                            <input type="number" step="0.1" min="0" required  class="form-control"  name="current_ctc" placeholder="Ex : 2.5 LPA">
+                            <label >Current CTC  </label>
+                            <input type="number" step="0.1" min="0"   class="form-control"  name="current_ctc" placeholder="Ex : 2.5 LPA">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Expected  CTC</label>
+                            <label >Expected  CTC <span class="text-danger">*</span> </label>
                             <input type="number" step="0.1" min="0" required  class="form-control"  name="expected_ctc" placeholder="Ex : 3.0 LPA">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Negotiable  CTC</label>
+                            <label >Negotiable  CTC <span class="text-danger">*</span>  </label>
                             <input type="number" step="0.1" min="0" required  class="form-control"  name="neg_ctc" placeholder="Ex : 2.9 LPA">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Notice Period</label>
-                            <input type="number" step="1" min="0" required  class="form-control"  name="notice_period" placeholder="Ex : 30 Days">
+                            <label >Notice Period </label>
+                            <input type="number" step="1" min="0"   class="form-control"  name="notice_period" placeholder="Ex : 30 Days">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Buyout</label>
-                            <select name="buyout" id="" class="form-control">
+                            <label >Buyout <span class="text-danger">*</span> </label>
+                            <select name="buyout" id="" required class="form-control">
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
@@ -159,16 +159,16 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label >Location</label>
+                            <label >Location <span class="text-danger">*</span> </label>
                             <input type="text"  required  class="form-control"  name="location" placeholder="Ex : Chennai, India">
                         </div>
                         <div class="form-group col-md-4">
-                            <label >Preferred Location</label>
+                            <label >Preferred Location <span class="text-danger">*</span> </label>
                             <input type="text"  required  class="form-control"  name="prelocation" placeholder="Ex : Mumbai, India">
                         </div>
                         <div class="form-group col-md-4">
-                            <label >Resume</label>
-                            <input type="file"  required  class="form-control"  name="resume" >
+                            <label >Resume <span class="text-danger">*</span>  </label>
+                            <input type="file"  required  class="form-control"  name="resume" accept="application/pdf" >
                         </div>
                     </div>
 

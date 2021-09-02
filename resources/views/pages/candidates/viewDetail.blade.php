@@ -91,6 +91,8 @@
                     <div class="col-md-4">
                         <div class="d-md-flex align-items-center">
                             <div class="text-center text-sm-left m-v-15 p-l-30">
+                                <h4 class="m-b-5">Interview  <span class="badge badge-dark">  {{$candidate->interview_date}}</span> <span class="badge badge-danger">  {{$candidate->interview_time}}</span></h4>
+                                <hr>
                                 <h2 class="m-b-5">{{$candidate->candidate_name}} 
                                     
                                  <small><small>   @switch($candidate->gender)
@@ -174,6 +176,7 @@
                                         </p>
                                         <p class="col font-weight-semibold"> {{$candidate->neg_ctc}}</p>
                                     </li>
+                                  
                                 </ul>
                             </div>
                         </div>

@@ -21,11 +21,11 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Field Name <small>(No Space Between Words)</small></label>
+                            <label >Field Name <small>(No Space Between Words)</small> <span class="text-danger">*</span>  </label>
                             <input type="text" class="form-control" required placeholder="Ex: FieldName" name="name" pattern="^[a-zA-Z]*$">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Field Type</label>
+                            <label >Field Type <span class="text-danger">*</span>  </label>
                             <select name="type" id="" required class="form-control">
                                 <option value="text">Text</option>
                                 <option value="number">Number</option>
