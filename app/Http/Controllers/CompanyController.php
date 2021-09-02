@@ -114,4 +114,59 @@ class CompanyController extends Controller
         $companies = Company::where('status', 'active')->get();
         return view('pages.companies.view')->with('companies', $companies);
     }
+    public function editCompany(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin') {
+            abort(401);
+        }
+        $company = Company::findOrFail($id);
+        $admin = User::find($company->admin_id);
+        return view('pages.companies.edit')->with(['company' => $company, 'admin' => $admin]);
+    }
+    public function editCompanyPost(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin') {
+            abort(401);
+        }
+        // return $request;
+        $company = Company::findOrFail($id);
+        $company->company_name = $request->company_name;
+        $company->industry = $request->industry;
+        $company->description = $request->description;
+        $company->location = $request->location;
+        $company->website = $request->website;
+        $company->email = $request->email;
+        $company->contactno = $request->contactno;
+        $company->pincode = $request->pincode;
+
+        if ($logo = $request->logo) {
+            $filenameWithExt = $logo->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $logo->getClientOriginalExtension();
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            $path = $logo->storeAs('public/logo/', $fileNameToStore);
+            $storagename = '/storage/logo/' . $fileNameToStore;
+            $company->logo = $storagename;
+        }
+
+        $company->save();
+
+        return redirect('/companies/view')->with('success', 'Edited Successfully');
+        // return view('pages.companies.add');
+    }
+    public function editCompanyAdminPost(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin') {
+            abort(401);
+        }
+        // return $request;
+        $company = Company::findOrFail($id);
+        $user = User::findOrFail($company->admin_id);
+        $user->name = $request->name;
+        $user->phoneno = $request->phoneno;
+        $user->save();
+
+        return redirect('/companies/view')->with('success', 'Edited Successfully');
+        // return view('pages.companies.add');
+    }
 }

@@ -38,7 +38,10 @@ Route::group(['prefix' => '/companies', 'middleware' => ['auth']], function () {
     Route::post('/', [CompanyController::class, 'addCompanyPost']);
     Route::get('/{id}/add-admin', [CompanyController::class, 'addCompanyAdmin']);
     Route::post('/{id}/add-admin', [CompanyController::class, 'addCompanyAdminPost']);
+    Route::post('/{id}/edit-admin', [CompanyController::class, 'editCompanyAdminPost']);
     Route::get('/view', [CompanyController::class, 'viewCompanies']);
+    Route::get('/edit/{id}', [CompanyController::class, 'editCompany']);
+    Route::post('/edit/{id}', [CompanyController::class, 'editCompanyPost']);
 });
 
 
