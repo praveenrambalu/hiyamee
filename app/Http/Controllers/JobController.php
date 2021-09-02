@@ -230,6 +230,8 @@ class JobController extends Controller
             foreach ($candidates as $candidate) {
                 $dbcand = Candidate::find($candidate);
                 $dbcand->allocated_to = $request->employee;
+                $dbcand->interview_date = $request->interview_date;
+                $dbcand->interview_time = $request->interview_time;
                 $dbcand->update_history = $dbcand->update_history . ' <br> *' . now() . ' : Candidate Allocated to ' . $employee->name . ' By ' . Auth::user()->name;
                 $dbcand->save();
             }
