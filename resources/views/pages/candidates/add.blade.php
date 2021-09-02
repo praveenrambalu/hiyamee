@@ -195,7 +195,8 @@
             <form action="/candidates/bulk/{{$job->id}}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="text-center">
-                        <a href="/assets/sample-candidate-form.csv">Download Sample Document</a>
+                        <a href="/assets/sample-candidate-form.csv">Download Bulk Upload Format here <span class="fa fa-download"></span></a>
+                        <br>
                         <br>
                     </div>
                     @csrf

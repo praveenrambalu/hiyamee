@@ -165,7 +165,8 @@
             <form action="/candidates/bulk-status/update" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="text-center">
-                        <a href="/assets/sample-application-status.csv">Download Sample Document</a>
+                        <a href="/assets/sample-application-status.csv">Download Bulk Upload Format here <span class="fa fa-download"></span></a>
+                        <br>
                         <br>
                     </div>
                     @csrf
