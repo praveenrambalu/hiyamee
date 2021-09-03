@@ -1,65 +1,119 @@
-@extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<!DOCTYPE html>
+<html lang="en">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Reset Password  | Hiyamee </title>
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/logo/favicon.png">
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+    <!-- page css -->
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+    <!-- Core css -->
+    <link href="/assets/css/app.min.css" rel="stylesheet">
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+</head>
+
+<body>
+    <div class="app">
+        <div class="container-fluid">
+            <div class="d-flex full-height p-v-15 flex-column justify-content-between">
+                <div class="d-none d-md-flex p-h-40">
+                    <img src="/assets/images/logo/logo.png" alt="">
+                </div>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h2 class="m-t-20">Reset Password</h2>
+                                    <p class="m-b-30">Enter your credential to get access</p>
+                                    <form method="POST" action="{{ route('password.update') }}">
+                                        @csrf
+                                        <input type="hidden" name="token" value="{{ $token }}">
+                                        <div class="form-group">
+                                            <label class="font-weight-semibold" for="userName">Email Address:</label>
+                                            <div class="input-affix">
+                                                <i class="prefix-icon anticon anticon-mail"></i>
+                                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="email" value="{{ $email ?? old('email') }}"  autofocus>
+
+                                               
+                                            </div>
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-semibold" for="password">Password:</label>
+                                            {{-- <a class="float-right font-size-13 text-muted" href="">Forget Password?</a> --}}
+                                            <div class="input-affix m-b-10">
+                                                <i class="prefix-icon anticon anticon-lock"></i>
+                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                            </div>
+                                            @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                             @enderror
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="font-weight-semibold" for="password-confirm">Confirm Password</label>
+                                            {{-- <a class="float-right font-size-13 text-muted" href="">Forget password-confirm?</a> --}}
+                                            <div class="input-affix m-b-10">
+                                                <i class="prefix-icon anticon anticon-lock"></i>
+                                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                
+
+
+                                                <button class="btn btn-primary">{{ __('Reset Password') }}</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="offset-md-1 col-md-6 d-none d-md-block">
+                            <img class="img-fluid" src="/assets/images/others/login-2.png" alt="">
                         </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
+                </div>
+                <div class="d-none d-md-flex  p-h-40 justify-content-between">
+                    <span class="">© 2021 Hiyamee</span>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a class="text-dark text-link" href="">Terms & Conditions</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="text-dark text-link" href="">Privacy Policy</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+
+    
+    <!-- Core Vendors JS -->
+    <script src="/assets/js/vendors.min.js"></script>
+
+    <!-- page js -->
+
+    <!-- Core JS -->
+    <script src="/assets/js/app.min.js"></script>
+
+</body>
+
+</html>
