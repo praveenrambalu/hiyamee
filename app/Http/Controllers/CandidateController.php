@@ -255,6 +255,7 @@ class CandidateController extends Controller
             $candidate->notes = $candidate->notes . '<br>  ' .  $request->notes;
             $candidate->additional_notes = $candidate->additional_notes . '<br>   ' .   $request->additional_notes;
             $candidate->interviewer_id = Auth::user()->id;
+            $candidate->interview_completed_at = now();
             $candidate->updated_by = Auth::user()->id;
             $candidate->update_history = $candidate->update_history . ' <br> *' . now() . ' : Candidate Updated by ' . Auth::user()->name . '   with status  ' . $request->interview_outcome . ' <br>';
             $candidate->save();
@@ -310,5 +311,76 @@ class CandidateController extends Controller
         }
         $candidates = Candidate::where('allocated_to', $id)->get();
         return view('pages.candidates.viewAllCandidatesByUser')->with(['candidates' => $candidates]);
+    }
+    public function editCandidate(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin' && Auth::user()->user_type != "admin") {
+            abort(401);
+        }
+        $candidate = Candidate::findOrFail($id);
+        if ($candidate->interview_outcome != 'Ready') {
+            abort(403);
+        }
+
+        if (Auth::user()->user_type == 'admin') {
+            if ($company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first()) {
+
+                if ($candidate->company_id != $company->id) {
+                    abort(403);
+                }
+            } else {
+                abort(401);
+            }
+        }
+
+        return view('pages.candidates.edit')->with(['candidate' => $candidate]);
+    }
+
+    public function editCandidatePost(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin' && Auth::user()->user_type != "admin") {
+            abort(401);
+        }
+        $candidate = Candidate::findOrFail($id);
+        if ($candidate->interview_outcome != 'Ready') {
+            abort(403);
+        }
+
+        if (Auth::user()->user_type == 'admin') {
+            if ($candidate->company_id != Auth::user()->company_id) {
+                abort(403);
+            }
+        }
+
+
+        $candidate->candidate_name = $request->candidate_name;
+        $candidate->candidate_email = $request->candidate_email;
+        $candidate->candidate_phone = $request->candidate_phone;
+        $candidate->dateofbirth = $request->dateofbirth;
+        $candidate->pancard = $request->pancard;
+        $candidate->gender = $request->gender;
+        $candidate->experience = $request->experience;
+        $candidate->relexperience = $request->relexperience;
+        $candidate->current_company = $request->current_company;
+        $candidate->current_ctc = $request->current_ctc;
+        $candidate->expected_ctc = $request->expected_ctc;
+        $candidate->neg_ctc = $request->neg_ctc;
+        $candidate->notice_period = $request->notice_period;
+        $candidate->buyout = $request->buyout;
+        $candidate->location = $request->location;
+        $candidate->prelocation = $request->prelocation;
+        $candidate->update_history = '*' . now() . ' : Candidate Edited   by ' . Auth::user()->name . '<br>';
+        if ($resume = $request->resume) {
+            $filenameWithExt = $resume->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $resume->getClientOriginalExtension();
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            $path = $resume->storeAs('public/resume/', $fileNameToStore);
+            $storagename = '/storage/resume/' . $fileNameToStore;
+            $candidate->resume = $storagename;
+        }
+
+        $candidate->save();
+        return redirect()->back()->with('success', 'Candidate updated Successfully ');
     }
 }
