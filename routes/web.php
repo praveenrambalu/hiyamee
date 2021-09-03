@@ -5,6 +5,7 @@ use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RecruiterController;
 use Illuminate\Support\Facades\Auth;
@@ -86,4 +87,9 @@ Route::group(['prefix' => '/employees', 'middleware' => ['auth']], function () {
 Route::group(['prefix' => '/fields', 'middleware' => ['auth']], function () {
     Route::get('/', [AdditionalFieldsController::class, 'addFields']);
     Route::post('/', [AdditionalFieldsController::class, 'addFieldsPost']);
+});
+
+
+Route::group(['prefix' => '/export', 'middleware' => ['auth']], function () {
+    Route::get('/companies', [ExportController::class, 'companies']);
 });
