@@ -35,9 +35,9 @@ class CompanyExport implements FromCollection, WithHeadings
                 'Email' => $company->email,
                 'Pincode' => $company->pincode,
                 'Status' => $company->status,
-                'AdminName' => $admin->name,
-                'AdminEmail' => $admin->email,
-                'AdminPhone' => $admin->phone,
+                'AdminName' => $admin->name ?? '',
+                'AdminEmail' => $admin->email ?? '',
+                'AdminPhone' => $admin->phone ?? '',
             );
             array_push($data, $localdata);
         }
