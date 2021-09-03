@@ -1,47 +1,93 @@
-@extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<!DOCTYPE html>
+<html lang="en">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Reset Password  | Hiyamee </title>
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/logo/favicon.png">
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+    <!-- page css -->
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+    <!-- Core css -->
+    <link href="/assets/css/app.min.css" rel="stylesheet">
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+</head>
+
+<body>
+    <div class="app">
+        <div class="container-fluid">
+            <div class="d-flex full-height p-v-15 flex-column justify-content-between">
+                <div class="d-none d-md-flex p-h-40">
+                    <img src="/assets/images/logo/logo.png" alt="">
+                </div>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h2 class="m-t-20">Reset Password</h2>
+                                    <p class="m-b-30">Enter your email to reset password</p>
+                                    <form method="POST" action="{{ route('password.email') }}">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label class="font-weight-semibold" for="userName">Email Address:</label>
+                                            <div class="input-affix">
+                                                <i class="prefix-icon anticon anticon-mail"></i>
+                                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                               
+                                            </div>
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    
+                                        <div class="form-group">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                
+
+
+                                                <button class="btn btn-primary">{{ __('Send Password Reset Link') }}</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
+                        <div class="offset-md-1 col-md-6 d-none d-md-block">
+                            <img class="img-fluid" src="/assets/images/others/login-2.png" alt="">
                         </div>
-                    </form>
+                    </div>
+                </div>
+                <div class="d-none d-md-flex  p-h-40 justify-content-between">
+                    <span class="">© 2021 Hiyamee</span>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a class="text-dark text-link" href="">Terms & Conditions</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="text-dark text-link" href="">Privacy Policy</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+
+    
+    <!-- Core Vendors JS -->
+    <script src="/assets/js/vendors.min.js"></script>
+
+    <!-- page js -->
+
+    <!-- Core JS -->
+    <script src="/assets/js/app.min.js"></script>
+
+</body>
+
+</html>

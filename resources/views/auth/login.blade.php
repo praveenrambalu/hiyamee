@@ -62,10 +62,14 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="d-flex align-items-center justify-content-between">
-                                                {{-- <span class="font-size-13 text-muted">
-                                                    Don't have an account? 
-                                                    <a class="small" href=""> Signup</a>
-                                                </span> --}}
+                                                
+
+                                                @if (Route::has('password.request'))
+                                                    <span class="font-size-13 text-muted">
+                                                        <a class="small" href="{{ route('password.request') }}"> {{ __('Forgot Your Password?') }}</a>
+                                                    </span>
+                                                @endif
+
                                                 <button class="btn btn-primary">Log In</button>
                                             </div>
                                         </div>
