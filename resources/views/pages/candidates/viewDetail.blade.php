@@ -111,7 +111,10 @@
                                 <p class="text-dark ">{{$job->job_title}} <span class="text-opacity font-size-13">@ {{$company->company_name}}</span></p>
                                 
                                 <a href="{{$candidate->resume}}" download>Download Resume</a> <br><br>
+                                @if ($candidate->interview_outcome=='Ready')
+                                    
                                 <button class="btn btn-primary btn-tone" type="button" data-toggle="modal" data-target="#InterViewStatus">Status Update</button>
+                                @endif
                             </div>
                         </div>
                     </div>
