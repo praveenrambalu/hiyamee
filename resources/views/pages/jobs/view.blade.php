@@ -58,7 +58,7 @@
                             <th>Skills Required</th>
                             <th>Location</th>
                             <th>Annual CTC</th>
-                            <th>How Many Places</th>
+                            <th>How Many Openings</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
