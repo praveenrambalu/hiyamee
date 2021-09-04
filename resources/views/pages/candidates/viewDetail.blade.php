@@ -110,9 +110,12 @@
                                 
                                 <p class="text-dark ">{{$job->job_title}} <span class="text-opacity font-size-13">@ {{$company->company_name}}</span></p>
                                 
-                                <a href="{{$candidate->resume}}" download>Download Resume</a> <br><br>
+                                <a href="{{$candidate->resume}}" download class="btn  btn-outline-dark">Download Resume</a> 
+
+                                <a href="/candidates/share/{{$candidate->id}}" class="btn btn-tone  btn-danger">Share Profile as PDF</a> 
                                 @if ($candidate->interview_outcome=='Ready')
-                                    
+                                <br>    
+                                <br>    
                                 <button class="btn btn-primary btn-tone" type="button" data-toggle="modal" data-target="#InterViewStatus">Status Update</button>
                                 @endif
                             </div>

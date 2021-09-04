@@ -101,6 +101,7 @@ class CandidateExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
+            'Application ID',
             'Candidate Name',
             'Candidate Email',
             'Candidate Phone',

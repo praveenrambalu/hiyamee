@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\FieldList;
 use App\Models\Job;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Dompdf\Dompdf;
@@ -391,8 +392,6 @@ class CandidateController extends Controller
 
 
 
-        return "hello";
-
         $candidate = Candidate::find($id);
         $job_id = $candidate->job_id;
         if (Auth::user()->user_type == 'superadmin') {
@@ -421,7 +420,28 @@ class CandidateController extends Controller
 
             $addfields = FieldList::where('job_id', $job->id)->where('status', 'active')->get();
             $fielddatas = AddFieldData::where('job_id', $job->id)->where('candidate_id', $candidate->id)->get();
-            return view('pages.candidates.viewDetailPrint')->with([
+            // return view('pages.candidates.viewDetailPrint')->with([
+            //     'company' => $company,
+            //     'job' => $job,
+            //     'job_creator' => $job_creator,
+            //     'candidate_creator' => $candidate_creator,
+            //     'candidate' => $candidate,
+            //     'interviewer' => $interviewer,
+            //     'addfields' => $addfields,
+            //     'fielddatas' => $fielddatas
+            // ]);
+
+            // return view('resume')->with([
+            //     'company' => $company,
+            //     'job' => $job,
+            //     'job_creator' => $job_creator,
+            //     'candidate_creator' => $candidate_creator,
+            //     'candidate' => $candidate,
+            //     'interviewer' => $interviewer,
+            //     'addfields' => $addfields,
+            //     'fielddatas' => $fielddatas
+            // ]);
+            $details = [
                 'company' => $company,
                 'job' => $job,
                 'job_creator' => $job_creator,
@@ -430,7 +450,9 @@ class CandidateController extends Controller
                 'interviewer' => $interviewer,
                 'addfields' => $addfields,
                 'fielddatas' => $fielddatas
-            ]);
+            ];
+            $pdf = PDF::loadView('resume', $details);
+            return $pdf->download('candidate_' . $candidate->id . '_' . now() . '.pdf');
 
             // return redirect()->back()->with('success', 'Candidate added Successfully ');
         } else {
