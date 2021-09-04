@@ -16,7 +16,10 @@
     <div class="col-md-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">View Recruiter</h3>
+                <h3 class="card-title" style="float: left;">View Recruiter</h3>
+                @if (Auth::user()->user_type=='superadmin')
+                <a href="/export/employees" class="btn btn-dark float-right"   style="    margin-top: 10px;">Export Recruiters</a>
+                @endif
             </div>
             <div class="card-body">
                 <table  class="table datatable dt-responsive nowrap" style="width: 100%">

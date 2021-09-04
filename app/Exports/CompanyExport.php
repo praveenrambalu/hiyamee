@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Company;
+use App\Models\Job;
 use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\Exportable;
@@ -25,6 +26,7 @@ class CompanyExport implements FromCollection, WithHeadings
         $companies = Company::all();
         foreach ($companies as $company) {
             $admin = User::find($company->admin_id);
+            $jobs = Job::where('company_id', $company->id)->get();
             $localdata = array(
                 'Name' => $company->company_name,
                 'Industry' => $company->industry,
@@ -34,10 +36,11 @@ class CompanyExport implements FromCollection, WithHeadings
                 'Phone' => $company->contactno,
                 'Email' => $company->email,
                 'Pincode' => $company->pincode,
+                'Total Jobs' => count($jobs),
+                'Admin Name' => $admin->name ?? '',
+                'Admin Email' => $admin->email ?? '',
+                'Admin Phone' => $admin->phone ?? '',
                 'Status' => $company->status,
-                'AdminName' => $admin->name ?? '',
-                'AdminEmail' => $admin->email ?? '',
-                'AdminPhone' => $admin->phone ?? '',
             );
             array_push($data, $localdata);
         }
@@ -55,10 +58,11 @@ class CompanyExport implements FromCollection, WithHeadings
             'Phone',
             'Email',
             'Pincode',
+            'Total Jobs',
+            'Admin Name',
+            'Admin Email',
+            'Admin Phone',
             'Status',
-            'AdminName',
-            'AdminEmail',
-            'AdminPhone',
         ];
     }
 }

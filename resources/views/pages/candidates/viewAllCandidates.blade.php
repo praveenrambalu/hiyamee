@@ -16,7 +16,8 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title" style="float: left;">View Candidates</h3>
-                <button class="btn btn-dark float-right"  data-toggle="modal" data-target="#bulkUpdate" style="    margin-top: 10px;">Bulk Status Update</button>
+                <button class="btn btn-primary float-right"  data-toggle="modal" data-target="#bulkUpdate" style="    margin-top: 10px;">Bulk Status Update</button>
+                <a href="/export/candidates" class="btn btn-dark float-right"   style="    margin-top: 10px;">Export Candidates</a>
             </div>
             <form action="/candidates/allocate/update" method="post">
                 @csrf
