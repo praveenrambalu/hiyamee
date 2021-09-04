@@ -29,6 +29,10 @@ class EmployeeExport implements FromCollection, WithHeadings
             case 'superadmin':
                 $recruiters = User::where('user_type', 'recruiter')->where('status', 'active')->get();
                 break;
+            case 'admin':
+                $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+                $recruiters = User::where('user_type', 'employee')->where('company_id', $company->id)->where('status', 'active')->get();
+                break;
 
             default:
                 # code...

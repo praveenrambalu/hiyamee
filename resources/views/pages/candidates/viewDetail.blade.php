@@ -139,7 +139,7 @@
                                     </li>
                                     <li class="row">
                                         <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
-                                            <i class="m-r-10 text-primary anticon anticon-compass"></i>
+                                            <i class="m-r-10 text-primary fa fa-map-marker"></i>
                                             <span>Location: </span> 
                                         </p>
                                         <p class="col font-weight-semibold"> {{$candidate->location}}</p>
@@ -153,14 +153,14 @@
                                     </li>
                                     <li class="row">
                                         <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
-                                            <i class="m-r-10 text-primary fas fa-signal"></i>
+                                            <i class="m-r-10 text-primary fas fa-chart-line"></i>
                                             <span>RExperience: </span> 
                                         </p>
                                         <p class="col font-weight-semibold"> {{$candidate->relexperience}}</p>
                                     </li>
                                     <li class="row">
                                         <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
-                                            <i class="m-r-10 text-primary fas fa-money-check-alt"></i>
+                                            <i class="m-r-10 text-primary fas fa-credit-card"></i>
                                             <span>Current CTC: </span> 
                                         </p>
                                         <p class="col font-weight-semibold"> {{$candidate->current_ctc}}</p>
@@ -174,7 +174,7 @@
                                     </li>
                                     <li class="row">
                                         <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
-                                            <i class="m-r-10 text-primary fas fa-money-bill"></i>
+                                            <i class="m-r-10 text-primary fas fa-comments"></i>
                                             <span>N CTC: </span> 
                                         </p>
                                         <p class="col font-weight-semibold"> {{$candidate->neg_ctc}}</p>
@@ -332,9 +332,9 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            <label for="">Interview Outcome</label>
+                            <label for="">Interview Outcome <span class="text-danger">*</span> </label>
                             <input type="hidden" name="id" value="{{$candidate->id}}" id="">
-                            <select type="text" name="interview_outcome" id="" class="form-control">
+                            <select type="text" name="interview_outcome" required  id="" class="form-control">
                                 <option value="Ready">Ready</option>
                                 <option value="Interviewed">Interviewed</option>
                                 <option value="Selected">Selected</option>
@@ -342,15 +342,15 @@
                             </select>
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="">Current Location</label>
+                            <label for="">Current Location <span class="text-danger">*</span> </label>
                             <input type="text" name="location" id="" value="{{$candidate->location}}" required class="form-control">
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="">Preferred Location</label>
+                            <label for="">Preferred Location <span class="text-danger">*</span> </label>
                             <input type="text" name="prelocation" id="" value="{{$candidate->prelocation}}" required class="form-control">
                         </div>
                         <div class="form-group col-sm-3">
-                            <label for="">Current Company</label>
+                            <label for="">Current Company </label>
                             <input type="text" name="current_company"  value="{{$candidate->current_company}}" id=""  class="form-control">
                         </div>
                         <div class="form-group col-sm-3">
@@ -358,31 +358,31 @@
                             <input type="text" name="current_ctc"  value="{{$candidate->current_ctc}}" id="" required class="form-control">
                         </div>
                         <div class="form-group col-sm-3">
-                            <label for="">Expected CTC</label>
+                            <label for="">Expected CTC <span class="text-danger">*</span> </label>
                             <input type="text" name="expected_ctc"  value="{{$candidate->expected_ctc}}" id="" required class="form-control">
                         </div>
                         <div class="form-group col-sm-3">
-                            <label for="">Negotiable CTC</label>
+                            <label for="">Negotiable CTC <span class="text-danger">*</span> </label>
                             <input type="text" name="neg_ctc"  value="{{$candidate->neg_ctc}}" id="" required class="form-control">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="">Notice Period</label>
-                            <input type="text" name="notice_period"  value="{{$candidate->notice_period}}" id="" required class="form-control">
+                            <input type="text" name="notice_period"  value="{{$candidate->notice_period}}" id=""  class="form-control">
                         </div>
                       
                       
                         <div class="form-group col-sm-3">
-                            <label for="">Total Experience</label>
-                            <input type="number" name="experience"  value="{{$candidate->experience}}" id="" required step="0.1" min="0" max="50" class="form-control">
+                            <label for="">Total Experience <span class="text-danger">*</span> </label>
+                            <input type="number" name="experience" required  value="{{$candidate->experience}}" id=""  step="0.1" min="0" max="50" class="form-control">
                         </div>
                         <div class="form-group col-sm-3">
-                            <label for="">Relevent Experience</label>
-                            <input type="number" name="relexperience"  value="{{$candidate->relexperience}}" id="" required step="0.1" min="0" max="50" class="form-control">
+                            <label for="">Relevent Experience <span class="text-danger">*</span> </label>
+                            <input type="number" name="relexperience" required  value="{{$candidate->relexperience}}" id=""  step="0.1" min="0" max="50" class="form-control">
                         </div>
 
                         <div class="form-group col-sm-3">
-                            <label for="">Buyout</label>
-                            <select name="buyout" id="" class="form-control">
+                            <label for="">Buyout <span class="text-danger">*</span> </label>
+                            <select name="buyout" id="" required class="form-control">
                                 <option value="{{$candidate->buyout}}">{{$candidate->buyout}}</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
@@ -400,11 +400,11 @@
 
 
                         <div class="form-group col-sm-6">
-                            <label for="">Notes</label>
+                            <label for="">Notes <span class="text-danger">*</span> </label>
                             <textarea type="text" name="notes" id="" required class="form-control"></textarea>
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="">Additional Notes</label>
+                            <label for="">Additional Notes </label>
                             <textarea type="text" name="additional_notes" id="" class="form-control"></textarea>
                         </div>
                     </div>
