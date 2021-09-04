@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CandidateExport;
 use App\Exports\CompanyExport;
 use App\Exports\EmployeeExport;
 use App\Models\Company;
@@ -17,5 +18,9 @@ class ExportController extends Controller
     public function employees()
     {
         return Excel::download(new EmployeeExport, 'employees_' . now() . '.csv');
+    }
+    public function candidates()
+    {
+        return Excel::download(new CandidateExport, 'candidates_' . now() . '.csv');
     }
 }

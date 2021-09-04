@@ -93,4 +93,5 @@ Route::group(['prefix' => '/fields', 'middleware' => ['auth']], function () {
 Route::group(['prefix' => '/export', 'middleware' => ['auth']], function () {
     Route::get('/companies', [ExportController::class, 'companies']);
     Route::get('/employees', [ExportController::class, 'employees']);
+    Route::get('/candidates', [ExportController::class, 'candidates']);
 });
