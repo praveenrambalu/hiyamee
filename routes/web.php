@@ -94,4 +94,5 @@ Route::group(['prefix' => '/export', 'middleware' => ['auth']], function () {
     Route::get('/companies', [ExportController::class, 'companies']);
     Route::get('/employees', [ExportController::class, 'employees']);
     Route::get('/candidates', [ExportController::class, 'candidates']);
+    Route::get('/jobs/{id}', [ExportController::class, 'jobs']);
 });
