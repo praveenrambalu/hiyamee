@@ -36,49 +36,49 @@
 
         <tr  >
             <td colspan="6" style="padding-bottom:5px; padding-left:10px; padding-right:10px; border-bottom:1px solid #fff;">
-                <h3 style="font-size:2rem; text-align:center; ">{{$company->company_name}} - #{{$candidate->id}} </h3>
+                <h3 style="font-size:2rem; text-align:center; ">{{$company->company_name ?? ' ' }}  - #{{$candidate->id ?? ' ' }}  </h3>
                 @switch($candidate->interview_outcome)
                     @case('Ready')
                             <h3 style="text-align:center; font-size:1.5rem; color:blue">Interview Not Yet Done</h3>
                         @break
                     @case('Selected')
-                            <h3 style="text-align:center; font-size:1.5rem; color:green">{{$candidate->interview_outcome}}</h3>
+                            <h3 style="text-align:center; font-size:1.5rem; color:green">{{$candidate->interview_outcome ?? ' ' }} </h3>
                         @break
                     @case('Rejected')
-                            <h3 style="text-align:center; font-size:1.5rem; color:red">{{$candidate->interview_outcome}}</h3>
+                            <h3 style="text-align:center; font-size:1.5rem; color:red">{{$candidate->interview_outcome ?? ' ' }} </h3>
                         @break
                     @case('Interviewed')
-                            <h3 style="text-align:center; font-size:1.5rem; color:orange">{{$candidate->interview_outcome}}</h3>
+                            <h3 style="text-align:center; font-size:1.5rem; color:orange">{{$candidate->interview_outcome ?? ' ' }} </h3>
                         @break
                 
                     @default
-                    <h3 style="text-align:center; font-size:1.5rem; ">{{$candidate->interview_outcome}}</h3>
+                    <h3 style="text-align:center; font-size:1.5rem; ">{{$candidate->interview_outcome ?? ' ' }} </h3>
                 @endswitch
             </td>
         </tr>
         <tr >
             <td colspan="6" style="padding-left:10px; padding-right:10px;">
-                <h4 style="font-size:1rem; text-align:center">{{$job->job_title}}</h4>
+                <h4 style="font-size:1rem; text-align:center">{{$job->job_title ?? ' ' }} </h4>
             </td>
         </tr>
         <tr >
             <td colspan="3">
-                <h3 style="font-size:2rem; text-align:left;"><b>Skills : </b>{{$job->primary_skill}} , {{$job->skills_required}}</h3>
+                <p style="font-size:1rem; text-align:left;"><b>Skills : </b>{{$job->primary_skill ?? ' ' }}  , {{$job->skills_required ?? ' ' }} </p>
             </td>
             <td colspan="3">
-                <h5 style="font-size:1rem; text-align:right;">Location : {{$job->location}}</h5>
+                <p style="font-size:1rem; text-align:right;">Location : {{$job->location ?? ' ' }} </p>
             </td>
         </tr>
 
         <tr style="background:#fff;">
             <td colspan="2">
-                <h3 style="font-size:2rem; text-align:left;">{{$candidate->candidate_name}}</h3>
+                <h3 style="font-size:1.5rem; text-align:left;">{{$candidate->candidate_name ?? ' ' }} </h3>
             </td>
             <td colspan="2">
-                <h5 style="font-size:1rem; text-align:right;">DOB : {{$candidate->dateofbirth}}</h5>
+                <h5 style="font-size:1rem; text-align:right;">DOB : {{$candidate->dateofbirth ?? ' ' }} </h5>
             </td>
             <td colspan="2">
-                <h5 style="font-size:1rem; text-align:right;">Gender : {{$candidate->gender}}</h5>
+                <h5 style="font-size:1rem; text-align:right;">Gender : {{$candidate->gender ?? ' ' }} </h5>
             </td>
         </tr>
         <tr  >
@@ -86,13 +86,13 @@
                 <p><b>Email : </b></p>
             </td>
             <td colspan="2" style="border:1px solid #fff; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->candidate_email}}</p>
+                <p>{{$candidate->candidate_email ?? ' ' }} </p>
             </td>
             <td colspan="1" style="border:1px solid #fff;  border-right:none; padding-left:10px; padding-right:10px;">
                 <p><b>Phone No : </b></p>
             </td>
             <td colspan="2" style="border:1px solid #fff; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->candidate_phone}}</p>
+                <p>{{$candidate->candidate_phone ?? ' ' }} </p>
             </td>
         </tr>
         <tr >
@@ -100,13 +100,13 @@
                 <p><b>Location : </b></p>
             </td>
             <td colspan="2" style="border:1px solid #fff; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->location}}</p>
+                <p>{{$candidate->location ?? ' ' }} </p>
             </td>
             <td colspan="1" style="border:1px solid #fff; border-right:none; padding-left:10px; padding-right:10px;">
                 <p><b>Preferred Location : </b></p>
             </td>
             <td colspan="2" style="border:1px solid #fff; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->prelocation}}</p>
+                <p>{{$candidate->prelocation ?? ' ' }} </p>
             </td>
         </tr>
         <tr >
@@ -114,13 +114,13 @@
                 <p><b>Experience : </b></p>
             </td>
             <td colspan="2" style="border:1px solid #fff;  border-left:none;padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->experience}}</p>
+                <p>{{$candidate->experience ?? ' ' }} </p>
             </td>
             <td colspan="1" style="border:1px solid #fff;  border-right:none; padding-left:10px; padding-right:10px;">
                 <p><b>Relevent Experience : </b></p>
             </td>
             <td colspan="2" style="border:1px solid #fff; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->relexperience}}</p>
+                <p>{{$candidate->relexperience ?? ' ' }} </p>
             </td>
         </tr>
         <tr >
@@ -128,19 +128,19 @@
                 <p><b>Current CTC : </b></p>
             </td>
             <td colspan="1" style="border:1px solid #fff; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->current_ctc}}</p>
+                <p>{{$candidate->current_ctc ?? ' ' }} </p>
             </td>
             <td colspan="1" style="border:1px solid #fff; border-right:none; padding-left:10px; padding-right:10px;">
                 <p><b>Expected CTC : </b></p>
             </td>
             <td colspan="1" style="border:1px solid #fff;  border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->expected_ctc}}</p>
+                <p>{{$candidate->expected_ctc ?? ' ' }} </p>
             </td>
             <td colspan="1" style="border:1px solid #fff; border-right:none; padding-left:10px; padding-right:10px;">
                 <p><b>Negotiable CTC : </b></p>
             </td>
             <td colspan="1" style="border:1px solid #fff; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->neg_ctc}}</p>
+                <p>{{$candidate->neg_ctc ?? ' ' }} </p>
             </td>
         </tr>
 
@@ -149,13 +149,13 @@
                 <p><b>Current Company : </b></p>
             </td>
             <td colspan="2" style="border:1px solid #fff;  border-left:none;padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->current_company}}</p>
+                <p>{{$candidate->current_company ?? ' ' }} </p>
             </td>
             <td colspan="1" style="border:1px solid #fff;  border-right:none; padding-left:10px; padding-right:10px;">
                 <p><b>Notice Period : </b></p>
             </td>
             <td colspan="2" style="border:1px solid #fff; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->notice_period}}</p>
+                <p>{{$candidate->notice_period ?? ' ' }} </p>
             </td>
         </tr>
         <tr >
@@ -163,13 +163,13 @@
                 <p><b>PAN Card  : </b></p>
             </td>
             <td colspan="2" style="border:1px solid #fff;  border-left:none;padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->pancard}}</p>
+                <p>{{$candidate->pancard ?? ' ' }} </p>
             </td>
             <td colspan="1" style="border:1px solid #fff;  border-right:none; padding-left:10px; padding-right:10px;">
                 <p><b>Buyout: </b></p>
             </td>
             <td colspan="2" style="border:1px solid #fff; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->buyout}}</p>
+                <p>{{$candidate->buyout ?? ' ' }} </p>
             </td>
         </tr>
 
@@ -178,19 +178,19 @@
                 <p><b>Interview Date  : </b></p>
             </td>
             <td colspan="1" style="border:1px solid #edf2f7;  border-left:none;padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->interview_date}}</p>
+                <p>{{$candidate->interview_date ?? ' ' }} </p>
             </td>
             <td colspan="1" style="border:1px solid #edf2f7;  border-right:none; padding-left:10px; padding-right:10px;">
                 <p><b>Interview Time: </b></p>
             </td>
             <td colspan="1" style="border:1px solid #edf2f7; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->interview_time}}</p>
+                <p>{{$candidate->interview_time ?? ' ' }} </p>
             </td>
             <td colspan="1" style="border:1px solid #edf2f7;  border-right:none; padding-left:10px; padding-right:10px;">
                 <p><b>Interview Completed At: </b></p>
             </td>
             <td colspan="1" style="border:1px solid #edf2f7; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate->interview_completed_at}}</p>
+                <p>{{$candidate->interview_completed_at ?? ' ' }} </p>
             </td>
         </tr>
 
@@ -199,19 +199,19 @@
                 <p><b>Interviewer Name: </b></p>
             </td>
             <td colspan="1" style="border:1px solid #edf2f7; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$interviewer->name}}</p>
+                <p>{{$interviewer->name ?? ' ' }} </p>
             </td>
             <td colspan="1" style="border:1px solid #edf2f7; border-right:none; padding-left:10px; padding-right:10px;">
                 <p><b>Interviewer Email : </b></p>
             </td>
             <td colspan="1" style="border:1px solid #edf2f7;  border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$interviewer->email}}</p>
+                <p>{{$interviewer->email ?? ' ' }} </p>
             </td>
             <td colspan="1" style="border:1px solid #edf2f7; border-right:none; padding-left:10px; padding-right:10px;">
                 <p><b>Interviewer Phone : </b></p>
             </td>
             <td colspan="1" style="border:1px solid #edf2f7; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$interviewer->phoneno}}</p>
+                <p>{{$interviewer->phoneno ?? ' ' }} </p>
             </td>
         </tr>
 
@@ -220,19 +220,19 @@
                 <p><b>Uploader Name : </b></p>
             </td>
             <td colspan="1" style="border:1px solid #fff; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate_creator->name}}</p>
+                <p>{{$candidate_creator->name ?? ' ' }} </p>
             </td>
             <td colspan="1" style="border:1px solid #fff;  border-right:none; padding-left:10px; padding-right:10px;">
                 <p><b>Uploader Email : </b></p>
             </td>
             <td colspan="1" style="border:1px solid #fff; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate_creator->email}}</p>
+                <p>{{$candidate_creator->email ?? ' ' }} </p>
             </td>
             <td colspan="1" style="border:1px solid #fff;  border-right:none; padding-left:10px; padding-right:10px;">
                 <p><b>Uploader Phone : </b></p>
             </td>
             <td colspan="1" style="border:1px solid #fff; border-left:none; padding-left:10px; padding-right:10px;">
-                <p>{{$candidate_creator->phoneno}}</p>
+                <p>{{$candidate_creator->phoneno ?? ' ' }} </p>
             </td>
         </tr>
         <tr  >
