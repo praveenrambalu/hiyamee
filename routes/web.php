@@ -70,6 +70,7 @@ Route::group(['prefix' => '/candidates', 'middleware' => ['auth']], function () 
     Route::get('/view/{id}', [CandidateController::class, 'viewCandidatesbyUser']);
     Route::get('/edit/{id}', [CandidateController::class, 'editCandidate']);
     Route::post('/edit/{id}', [CandidateController::class, 'editCandidatePost']);
+    Route::get('/share/{id}', [CandidateController::class, 'shareCandidate']);
 });
 
 

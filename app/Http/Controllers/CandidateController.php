@@ -10,6 +10,7 @@ use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Dompdf\Dompdf;
 
 class CandidateController extends Controller
 {
@@ -382,5 +383,58 @@ class CandidateController extends Controller
 
         $candidate->save();
         return redirect()->back()->with('success', 'Candidate updated Successfully ');
+    }
+
+    public function shareCandidate(Request $request, $id)
+    {
+
+
+
+
+        return "hello";
+
+        $candidate = Candidate::find($id);
+        $job_id = $candidate->job_id;
+        if (Auth::user()->user_type == 'superadmin') {
+            $job = Job::where('status', 'active')->where('id', $job_id)->first();
+        } else if (Auth::user()->user_type == 'admin') {
+            $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+            $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $job_id)->first();
+        } else if (Auth::user()->user_type == 'employee') {
+            $company = Company::where('id', Auth::user()->company_id)->where('status', 'active')->first();
+            $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $job_id)->first();
+        } else if (Auth::user()->user_type == 'recruiter') {
+            $job = Job::where('status', 'active')->where('id', $job_id)->first();
+        } else {
+            abort(401);
+        }
+
+        if ($job) {
+            $company = Company::find($job->company_id);
+            $job_creator = User::find($job->created_by);
+            $candidate_creator = User::find($candidate->uploaded_by);
+            if ($candidate->interviewer_id != NULL) {
+                $interviewer = User::find($candidate->interviewer_id);
+            } else {
+                $interviewer = [];
+            }
+
+            $addfields = FieldList::where('job_id', $job->id)->where('status', 'active')->get();
+            $fielddatas = AddFieldData::where('job_id', $job->id)->where('candidate_id', $candidate->id)->get();
+            return view('pages.candidates.viewDetailPrint')->with([
+                'company' => $company,
+                'job' => $job,
+                'job_creator' => $job_creator,
+                'candidate_creator' => $candidate_creator,
+                'candidate' => $candidate,
+                'interviewer' => $interviewer,
+                'addfields' => $addfields,
+                'fielddatas' => $fielddatas
+            ]);
+
+            // return redirect()->back()->with('success', 'Candidate added Successfully ');
+        } else {
+            return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
+        }
     }
 }
