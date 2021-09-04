@@ -14,6 +14,33 @@
 <div class="row">
     <div class="col-md-12 col-lg-12">
         <div class="card">
+            <div class="card-body">
+                <form action="" method="get">
+                        <div class="row">
+
+                            <div class="form-group col-5">
+                              <label for="">From Date</label>
+                              <input type="date" name="from_date" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                            </div>
+                            <div class="form-group col-5">
+                              <label for="">To Date</label>
+                              <input type="date" name="to_date" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                            </div>
+                            <div class="form-group col-2">
+                                <input type="submit" value="Filter" class="btn btn-primary mt-4">
+                                @if (isset($_GET['from_date']))
+                                <a href="/candidates" class="btn btn-danger mt-4">Clear Filter</a>
+                                @endif
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
             <div class="card-header">
                 <h3 class="card-title" style="float: left;">View Candidates</h3>
                 <button class="btn btn-primary float-right"  data-toggle="modal" data-target="#bulkUpdate" style="    margin-top: 10px;">Bulk Status Update</button>

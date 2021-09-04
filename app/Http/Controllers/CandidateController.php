@@ -285,20 +285,40 @@ class CandidateController extends Controller
     public function viewAllCandidates(Request $request)
     {
         $employees = [];
-        if (Auth::user()->user_type == 'superadmin') {
-            $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
-            $candidates = Candidate::all();
-        } else if (Auth::user()->user_type == 'admin') {
-            $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
-            $employees = User::where('status', 'active')->where('user_type', 'employee')->where('company_id', $company->id)->get();
-            $candidates = Candidate::where('company_id', $company->id)->get();
-        } else if (Auth::user()->user_type == 'employee') {
-            $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
-        } else if (Auth::user()->user_type == 'recruiter') {
-            $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
+        if (isset($_GET['from_date']) && isset($_GET['to_date'])) {
+            $start = date("Y-m-d", strtotime($_GET['from_date']));
+            $end = date("Y-m-d", strtotime($_GET['to_date'] . "+1 day"));
+            if (Auth::user()->user_type == 'superadmin') {
+                $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
+                $candidates = Candidate::whereBetween('interview_date', [$start, $end])->get();
+            } else if (Auth::user()->user_type == 'admin') {
+                $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+                $employees = User::where('status', 'active')->where('user_type', 'employee')->where('company_id', $company->id)->get();
+                $candidates = Candidate::where('company_id', $company->id)->whereBetween('interview_date', [$start, $end])->get();
+            } else if (Auth::user()->user_type == 'employee') {
+                $candidates = Candidate::where('allocated_to', Auth::user()->id)->whereBetween('interview_date', [$start, $end])->get();
+            } else if (Auth::user()->user_type == 'recruiter') {
+                $candidates = Candidate::where('allocated_to', Auth::user()->id)->whereBetween('interview_date', [$start, $end])->get();
+            } else {
+                abort(401);
+            }
         } else {
-            abort(401);
+            if (Auth::user()->user_type == 'superadmin') {
+                $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
+                $candidates = Candidate::all();
+            } else if (Auth::user()->user_type == 'admin') {
+                $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+                $employees = User::where('status', 'active')->where('user_type', 'employee')->where('company_id', $company->id)->get();
+                $candidates = Candidate::where('company_id', $company->id)->get();
+            } else if (Auth::user()->user_type == 'employee') {
+                $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
+            } else if (Auth::user()->user_type == 'recruiter') {
+                $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
+            } else {
+                abort(401);
+            }
         }
+
 
 
 
