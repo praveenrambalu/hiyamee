@@ -53,10 +53,6 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4  align-self-center">
-                                <a href="{{$job->feedback}}" target="_blank" class="btn btn-danger">Feedback </a>
-                                <a href="{{$job->zoomlink}}" target="_blank" title="{{$job->zoomlink}}" class="btn btn-dark">Meet Link  </a>
-                        </div>
                         <div class="col-md-8 align-self-center ">
                             <a href="/candidates/add/{{$job->id}}" target="" class="btn btn-primary">Add Candidates </a>
                         </div>

@@ -52,14 +52,17 @@
                                     <td>{{$i++}}</td>
                                     <td>{{$candidate->id}}</td>
                                     <td>
-                                        @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin')
+                                     @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin')
                                         @if ($candidate->allocated_to==null)
                                             <input type="checkbox" name="candidate[]" value="{{$candidate->id}}" >
-                                        @endif
                                         @else
-                                        -
+                                            @php
+                                                $allocated = \App\Models\User::find($candidate->allocated_to);
+                                            @endphp
+                                            {{$allocated->name}} <br>
+                                            <small>{{$allocated->email}}</small>
                                         @endif
-
+                                    @endif
                                     </td>
                                     <td>
                                         <img src="{{$company->logo ?? ''}}" alt="" class="img img-responsive" style="height:50px; width:50px;">
