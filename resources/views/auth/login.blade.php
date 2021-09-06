@@ -14,7 +14,15 @@
 
     <!-- Core css -->
     <link href="assets/css/app.min.css" rel="stylesheet">
-
+    <style>
+        span#password-show {
+            position: absolute;
+            right: 10px;
+            top: 35%;
+            color: #9b9696;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -53,6 +61,7 @@
                                             <div class="input-affix m-b-10">
                                                 <i class="prefix-icon anticon anticon-lock"></i>
                                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                                <span class="fa fa-eye" id="password-show" data-showhide="hidden"></span>
                                             </div>
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
@@ -105,7 +114,24 @@
 
     <!-- Core JS -->
     <script src="assets/js/app.min.js"></script>
-
+    <script>
+        $('document').ready(function(){
+           $("#password-show").click(function(){
+            var val = $(this).data('showhide');
+            if (val=='hidden') {
+                $("#password").attr('type','text');
+                $("#password-show").data('showhide','shown');
+                $("#password-show").removeClass('fa-eye');
+                $("#password-show").addClass('fa-eye-slash');
+            }else{
+                $("#password").attr('type','password');
+                $("#password-show").data('showhide','hidden');
+                $("#password-show").removeClass('fa-eye-slash');
+                $("#password-show").addClass('fa-eye');
+            }
+           })
+        })
+    </script>
 </body>
 
 </html>
