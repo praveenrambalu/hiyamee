@@ -97,3 +97,7 @@ Route::group(['prefix' => '/export', 'middleware' => ['auth']], function () {
     Route::get('/candidates', [ExportController::class, 'candidates']);
     Route::get('/jobs/{id}', [ExportController::class, 'jobs']);
 });
+
+
+Route::get('/calendar', [CandidateController::class, 'calendar']);
+Route::get('/calfeed', [CandidateController::class, 'calfeed']);

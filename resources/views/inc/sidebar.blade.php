@@ -472,6 +472,14 @@
                 </a>
             </li>
             <li class="nav-item dropdown ">
+                <a class="dropdown-toggle" href="/calendar">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-calendar"></i>
+                    </span>
+                    <span class="title">Interviews</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown ">
                 <a class="dropdown-toggle" href="/logout">
                     <span class="icon-holder">
                         <i class="anticon anticon-lock"></i>

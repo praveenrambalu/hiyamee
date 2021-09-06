@@ -479,4 +479,47 @@ class CandidateController extends Controller
             return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
         }
     }
+
+    public function calendar()
+    {
+        return view('pages.candidates.calendar');
+    }
+    public function calfeed()
+    {
+        // if (Auth::user()->user_type != 'admin') {
+        //     abort(401);
+        // }
+        if (Auth::user()->user_type == 'superadmin') {
+            $candidates = Candidate::where('interview_date', '!=', NULL)->get();
+        } else if (Auth::user()->user_type == 'admin') {
+            $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+            $candidates = Candidate::where('company_id', $company->id)->where('interview_date', '!=', NULL)->get();
+        } else {
+            $candidates = Candidate::where('allocated_to', Auth::user()->id)->where('interview_date', '!=', NULL)->get();
+        }
+        $data = [];
+
+
+        foreach ($candidates as $candidate) {
+
+            $job = Job::find($candidate->job_id);
+            $company = Company::find($candidate->company_id);
+            $job_title = $candidate->candidate_name . '-' . $job->job_title . ' - ' . $company->company_name;
+
+            $date = $candidate->interview_date . 'T' . $candidate->interview_time . ':00';
+
+
+            $newdata = [
+                // 'start' => '2021-05-24T12:30:00Z',
+                'start' => $date,
+                'title' => $job_title,
+                'url' => '/candidates/' . $candidate->id
+            ];
+            array_push($data, $newdata);
+
+            // echo $actualdate;
+        }
+
+        return response()->json($data);
+    }
 }
