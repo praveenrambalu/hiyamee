@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdditionalFieldsController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
@@ -96,6 +97,15 @@ Route::group(['prefix' => '/export', 'middleware' => ['auth']], function () {
     Route::get('/employees', [ExportController::class, 'employees']);
     Route::get('/candidates', [ExportController::class, 'candidates']);
     Route::get('/jobs/{id}', [ExportController::class, 'jobs']);
+});
+Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
+    Route::get('/', [AdminController::class, 'addAdmin']);
+    Route::post('/', [AdminController::class, 'addAdminPost']);
+    Route::get('/assign/{id}', [AdminController::class, 'assignCompanies']);
+    Route::post('/assign/{id}', [AdminController::class, 'assignCompaniesPost']);
+    Route::get('/view', [AdminController::class, 'viewAdmin']);
+    Route::get('/view/{id}', [AdminController::class, 'viewAdminDetail']);
+    Route::get('/assign/delete/{id}', [AdminController::class, 'viewAdminDetail']);
 });
 
 

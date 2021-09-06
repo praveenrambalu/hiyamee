@@ -53,6 +53,25 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item dropdown @yield('subadmin')">
+                        <a class="dropdown-toggle" href="javascript:void(0);">
+                            <span class="icon-holder">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <span class="title">Admin</span>
+                            <span class="arrow">
+                                <i class="arrow-icon"></i>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="@yield('subadmin-add')">
+                                <a href="/admin/">Add</a>
+                            </li>
+                            <li class="@yield('subadmin-view')">
+                                <a href="/admin/view">View</a>
+                            </li>
+                        </ul>
+                    </li>
                  
 
                     <li class="nav-item dropdown @yield('fields')">
