@@ -75,7 +75,7 @@ Route::group(['prefix' => '/candidates', 'middleware' => ['auth']], function () 
 });
 
 
-Route::group(['prefix' => '/recruiter', 'middleware' => ['auth', 'superadmin']], function () {
+Route::group(['prefix' => '/recruiter', 'middleware' => ['auth']], function () {
     Route::get('/', [RecruiterController::class, 'addRecruiter']);
     Route::post('/', [RecruiterController::class, 'addRecruiterPost']);
     Route::get('/view', [RecruiterController::class, 'viewRecruiter']);

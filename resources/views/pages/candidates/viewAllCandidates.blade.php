@@ -85,7 +85,7 @@
                                         <td>{{$i++}}</td>
                                         <td>{{$candidate->id}}</td>
                                         <td>
-                                            @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin')
+                                            @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='subadmin')
                                                 @if ($candidate->allocated_to==null)
                                                     <input type="checkbox" name="candidate[]" value="{{$candidate->id}}" >
                                                 @else
@@ -134,7 +134,7 @@
                                         <td>{{date('Y-m-d', strtotime($candidate->created_at))}}</td>
                                         <td>
                                             <a href="/candidates/{{$candidate->id}}"  class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                                            @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='admin')
+                                            @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='admin' || Auth::user()->user_type=='subadmin')
                                               <a href="#" onclick="alert('Not Implemented')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                                 @if ($candidate->interview_outcome=='Ready')
                                                     <a href="/candidates/edit/{{$candidate->id}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
@@ -153,7 +153,7 @@
     
                     <hr>
     
-                    @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin')
+                    @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='subadmin')
                         
                     <div class=" row align-items-center">
                         <div class="form-group col-sm-3 align-self-center">

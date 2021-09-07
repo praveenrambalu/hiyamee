@@ -12,7 +12,7 @@ class RecruiterController extends Controller
 {
     public function addRecruiter()
     {
-        if (Auth::user()->user_type != 'superadmin') {
+        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type != 'subadmin') {
             return redirect('/dashboard')->with('error', 'Unauthorized');
         }
         return view('pages.recruiter.add');
@@ -20,7 +20,7 @@ class RecruiterController extends Controller
     public function addRecruiterPost(Request $request)
     {
         // return $request;
-        if (Auth::user()->user_type != 'superadmin') {
+        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type != 'subadmin') {
             return redirect('/dashboard')->with('error', 'Unauthorized');
         }
         $existtest = User::where('email', $request->email)->first();
@@ -44,7 +44,7 @@ class RecruiterController extends Controller
     }
     public function viewRecruiter()
     {
-        if (Auth::user()->user_type != 'superadmin') {
+        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type != 'subadmin') {
             return redirect('/dashboard')->with('error', 'Unauthorized');
         }
         $recruiters = User::where('user_type', 'recruiter')->where('status', 'active')->get();

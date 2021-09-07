@@ -25,7 +25,7 @@ class JobController extends Controller
     }
     public function addJobBySuperadmin(Request $request, $id)
     {
-        if (Auth::user()->user_type != 'superadmin') {
+        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type == 'subadmin') {
             abort(401);
         }
         $company = Company::where('id', $id)->where('status', 'active')->first();
@@ -38,7 +38,7 @@ class JobController extends Controller
     }
     public function addJobBySuperadminPost(Request $request, $id)
     {
-        if (Auth::user()->user_type != 'superadmin') {
+        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type == 'subadmin') {
             abort(401);
         }
         $company = Company::where('id', $id)->where('status', 'active')->first();
@@ -179,7 +179,7 @@ class JobController extends Controller
     public function viewJobDetail(Request $request, $id)
     {
         $employees = [];
-        if (Auth::user()->user_type == 'superadmin') {
+        if (Auth::user()->user_type == 'superadmin' || Auth::user()->user_type == 'subadmin') {
             $job = Job::where('status', 'active')->where('id', $id)->first();
             $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
         } else if (Auth::user()->user_type == 'admin') {
@@ -214,7 +214,7 @@ class JobController extends Controller
     }
     public function allocateCandidates(Request $request)
     {
-        if (Auth::user()->user_type == 'superadmin') {
+        if (Auth::user()->user_type == 'superadmin' || Auth::user()->user_type == 'subadmin') {
         } else if (Auth::user()->user_type == 'admin') {
             $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
         } else {
@@ -294,7 +294,7 @@ class JobController extends Controller
                         $candidate->interviewer_id = Auth::user()->id;
                         $candidate->updated_by = Auth::user()->id;
                         $candidate->update_history = $candidate->update_history . ' <br> *' . now() . ' : Candidate Updated by ' . Auth::user()->name . '   with status  ' . $candidate->interview_outcome . ' <br>';
-                        if (Auth::user()->user_type == 'superadmin') {
+                        if (Auth::user()->user_type == 'superadmin' || Auth::user()->user_type == 'subadmin') {
                             $candidate->save();
                         } else if (Auth::user()->user_type == 'admin') {
                             $company = Company::find($candidate->company_id);
