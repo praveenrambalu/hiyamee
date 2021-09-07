@@ -107,7 +107,7 @@ class CompanyController extends Controller
     public function viewCompanies()
     {
         // return Auth::user()->user_type;
-        if (Auth::user()->user_type != 'recruiter' &&  Auth::user()->user_type != 'superadmin') {
+        if (Auth::user()->user_type != 'recruiter' &&  Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type != 'subadmin') {
             abort(401);
         }
 
