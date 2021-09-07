@@ -262,11 +262,17 @@
     <script src="/assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" ></script>
     <script>
         CKEDITOR.replace( '.ckeditor' );
         $('.datatable').DataTable({
         responsive: true
         } );
+    </script>
+    <script>
+        function swalalert($message){
+            swal($message)
+        }
     </script>
 </body>
 
