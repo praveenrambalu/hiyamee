@@ -35,10 +35,16 @@
     <link href="/assets/css/app.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <style>
-        button.btn.btn-secondary {
-        background: #212529;
-        border-color: white;
+    button.btn.btn-secondary {
+    background: #212529;
+    border-color: white;
     }
+    span.fa.fa-info-circle.infocircle {
+    padding-left: 10px;
+    color:#b7b7b7
+    }
+
+
     </style>
 </head>
 
