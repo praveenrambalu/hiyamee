@@ -135,7 +135,7 @@
                                         <td>
                                             <a href="/candidates/{{$candidate->id}}"  class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                             @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='admin' || Auth::user()->user_type=='subadmin')
-                                              <a href="#" onclick="swal('Not Implemented')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                              {{-- <a href="#" onclick="swal('Not Implemented')" class="btn btn-danger"><i class="fas fa-trash"></i></a> --}}
                                                 @if ($candidate->interview_outcome=='Ready')
                                                     <a href="/candidates/edit/{{$candidate->id}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                                 @else

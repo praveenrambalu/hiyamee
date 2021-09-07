@@ -27,13 +27,19 @@
 
     <!-- page css -->
     @yield('styles')
-    <link href="/assets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+    {{-- <link href="/assets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet"> --}}
+   {{--  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css"> --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.1/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/cr-1.5.4/date-1.1.1/r-2.2.9/datatables.min.css"/>
     <!-- Core css -->
     <link href="/assets/css/app.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
-
+    <style>
+        button.btn.btn-secondary {
+        background: #212529;
+        border-color: white;
+    }
+    </style>
 </head>
 
 <body>
@@ -258,15 +264,36 @@
     @endif
 
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-    <script src="/assets/vendors/datatables/jquery.dataTables.min.js"></script>
+    {{-- <script src="/assets/vendors/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script> --}}
+ 
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.1/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/cr-1.5.4/date-1.1.1/r-2.2.9/datatables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" ></script>
     <script>
         CKEDITOR.replace( '.ckeditor' );
         $('.datatable').DataTable({
-        responsive: true
+        responsive: true,
+        dom: 'Bfrtip',
+        colReorder: false,
+        buttons: [
+           
+            // {
+            // extend: 'csv',
+            // text: 'Download CSV'
+            // },
+            // {
+            // extend: 'excel',
+            // text: 'Download Excel'
+            // },
+            'csv',
+            'excel',
+            'colvis',
+        ]
         } );
     </script>
     <script>
