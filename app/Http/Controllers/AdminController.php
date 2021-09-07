@@ -66,13 +66,23 @@ class AdminController extends Controller
             foreach ($companies as $company) {
                 if ($dbcompany = Company::find($company)) {
 
-                    $assign = new CompanyAssign;
-                    $assign->user_id = $id;
-                    $assign->company_id = $dbcompany->id;
-                    $assign->company_name = $dbcompany->company_name;
-                    $assign->industry = $dbcompany->industry;
-                    $assign->location = $dbcompany->location;
-                    $assign->save();
+                    if ($existtest = CompanyAssign::where('user_id', $id)->where('company_id', $company)->first()) {
+                        $existtest->user_id = $id;
+                        $existtest->company_id = $dbcompany->id;
+                        $existtest->company_name = $dbcompany->company_name;
+                        $existtest->industry = $dbcompany->industry;
+                        $existtest->location = $dbcompany->location;
+                        $existtest->status = 'active';
+                        $existtest->save();
+                    } else {
+                        $assign = new CompanyAssign;
+                        $assign->user_id = $id;
+                        $assign->company_id = $dbcompany->id;
+                        $assign->company_name = $dbcompany->company_name;
+                        $assign->industry = $dbcompany->industry;
+                        $assign->location = $dbcompany->location;
+                        $assign->save();
+                    }
                 }
             }
             return redirect('/admin/view')->with('success', 'The companies allocated Successfully ');
@@ -101,6 +111,20 @@ class AdminController extends Controller
             return view('pages.subadmin.detail')->with(['admin' => $admin, 'companies' => $companies]);
         } else {
             abort(404);
+        }
+    }
+    public function deleteAssign(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin') {
+            return redirect('/dashboard')->with('error', 'Unauthorized');
+        }
+
+        if ($company = CompanyAssign::where('id', $id)->where('status', 'active')->first()) {
+            $company->status = 'inactive';
+            $company->save();
+            return redirect()->back()->with('success', 'Company Unassigned');
+        } else {
+            return redirect()->back()->with('error', 'Not Found');
         }
     }
 }

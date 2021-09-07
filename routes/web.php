@@ -105,7 +105,7 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
     Route::post('/assign/{id}', [AdminController::class, 'assignCompaniesPost']);
     Route::get('/view', [AdminController::class, 'viewAdmin']);
     Route::get('/view/{id}', [AdminController::class, 'viewAdminDetail']);
-    Route::get('/assign/delete/{id}', [AdminController::class, 'viewAdminDetail']);
+    Route::get('/assign/delete/{id}', [AdminController::class, 'deleteAssign']);
 });
 
 
