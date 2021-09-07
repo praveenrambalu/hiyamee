@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Candidate;
 use App\Models\Company;
+use App\Models\CompanyAssign;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -67,6 +68,29 @@ class DashboardController extends Controller
             $latestCandidates = Candidate::where('allocated_to', Auth::user()->id)->orderBy('updated_at', 'desc')->paginate(5);
             $Companies = 0;
             $jobs = 0;
+        } else if (Auth::user()->user_type == 'subadmin') {
+
+
+            $assigns = CompanyAssign::where('user_id', Auth::user()->id)->where('status', 'active')->get();
+            $assignarray = [];
+            foreach ($assigns as $assign) {
+                array_push($assignarray, $assign->company_id);
+            }
+
+
+            $Companies = Company::where('status', 'active')->whereIn('id', $assignarray)->orderBy('updated_at', 'desc')->paginate(5);
+
+
+
+            $completedInterviews = Candidate::where('interview_outcome', '!=', 'Ready')->whereIn('company_id', $assignarray)->get();
+            $remainingInterviews = Candidate::where('interview_outcome',  'Ready')->whereIn('company_id', $assignarray)->get();
+            $rejectedInterviews = Candidate::where('interview_outcome',  'Rejected')->whereIn('company_id', $assignarray)->get();
+            $selectedInterviews = Candidate::where('interview_outcome',  'Selected')->whereIn('company_id', $assignarray)->get();
+            $totalCandidates = Candidate::whereIn('company_id', $assignarray)->get();
+            $totalCompanies = Company::where('status', 'active')->whereIn('id', $assignarray)->get();
+            $totalRecruiters = User::where('user_type', 'recruiter')->where('status', 'active')->get();
+            $latestCandidates = Candidate::whereIn('company_id', $assignarray)->orderBy('updated_at', 'desc')->paginate(5);
+            $jobs = Job::whereIn('company_id', $assignarray)->where('status', 'active')->orderBy('updated_at', 'desc')->paginate(5);
         }
 
 

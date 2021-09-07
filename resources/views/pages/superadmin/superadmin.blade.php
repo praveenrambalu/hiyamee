@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-    @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='admin')
+    @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='admin' || Auth::user()->user_type=='subadmin')
   
     <div class="col-md-6 col-lg-2">
         <div class="card">
@@ -57,7 +57,7 @@
                         </div>
                         <div class="m-l-15">
                             <h2 class="m-b-0">{{count($totalRecruiters) ?? 0}}</h2>
-                            @if (Auth::user()->user_type=='superadmin')
+                            @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='subadmin')
                             <p class="m-b-0 text-muted">Total <br> Recruiters </p>
                             @else
                             <p class="m-b-0 text-muted">Total <br> Employees </p>
@@ -196,7 +196,7 @@
             </div>
         </div>
     </div>
-    @if (Auth::user()->user_type=='superadmin')
+    @if (Auth::user()->user_type=='superadmin'  || Auth::user()->user_type=='subadmin')
     <div class="col-lg-4">
         <div class="card">
             <div class="card-body">

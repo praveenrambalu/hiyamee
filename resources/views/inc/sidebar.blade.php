@@ -84,6 +84,49 @@
                     </li>
 
                 @break
+                @case('subadmin')
+                
+
+
+                <li class="nav-item dropdown @yield('companies')">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-build"></i>
+                        </span>
+                        <span class="title">Companies</span>
+                        <span class="arrow">
+                            <i class="arrow-icon"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="@yield('companies-view')">
+                            <a href="/companies/view">View</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown @yield('recruiter')">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <span class="icon-holder">
+                            <i class="fas fa-users"></i>
+                        </span>
+                        <span class="title">Recruiter</span>
+                        <span class="arrow">
+                            <i class="arrow-icon"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="@yield('recruiter-add')">
+                            <a href="/recruiter/">Add</a>
+                        </li>
+                        <li class="@yield('recruiter-view')">
+                            <a href="/recruiter/view">View</a>
+                        </li>
+                    </ul>
+                </li>
+             
+
+
+            @break
                 @case('admin')
 
 

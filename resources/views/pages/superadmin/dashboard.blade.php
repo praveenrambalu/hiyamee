@@ -16,6 +16,9 @@
         @case('admin')
                 @include('pages.superadmin.admin')
             @break
+        @case('subadmin')
+                @include('pages.superadmin.superadmin')
+            @break
         @case('employee')
                 @include('pages.superadmin.employee')
             @break
