@@ -80,7 +80,7 @@
                                         <a href="/jobs/{{$job->id}}"  class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                         @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='admin')
                                         <a href="/jobs/edit/{{$job->id}}"  class="btn btn-warning" title="Edit Job"><i class="fas fa-edit"></i></a>
-                                        <a href="#" onclick="alert('Not Implemented')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                        {{-- <a href="#" onclick="alert('Not Implemented')" class="btn btn-danger"><i class="fas fa-trash"></i></a> --}}
                                         @endif
                                     </td>
 
