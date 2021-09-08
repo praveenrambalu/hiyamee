@@ -42,18 +42,15 @@ class AdditionalFieldsController extends Controller
         // $images = [];
         // return $files = Storage::disk('s3');
 
-        if (Auth::user()->user_type != 'superadmin') {
-            return redirect('/dashboard')->with('error', 'Unauthorized');
-        }
 
 
-        // $url = 'https://s3.' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/' . env('AWS_BUCKET') . '/';
+        $url = 'https://s3.' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/' . env('AWS_BUCKET') . '/';
         $resumes = [];
         // $files = Storage::disk('s3')->files('resumes');
         // foreach ($files as $file) {
         //     $resumes[] = [
         //         'name' => str_replace('resumes/', '', $file),
-        //         'src' => $url . $file
+        //         'url' => $url . $file
         //     ];
         // }
         return view('pages.fields.addstorage')->with([

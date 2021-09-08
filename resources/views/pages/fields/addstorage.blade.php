@@ -6,7 +6,7 @@
     <div class="header-sub-title">
         <nav class="breadcrumb breadcrumb-dash">
             <a href="/dashboard" class="breadcrumb-item"><i class="anticon anticon-dashboard m-r-5"></i>Dashboard</a>
-            <span class="breadcrumb-item active">Fields</span>
+            <span class="breadcrumb-item active">Resumes</span>
         </nav>
     </div>
 </div>
@@ -14,7 +14,7 @@
     <div class="col-md-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Add Fields</h3>
+                <h3 class="card-title">Add Resumes</h3>
             </div>
             <div class="card-body">
                 <form method="POST" action="" enctype="multipart/form-data">
@@ -63,6 +63,10 @@
                                     <td>{{ $resume['name'] }}</td>
                                     <td>{{ $resume['url'] }}</td>
                                     <td>
+                                       <!-- Trigger -->
+                                        <button class="btn clipbtn" data-clipboard-text="{{$resume['url']}}">
+                                            <i class="far fa-clipboard"></i>
+                                        </button>
                                         
                                     </td>
                                 </tr>
@@ -77,4 +81,24 @@
 </div>
 
 
+@endsection
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+
+<script>
+var clipboard = new ClipboardJS('.clipbtn');
+
+clipboard.on('success', function(e) {
+    console.info('Action:', e.action);
+    console.info('Text:', e.text);
+    console.info('Trigger:', e.trigger);
+
+    e.clearSelection();
+});
+
+clipboard.on('error', function(e) {
+    console.error('Action:', e.action);
+    console.error('Trigger:', e.trigger);
+});
+</script>
 @endsection

@@ -113,5 +113,5 @@ Route::get('/calendar', [CandidateController::class, 'calendar']);
 Route::get('/calfeed', [CandidateController::class, 'calfeed']);
 
 
-Route::get('/storagetester', [AdditionalFieldsController::class, 'addStorage']);
-Route::post('/storagetester', [AdditionalFieldsController::class, 'addStoragePost']);
+Route::get('/store-resume', [AdditionalFieldsController::class, 'addStorage']);
+Route::post('/store-resume', [AdditionalFieldsController::class, 'addStoragePost']);
