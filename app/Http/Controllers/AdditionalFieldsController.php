@@ -45,20 +45,38 @@ class AdditionalFieldsController extends Controller
         if (Auth::user()->user_type != 'superadmin') {
             return redirect('/dashboard')->with('error', 'Unauthorized');
         }
-        $fields = AdditionalField::where('status', 'active')->get();
+
+
+        // $url = 'https://s3.' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/' . env('AWS_BUCKET') . '/';
+        $resumes = [];
+        // $files = Storage::disk('s3')->files('resumes');
+        // foreach ($files as $file) {
+        //     $resumes[] = [
+        //         'name' => str_replace('resumes/', '', $file),
+        //         'src' => $url . $file
+        //     ];
+        // }
         return view('pages.fields.addstorage')->with([
-            'fields' => $fields
+            'resumes' => $resumes
         ]);
     }
     public function addStoragePost(Request $request)
     {
-        $path = $request->file('resume')->store('resumes', 's3');
-        return Storage::disk('s3')->url($path);
-        // if ($request->hasfile('resume')) {
-        //     $file = $request->file('resume');
-        //     $name = time() . $file->getClientOriginalName();
-        //     $filePath = 'resumes/' . $name;
-        //     return Storage::disk('s3')->put($filePath, file_get_contents($file));
-        // }
+
+        $resumes = $request->resume;
+        $data = [];
+        foreach ($resumes as $resume) {
+            $path = $resume->store('resumes', 's3');
+            $name = $resume->getClientOriginalName();
+            $url =  Storage::disk('s3')->url($path);
+            $localdata = [
+                'name' => $name,
+                'url' => $url
+            ];
+            array_push($data, $localdata);
+        }
+        return view('pages.fields.addstorage')->with([
+            'resumes' => $data
+        ]);
     }
 }
