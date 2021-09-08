@@ -51,7 +51,7 @@
                             <input type="text" value="{{$job->skills_required}}" required class="form-control"  placeholder="Ex: MongoDB,NodeJS,ReactJs" name="skills_required">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >How many openings <span class="text-danger">*</span> </label>
+                            <label >Openings <span class="text-danger">*</span> </label>
                             <input type="number" value="{{$job->how_many_hires}}" required class="form-control"  placeholder="Ex: 2" min="1" name="how_many_hires">
                         </div>
                     </div>
