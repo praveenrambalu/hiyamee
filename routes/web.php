@@ -111,3 +111,6 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
 
 Route::get('/calendar', [CandidateController::class, 'calendar']);
 Route::get('/calfeed', [CandidateController::class, 'calfeed']);
+
+
+Route::get('/storagetester', [AdditionalFieldsController::class, 'addStorage']);

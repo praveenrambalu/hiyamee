@@ -33,4 +33,16 @@ class AdditionalFieldsController extends Controller
             return redirect()->back()->with('success', 'Field added successfully');
         }
     }
+
+
+    public function addStorage()
+    {
+        if (Auth::user()->user_type != 'superadmin') {
+            return redirect('/dashboard')->with('error', 'Unauthorized');
+        }
+        $fields = AdditionalField::where('status', 'active')->get();
+        return view('pages.fields.addstorage')->with([
+            'fields' => $fields
+        ]);
+    }
 }
