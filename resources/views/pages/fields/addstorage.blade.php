@@ -49,6 +49,7 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Src</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
