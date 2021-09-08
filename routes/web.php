@@ -114,3 +114,4 @@ Route::get('/calfeed', [CandidateController::class, 'calfeed']);
 
 
 Route::get('/storagetester', [AdditionalFieldsController::class, 'addStorage']);
+Route::post('/storagetester', [AdditionalFieldsController::class, 'addStoragePost']);

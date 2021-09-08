@@ -263,6 +263,26 @@ class CandidateController extends Controller
             $candidate->interview_completed_at = now();
             $candidate->updated_by = Auth::user()->id;
             $candidate->update_history = $candidate->update_history . ' <br> *' . now() . ' : Candidate Updated by ' . Auth::user()->name . '   with status  ' . $request->interview_outcome . ' <br>';
+            if ($request->zoomlink != "") {
+                $candidate->zoomlink = $request->zoomlink;
+            }
+
+            if ($request->linkorfile == 'link') {
+                if ($request->feedback != "") {
+                    $candidate->feedback = $request->feedback;
+                }
+            } else {
+                if ($feedback = $request->feedback) {
+                    $filenameWithExt = $feedback->getClientOriginalName();
+                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                    $extension = $feedback->getClientOriginalExtension();
+                    $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                    $path = $feedback->storeAs('public/feedback/', $fileNameToStore);
+                    $storagename = '/storage/feedback/' . $fileNameToStore;
+                    $candidate->feedback = $storagename;
+                }
+            }
+
             $candidate->save();
             $fieldLists = FieldList::where('job_id', $job->id)->where('status', 'active')->get();
 

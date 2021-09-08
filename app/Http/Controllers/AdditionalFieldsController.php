@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AdditionalField;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AdditionalFieldsController extends Controller
 {
@@ -37,6 +38,10 @@ class AdditionalFieldsController extends Controller
 
     public function addStorage()
     {
+        // $url = 'https://s3.' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/' . env('AWS_BUCKET') . '/';
+        // $images = [];
+        // return $files = Storage::disk('s3');
+
         if (Auth::user()->user_type != 'superadmin') {
             return redirect('/dashboard')->with('error', 'Unauthorized');
         }
@@ -44,5 +49,16 @@ class AdditionalFieldsController extends Controller
         return view('pages.fields.addstorage')->with([
             'fields' => $fields
         ]);
+    }
+    public function addStoragePost(Request $request)
+    {
+        $path = $request->file('resume')->store('resumes', 's3');
+        return Storage::disk('s3')->url($path);
+        // if ($request->hasfile('resume')) {
+        //     $file = $request->file('resume');
+        //     $name = time() . $file->getClientOriginalName();
+        //     $filePath = 'resumes/' . $name;
+        //     return Storage::disk('s3')->put($filePath, file_get_contents($file));
+        // }
     }
 }

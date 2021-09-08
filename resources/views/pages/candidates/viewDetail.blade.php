@@ -54,8 +54,8 @@
                     @if ($candidate->interview_outcome!='Ready')
                         <div class="row ">
                             <div class="col-md-4  align-self-center">
-                                    <a href="{{$job->feedback}}" target="_blank" class="btn btn-danger">Feedback </a>
-                                    <a href="{{$job->zoomlink}}" target="_blank" title="{{$job->zoomlink}}" class="btn btn-dark">Meet Link  </a>
+                                    <a href="{{$candidate->feedback}}" target="_blank" class="btn btn-danger">Feedback </a>
+                                    <a href="{{$candidate->zoomlink}}" target="_blank" title="{{$candidate->zoomlink}}" class="btn btn-dark">Meet Link  </a>
                             </div>
                         </div>
                     @endif
@@ -396,6 +396,29 @@
                             </select>
                         </div>
 
+                    </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label >Feedback  </label>
+                                <br>
+                                <br>
+                                <label for="linkorfilelink" class="mr-3"><input type="radio" checked name="linkorfile" value="link" id="linkorfilelink"> Link</label>
+                                <label for="linkorfilefile" class="mr-3"><input type="radio" name="linkorfile" value="file" id="linkorfilefile"> File</label>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label >Feedback  </label>
+                                <div id="linkorfile">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label >Zoom link </label>
+                                <input type="url"  class="form-control"  placeholder="Ex: https://us04web.zoom.us/j/123456789" name="zoomlink">
+                            </div>
+
+
+
+
+
                         @if (count($addfields)>0)
                             @foreach ($addfields as $addfield)
                                 <div class="form-group col-sm-6">
@@ -425,4 +448,27 @@
 </div>
 
 
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            linkorfilecheck();
+            $("#linkorfilelink").change(function(){
+                linkorfilecheck();
+            });
+            $("#linkorfilefile").change(function(){
+                linkorfilecheck();
+            });
+
+            function linkorfilecheck() {
+               var value = $('input[name="linkorfile"]:checked').val();
+               if(value==='file'){
+                $("#linkorfile").html('<input type="file" name="feedback"   class="form-control">');
+               }else{
+                $("#linkorfile").html('<input type="url" name="feedback"   class="form-control">');
+               }
+            }
+
+        })
+    </script>
 @endsection
