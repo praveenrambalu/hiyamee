@@ -53,9 +53,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <pre>
-                            {{-- {{$resumes}} --}}
-                        </pre>
                         @if (count($resumes)>0)
                             @php $i=1; @endphp
                             @foreach ($resumes as $resume)
