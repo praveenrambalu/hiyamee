@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruiterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -106,6 +107,10 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
     Route::get('/view', [AdminController::class, 'viewAdmin']);
     Route::get('/view/{id}', [AdminController::class, 'viewAdminDetail']);
     Route::get('/assign/delete/{id}', [AdminController::class, 'deleteAssign']);
+});
+Route::group(['prefix' => '/profile', 'middleware' => ['auth']], function () {
+    Route::get('/', [ProfileController::class, 'myProfile']);
+    Route::post('/', [ProfileController::class, 'myProfilePost']);
 });
 
 
