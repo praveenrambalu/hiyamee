@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Dompdf\Dompdf;
+use Illuminate\Support\Facades\Storage;
 
 class CandidateController extends Controller
 {
@@ -84,13 +85,16 @@ class CandidateController extends Controller
             $candidate->uploaded_by = Auth::user()->id;
             $candidate->update_history = '*' . now() . ' : Candidate Uploaded Via Single Upload  by ' . Auth::user()->name . '<br>';
             if ($resume = $request->resume) {
-                $filenameWithExt = $resume->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $resume->getClientOriginalExtension();
-                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-                $path = $resume->storeAs('public/resume/', $fileNameToStore);
-                $storagename = '/storage/resume/' . $fileNameToStore;
-                $candidate->resume = $storagename;
+                $path = $resume->store('resumes', 's3');
+                $name = $resume->getClientOriginalName();
+                $url =  Storage::disk('s3')->url($path);
+                // $filenameWithExt = $resume->getClientOriginalName();
+                // $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                // $extension = $resume->getClientOriginalExtension();
+                // $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                // $path = $resume->storeAs('public/resume/', $fileNameToStore);
+                // $storagename = '/storage/resume/' . $fileNameToStore;
+                $candidate->resume = $url;
             }
 
 
@@ -273,13 +277,10 @@ class CandidateController extends Controller
                 }
             } else {
                 if ($feedback = $request->feedback) {
-                    $filenameWithExt = $feedback->getClientOriginalName();
-                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                    $extension = $feedback->getClientOriginalExtension();
-                    $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-                    $path = $feedback->storeAs('public/feedback/', $fileNameToStore);
-                    $storagename = '/storage/feedback/' . $fileNameToStore;
-                    $candidate->feedback = $storagename;
+                    $path = $feedback->store('feedbacks', 's3');
+                    $name = $feedback->getClientOriginalName();
+                    $url =  Storage::disk('s3')->url($path);
+                    $candidate->feedback = $url;
                 }
             }
 
@@ -427,13 +428,10 @@ class CandidateController extends Controller
         $candidate->prelocation = $request->prelocation;
         $candidate->update_history = '*' . now() . ' : Candidate Edited   by ' . Auth::user()->name . '<br>';
         if ($resume = $request->resume) {
-            $filenameWithExt = $resume->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $resume->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $path = $resume->storeAs('public/resume/', $fileNameToStore);
-            $storagename = '/storage/resume/' . $fileNameToStore;
-            $candidate->resume = $storagename;
+            $path = $resume->store('resumes', 's3');
+            $name = $resume->getClientOriginalName();
+            $url =  Storage::disk('s3')->url($path);
+            $candidate->resume = $url;
         }
 
         $candidate->save();
