@@ -21,7 +21,7 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Field Name <small>(No Space Between Words)</small> <span class="text-danger">*</span>  </label>
+                            <label >Resumes <small>(Multiple files allowed)</small> <span class="text-danger">*</span>  </label>
                             <input type="file" class="form-control" multiple required placeholder="Ex: FieldName" name="resume[]" >
                         </div>
                         
@@ -29,7 +29,7 @@
                     </div>
                  
                 
-                    <button type="submit" class="btn btn-primary">Add Field</button>
+                    <button type="submit" class="btn btn-primary">Get Links</button>
                 </form>
             </div>
         </div>
