@@ -224,6 +224,14 @@
                 </a>
             </li>
             <li class="nav-item dropdown ">
+                <a class="dropdown-toggle" href="/store-resume">
+                    <span class="icon-holder">
+                        <i class="fas fa-id-card"></i>
+                    </span>
+                    <span class="title">Resume Link Generator <span class="fa fa-info-circle infocircle"  data-toggle="tooltip" data-placement="right" title="Upload resume to a storage and get a link for bulk upload "></span></span>
+                </a>
+            </li>
+            <li class="nav-item dropdown ">
                 <a class="dropdown-toggle" href="/logout">
                     <span class="icon-holder">
                         <i class="anticon anticon-lock"></i>
