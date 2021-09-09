@@ -1,14 +1,17 @@
 pipeline {
-     agent any
-     stages{
-        stage("Deploy") {
+    agent any
+    stages {
+            stage('deploy') {
+            agent any
             steps {
-               sshagent(['hiyamee-tracker-prod']) {
-    -               sh "cd /var/www/html/hiyamee-tracker"
-                    
-                }
+                sshagent ( ['hiyamee-tracker-prod']) {
+    sh '''
+ssh ubuntu@18.219.134.185
+'''
+  }
             }
         }
-    }
-}
 
+
+}
+}
