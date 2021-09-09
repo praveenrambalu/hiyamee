@@ -120,8 +120,11 @@ class CompanyController extends Controller
             abort(401);
         }
         $company = Company::findOrFail($id);
-        $admin = User::find($company->admin_id);
-        return view('pages.companies.edit')->with(['company' => $company, 'admin' => $admin]);
+        if ($admin = User::find($company->admin_id)) {
+            return view('pages.companies.edit')->with(['company' => $company, 'admin' => $admin]);
+        } else {
+            return redirect('/companies/' . $company->id . '/add-admin')->with('error', 'Please Add the admin to the company');
+        }
     }
     public function editCompanyPost(Request $request, $id)
     {
