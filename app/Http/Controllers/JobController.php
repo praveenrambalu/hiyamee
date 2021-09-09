@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\FieldList;
 use App\Models\Job;
 use App\Models\User;
+use App\Notifications\CandidatesAssigned;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -227,14 +228,30 @@ class JobController extends Controller
 
         $candidates = $request->candidate;
         if ($candidates != "") {
+            $count = 0;
+            $names = "";
+            $etc = 0;
             foreach ($candidates as $candidate) {
+                $count++;
                 $dbcand = Candidate::find($candidate);
+                if ($count < 6) {
+                    $names = $names . '' . $dbcand->candidate_name . ',';
+                } else {
+                    $etc = 1;
+                }
                 $dbcand->allocated_to = $request->employee;
                 $dbcand->interview_date = $request->interview_date;
                 $dbcand->interview_time = $request->interview_time;
                 $dbcand->update_history = $dbcand->update_history . ' <br> *' . now() . ' : Candidate Allocated to ' . $employee->name . ' By ' . Auth::user()->name;
                 $dbcand->save();
             }
+
+            if ($etc) {
+                $names = $names . ' etc.';
+            }
+
+            $employee->notify(new CandidatesAssigned($employee->name, $count, $names, $request->interview_date));
+
             return redirect()->back()->with('success', 'The candidates allocated Successfully ');
         } else {
             return redirect()->back()->with('error', 'No Candidates Selected ');
