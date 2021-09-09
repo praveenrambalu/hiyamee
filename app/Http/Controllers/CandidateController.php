@@ -9,6 +9,7 @@ use App\Models\CompanyAssign;
 use App\Models\FieldList;
 use App\Models\Job;
 use App\Models\User;
+use App\Notifications\InterviewsCompletedNotification;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -299,6 +300,12 @@ class CandidateController extends Controller
                     $fielddata->save();
                     // return $fielddata;
                 }
+            }
+
+            $checks = Candidate::where('job_id', $job_id)->where('interview_outcome', 'Ready')->get();
+            if (count($checks) == 0) {
+                $admin = User::find($company->admin_id);
+                $admin->notify(new InterviewsCompletedNotification($admin->name, $company->company_name, $job->job_title));
             }
 
             return redirect()->back()->with('success', 'Candidate Updated Successfully ');
