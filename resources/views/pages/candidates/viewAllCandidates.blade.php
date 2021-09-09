@@ -15,23 +15,25 @@
     <div class="col-md-12 col-lg-12">
         <div class="card">
             <div class="card-body">
-                <form action="" method="get">
+                <form action="" method="get" id="filterform">
                         <div class="row">
 
                             <div class="form-group col-5">
                               <label for="">From Date</label>
-                              <input type="date" name="from_date" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                              <input type="date" name="from_date" id="from_date" class="form-control" placeholder="" aria-describedby="helpId">
                             </div>
                             <div class="form-group col-5">
                               <label for="">To Date</label>
-                              <input type="date" name="to_date" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                              <input type="date" name="to_date" id="to_date" class="form-control" placeholder="" aria-describedby="helpId">
+                                <p class="text-danger" id="filter-error"></p>
                             </div>
                             <div class="form-group col-2">
-                                <input type="submit" value="Filter" class="btn btn-primary mt-4">
+                                <button type="button" id="filterbtn" class="btn btn-primary mt-4">Filter</button>
                                 @if (isset($_GET['from_date']))
                                 <a href="/candidates" class="btn btn-danger mt-4">Clear Filter</a>
                                 @endif
                             </div>
+                            
                         </div>
                 </form>
             </div>
@@ -212,4 +214,39 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+           $("#filterbtn").click(function(){
+               var from_date = $("#from_date").val();
+               var to_date = $("#to_date").val();
+                if (from_date != "" && to_date!="") {
+                    var date1 = new Date(from_date);
+                    var date2 = new Date(to_date);
+
+                    // To calculate the time difference of two dates
+                    var Difference_In_Time = date2.getTime() - date1.getTime();
+
+                    // To calculate the no. of days between two dates
+                    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
+                    if (Difference_In_Days > 0) {
+                        $("#filterform").submit()
+                    }else{
+                        $("#filter-error").hide();
+                        $("#filter-error").text('Please select valid date');
+                        $("#filter-error").show(1000);
+                        setTimeout(() => {
+                            $("#filter-error").hide(1000);
+                            $("#filter-error").text('');
+                            $("#filter-error").show();
+                        }, 3000);
+                    }
+                }
+
+           });
+        });
+    </script>
 @endsection
