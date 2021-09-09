@@ -10,7 +10,7 @@ pipeline {
     ssh-keyscan -t rsa,dsa 18.219.134.185 >> ~/.ssh/known_hosts
     ssh -tt ubuntu@18.219.134.185 << EOF
     cd /var/www/html/hiyamee-tracker
-    git checkout laravel-app
+    git checkout laravel_app
     git pull
     composer install
     php artisan migrate
