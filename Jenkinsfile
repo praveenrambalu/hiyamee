@@ -6,7 +6,7 @@ pipeline {
             steps {
                 sshagent ( ['hiyamee-tracker-prod']) {
     script { sh '''
-ssh -vv ubuntu@18.219.134.185
+ssh -tt ubuntu@18.219.134.185
 '''
     }
   }
