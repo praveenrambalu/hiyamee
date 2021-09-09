@@ -56,7 +56,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Application ID</th>
-                                <th>-</th>
+                                <th>Assigned to</th>
                                 <th>Company</th>
                                 <th>Job Detail</th>
                                 <th>Name</th>

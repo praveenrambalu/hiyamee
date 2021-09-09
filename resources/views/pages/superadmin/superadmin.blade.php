@@ -106,7 +106,6 @@
         </div>
     </div>
 
-    @if (Auth::user()->user_type!='superadmin')
     <div class="col-md-6 col-lg-2">
         <div class="card">
             <div class="card-body">
@@ -122,7 +121,75 @@
             </div>
         </div>
     </div>
-    @endif
+
+    <div class="col-md-6 col-lg-2">
+        <div class="card">
+            <div class="card-body">
+                <div class="media align-items-center">
+                    <div class="avatar avatar-icon avatar-lg avatar-blue">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="m-l-15">
+                        <h2 class="m-b-0">{{count($NoOfJobs) ?? 0}}</h2>
+                        <p class="m-b-0 text-muted">No. Of  <br> Jobs </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-2">
+        <div class="card">
+            <div class="card-body">
+                <div class="media align-items-center">
+                    <div class="avatar avatar-icon avatar-lg avatar-green">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="m-l-15">
+                        <h2 class="m-b-0">{{count($ActiveJobs) ?? 0}}</h2>
+                        <p class="m-b-0 text-muted">Active  <br> Jobs </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-lg-2">
+        <div class="card">
+            <div class="card-body">
+                <div class="media align-items-center">
+                    <div class="avatar avatar-icon avatar-lg avatar-red">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="m-l-15">
+                        <h2 class="m-b-0">{{count($InActiveJobs) ?? 0}}</h2>
+                        <p class="m-b-0 text-muted">In Active  <br> Jobs </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="media align-items-center">
+                    <div class="avatar avatar-icon avatar-lg avatar-cyan">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <div class="m-l-15">
+                        @if (count($totalCandidates)>0)
+                            @if (count($selectedInterviews)>0)
+                            <h2 class="m-b-0">{{ number_format(count($selectedInterviews)/count($totalCandidates)*100 ,2) ?? 0}} %</h2>
+                                
+                            @endif
+                        @endif
+                        <p class="m-b-0 text-muted">Conversion Ratio  <br> <br></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
 
 </div>
@@ -209,7 +276,8 @@
                         @if (count($Companies)>0)
                             @foreach ($Companies as $company)
                             @php
-                                $jobs = \App\Models\Job::where('company_id',$company->id)->where('status','active')->get();
+                                $overallcandidates = \App\Models\Candidate::where('company_id',$company->id)->get();
+                                $selectedoverallcandidates = \App\Models\Candidate::where('company_id',$company->id)->where('interview_outcome','Selected')->get();
                             @endphp
                             <li class="list-group-item p-h-0">
                                 <div class="d-flex align-items-center justify-content-between">
@@ -225,7 +293,7 @@
                                         </div>
                                     </div>
                                     <span class="badge badge-pill badge-cyan font-size-12">
-                                        <span class="font-weight-semibold ">{{count($jobs)}}</span>
+                                        <span class="font-weight-semibold ">{{ count($selectedoverallcandidates) }} / {{count($overallcandidates)}}</span>
                                     </span>
                                 </div>
                             </li>
@@ -255,7 +323,7 @@
                                 <tr>
                                     <th>Job Title</th>
                                     <th>Location</th>
-                                    <th>App</th>
+                                    <th>Applications</th>
                                 </tr>
                             </thead>
                             <tbody>

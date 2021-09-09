@@ -159,6 +159,8 @@ class JobController extends Controller
             $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
         } else if (Auth::user()->user_type == 'employee') {
             $company = Company::where('id', Auth::user()->company_id)->where('status', 'active')->first();
+        } else {
+            abort(404);
         }
         if ($company) {
             $jobs = Job::where('company_id', $company->id)->where('status', 'active')->get();

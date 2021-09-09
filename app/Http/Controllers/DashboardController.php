@@ -14,6 +14,9 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
+        $NoOfJobs = [];
+        $ActiveJobs = [];
+        $InActiveJobs = [];
 
         if (Auth::user()->user_type == 'superadmin') {
             $completedInterviews = Candidate::where('interview_outcome', '!=', 'Ready')->get();
@@ -26,6 +29,9 @@ class DashboardController extends Controller
             $latestCandidates = Candidate::orderBy('updated_at', 'desc')->paginate(5);
             $Companies = Company::where('status', 'active')->orderBy('updated_at', 'desc')->paginate(5);
             $jobs = Job::where('status', 'active')->orderBy('updated_at', 'desc')->paginate(5);
+            $NoOfJobs = Job::all();
+            $ActiveJobs = Job::where('status', 'active')->get();
+            $InActiveJobs = Job::where('status', 'inactive')->get();
         } else if (Auth::user()->user_type == 'admin') {
             $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
             $completedInterviews = Candidate::where('company_id', $company->id)->where('interview_outcome', '!=', 'Ready')->get();
@@ -91,6 +97,9 @@ class DashboardController extends Controller
             $totalRecruiters = User::where('user_type', 'recruiter')->where('status', 'active')->get();
             $latestCandidates = Candidate::whereIn('company_id', $assignarray)->orderBy('updated_at', 'desc')->paginate(5);
             $jobs = Job::whereIn('company_id', $assignarray)->where('status', 'active')->orderBy('updated_at', 'desc')->paginate(5);
+            $NoOfJobs = Job::whereIn('company_id', $assignarray)->get();
+            $ActiveJobs = Job::whereIn('company_id', $assignarray)->where('status', 'active')->get();
+            $InActiveJobs = Job::whereIn('company_id', $assignarray)->where('status', 'inactive')->get();
         }
 
 
@@ -105,6 +114,9 @@ class DashboardController extends Controller
             'latestCandidates' => $latestCandidates,
             'Companies' => $Companies,
             'latestjobs' => $jobs,
+            'NoOfJobs' => $NoOfJobs,
+            'ActiveJobs' => $ActiveJobs,
+            'InActiveJobs' => $InActiveJobs,
         ]);
     }
 }
