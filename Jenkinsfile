@@ -11,7 +11,6 @@ pipeline {
     ssh -tt ubuntu@18.219.134.185 << EOF
     cd /var/www/html/hiyamee-tracker
     git checkout laravel_app
-    git pull
     composer install
     php artisan migrate
     exit
