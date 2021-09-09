@@ -127,4 +127,32 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Not Found');
         }
     }
+
+    public function editAdmin(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin') {
+            return redirect('/dashboard')->with('error', 'Unauthorized');
+        }
+
+        if ($recruiter = User::where('user_type', 'subadmin')->where('id', $id)->first()) {
+            return view('pages.subadmin.edit')->with('recruiter', $recruiter);
+        } else {
+            return redirect()->back()->with('error', 'Forbidden Access');
+        }
+    }
+    public function editAdminPost(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin') {
+            return redirect('/dashboard')->with('error', 'Unauthorized');
+        }
+
+        if ($recruiter = User::where('user_type', 'subadmin')->where('id', $id)->first()) {
+            $recruiter->name = $request->name;
+            $recruiter->phoneno = $request->phoneno;
+            $recruiter->save();
+            return redirect('/admin/view')->with('success', 'Admin Details Updated');
+        } else {
+            return redirect()->back()->with('error', 'Forbidden Access');
+        }
+    }
 }

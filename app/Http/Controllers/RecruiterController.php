@@ -50,4 +50,31 @@ class RecruiterController extends Controller
         $recruiters = User::where('user_type', 'recruiter')->where('status', 'active')->get();
         return view('pages.recruiter.view')->with('recruiters', $recruiters);
     }
+    public function editRecruiter(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type != 'subadmin') {
+            return redirect('/dashboard')->with('error', 'Unauthorized');
+        }
+
+        if ($recruiter = User::where('user_type', 'recruiter')->where('id', $id)->first()) {
+            return view('pages.recruiter.edit')->with('recruiter', $recruiter);
+        } else {
+            return redirect()->back()->with('error', 'Forbidden Access');
+        }
+    }
+    public function editRecruiterPost(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type != 'subadmin') {
+            return redirect('/dashboard')->with('error', 'Unauthorized');
+        }
+
+        if ($recruiter = User::where('user_type', 'recruiter')->where('id', $id)->first()) {
+            $recruiter->name = $request->name;
+            $recruiter->phoneno = $request->phoneno;
+            $recruiter->save();
+            return redirect('/recruiter/view')->with('success', 'Recruiter Details Updated');
+        } else {
+            return redirect()->back()->with('error', 'Forbidden Access');
+        }
+    }
 }

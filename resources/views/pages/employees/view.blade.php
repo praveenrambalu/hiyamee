@@ -43,6 +43,7 @@
                                     <td>{{$employee->phoneno}}</td>
                                     <td>
                                         <a href="/candidates/view/{{$employee->id}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                        <a href="/employees/edit/{{$employee->id}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

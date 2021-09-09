@@ -75,4 +75,33 @@ class EmployeeController extends Controller
             return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');
         }
     }
+
+
+    public function editEmployee(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type != 'admin') {
+            return redirect('/dashboard')->with('error', 'Unauthorized');
+        }
+
+        if ($recruiter = User::where('user_type', 'employee')->where('id', $id)->first()) {
+            return view('pages.employees.edit')->with('recruiter', $recruiter);
+        } else {
+            return redirect()->back()->with('error', 'Forbidden Access');
+        }
+    }
+    public function editEmployeePost(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type != 'admin') {
+            return redirect('/dashboard')->with('error', 'Unauthorized');
+        }
+
+        if ($recruiter = User::where('user_type', 'employee')->where('id', $id)->first()) {
+            $recruiter->name = $request->name;
+            $recruiter->phoneno = $request->phoneno;
+            $recruiter->save();
+            return redirect('/employees/view')->with('success', 'Employee Details Updated');
+        } else {
+            return redirect()->back()->with('error', 'Forbidden Access');
+        }
+    }
 }

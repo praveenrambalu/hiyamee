@@ -80,11 +80,16 @@ Route::group(['prefix' => '/recruiter', 'middleware' => ['auth']], function () {
     Route::get('/', [RecruiterController::class, 'addRecruiter']);
     Route::post('/', [RecruiterController::class, 'addRecruiterPost']);
     Route::get('/view', [RecruiterController::class, 'viewRecruiter']);
+    Route::get('/edit/{id}', [RecruiterController::class, 'editRecruiter']);
+    Route::post('/edit/{id}', [RecruiterController::class, 'editRecruiterPost']);
 });
 Route::group(['prefix' => '/employees', 'middleware' => ['auth']], function () {
     Route::get('/', [EmployeeController::class, 'addEmployee']);
     Route::post('/', [EmployeeController::class, 'addEmployeePost']);
     Route::get('/view', [EmployeeController::class, 'viewEmployee']);
+
+    Route::get('/edit/{id}', [EmployeeController::class, 'editEmployee']);
+    Route::post('/edit/{id}', [EmployeeController::class, 'editEmployeePost']);
 });
 
 Route::group(['prefix' => '/fields', 'middleware' => ['auth']], function () {
@@ -107,6 +112,9 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
     Route::get('/view', [AdminController::class, 'viewAdmin']);
     Route::get('/view/{id}', [AdminController::class, 'viewAdminDetail']);
     Route::get('/assign/delete/{id}', [AdminController::class, 'deleteAssign']);
+
+    Route::get('/edit/{id}', [AdminController::class, 'editAdmin']);
+    Route::post('/edit/{id}', [AdminController::class, 'editAdminPost']);
 });
 Route::group(['prefix' => '/profile', 'middleware' => ['auth']], function () {
     Route::get('/', [ProfileController::class, 'myProfile']);
