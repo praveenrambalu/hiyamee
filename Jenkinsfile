@@ -6,7 +6,7 @@ pipeline {
             steps {
                 sshagent ( ['hiyamee-tracker-prod']) {
     script { sh '''
-ssh ubuntu@18.219.134.185
+cd /var/www/html/hiyamee-tracker
 '''
     }
   }
