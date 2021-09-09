@@ -3,11 +3,13 @@ pipeline {
         stage("Deploy") {
             steps {
                sshagent(['hiyamee-tracker-prod']) {
-    -               sh "cd /var/www/html/hiyamee-tracker"
-                    sh "git checkout laravel-app"
-                    sh "git pull"
-                    sh "composer install"
-                    sh "php artisan migrate"
+    -               sh '''
+                    cd /var/www/html/hiyamee-tracker
+                    git checkout laravel-app
+                    git pull
+                    composer install
+                    php artisan migrate
+                    '''
                 }
             }
         }
