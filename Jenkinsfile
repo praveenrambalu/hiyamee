@@ -3,7 +3,10 @@ pipeline {
     stages {
 
             stage('build'){
+                agent any
+                steps {
                 archiveArtifacts './*', followSymlinks: false
+                }
             }
 
             stage('deploy') {
