@@ -5,7 +5,7 @@ pipeline {
             stage('build'){
                 agent any
                 steps {
-                archiveArtifacts './*', followSymlinks: false
+                archiveArtifacts artifacts:'/**/*.*', followSymlinks: false
                 }
             }
 
