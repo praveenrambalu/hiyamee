@@ -4,20 +4,7 @@ pipeline {
             stage('deploy') {
             agent any
             steps {
-                sshagent ( ['hiyamee-tracker-prod']) {
-    script { sh '''
-    [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-    ssh-keyscan -t rsa,dsa 18.219.134.185 >> ~/.ssh/known_hosts
-    ssh -tt ubuntu@18.219.134.185 << EOF
-    cd /var/www/html/hiyamee-tracker
-    git checkout laravel_app
-    composer install
-    php artisan migrate
-    exit
-    EOF
-'''
-    }
-  }
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'Hiyamee ATS', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'apt-get-update', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/www/html/hiyamee-tracker', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
 
