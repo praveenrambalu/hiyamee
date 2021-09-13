@@ -82,45 +82,47 @@ class AdditionalFieldsController extends Controller
     }
 
 
-    // public function cronTest()
-    // {
+    public function cronTest()
+    {
 
 
 
-    //     $companies = count(Company::where('status', 'active')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
-    //     $jobs = count(Job::where('status', 'active')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
-    //     $candidates = count(Candidate::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
-    //     $SelectedCandidates = count(Candidate::where('interview_outcome', 'Selected')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
-    //     $RejectedCandidates = count(Candidate::where('interview_outcome', 'Rejected')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
+        $companies = count(Company::where('status', 'active')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->get());
+        $jobs = count(Job::where('status', 'active')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->get());
+        $candidates = count(Candidate::whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->get());
+        $SelectedCandidates = count(Candidate::where('interview_outcome', 'Selected')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->get());
+        $RejectedCandidates = count(Candidate::where('interview_outcome', 'Rejected')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->get());
 
-    //     $data = "
-    //         <table>
-    //             <tr>
-    //                 <th colspan='2' style='text-align:center'>
-    //                     <h3>Weekly Report </h3>
-    //                 </th>
-    //             </tr>
-    //             <tr style='text-align:left'>
-    //             <th>Total Companies </th>
-    //             <th>" . $companies . "</th>
-    //             </tr>
-    //             <tr style='text-align:left'>
-    //             <th>Total Jobs </th>
-    //             <th>" . $jobs . "</th>
-    //             </tr>
-    //             <tr style='text-align:left'>
-    //             <th>Total Applications </th>
-    //             <th>" . $candidates . "</th>
-    //             </tr>
-    //             <tr style='text-align:left'>
-    //             <th>Selected Applications </th>
-    //             <th>" . $SelectedCandidates . "</th>
-    //             </tr>
-    //             <tr style='text-align:left'>
-    //             <th>Rejected Applications </th>
-    //             <th>" . $RejectedCandidates . "</th>
-    //             </tr>
-    //         </table>
-    //         ";
-    // }
+        $data = "
+        <table>
+        <tr>
+            <th colspan='2' style='text-align:center'>
+                <h3 style='text-align:center'>Weekly Report </h3>
+            </th>
+        </tr>
+        <tr style='text-align:left'>
+        <th>Total Companies </th>
+        <th style='padding-left:25px'>" . $companies . "</th>
+        </tr>
+        <tr style='text-align:left'>
+        <th>Total Jobs </th>
+        <th style='padding-left:25px'>" . $jobs . "</th>
+        </tr>
+        <tr style='text-align:left'>
+        <th>Total Applications </th>
+        <th style='padding-left:25px'>" . $candidates . "</th>
+        </tr>
+        <tr style='text-align:left'>
+        <th>Selected Applications </th>
+        <th style='padding-left:25px'>" . $SelectedCandidates . "</th>
+        </tr>
+        <tr style='text-align:left'>
+        <th>Rejected Applications </th>
+        <th style='padding-left:25px'>" . $RejectedCandidates . "</th>
+        </tr>
+    </table>
+            ";
+
+        echo $data;
+    }
 }

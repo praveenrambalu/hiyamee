@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\HourlyUpdate::class,
         Commands\WeeklyReport::class,
+        Commands\MonthlyReport::class,
     ];
 
     /**
@@ -29,6 +30,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('hour:update')
             ->hourly();
         $schedule->command('weekly:report')
+            ->weekly();
+        $schedule->command('monthly:report')
             ->weekly();
     }
 
