@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdditionalField;
+use App\Models\Candidate;
+use App\Models\Company;
+use App\Models\Job;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -76,4 +80,47 @@ class AdditionalFieldsController extends Controller
             'resumes' => $data
         ]);
     }
+
+
+    // public function cronTest()
+    // {
+
+
+
+    //     $companies = count(Company::where('status', 'active')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
+    //     $jobs = count(Job::where('status', 'active')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
+    //     $candidates = count(Candidate::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
+    //     $SelectedCandidates = count(Candidate::where('interview_outcome', 'Selected')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
+    //     $RejectedCandidates = count(Candidate::where('interview_outcome', 'Rejected')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
+
+    //     $data = "
+    //         <table>
+    //             <tr>
+    //                 <th colspan='2' style='text-align:center'>
+    //                     <h3>Weekly Report </h3>
+    //                 </th>
+    //             </tr>
+    //             <tr style='text-align:left'>
+    //             <th>Total Companies </th>
+    //             <th>" . $companies . "</th>
+    //             </tr>
+    //             <tr style='text-align:left'>
+    //             <th>Total Jobs </th>
+    //             <th>" . $jobs . "</th>
+    //             </tr>
+    //             <tr style='text-align:left'>
+    //             <th>Total Applications </th>
+    //             <th>" . $candidates . "</th>
+    //             </tr>
+    //             <tr style='text-align:left'>
+    //             <th>Selected Applications </th>
+    //             <th>" . $SelectedCandidates . "</th>
+    //             </tr>
+    //             <tr style='text-align:left'>
+    //             <th>Rejected Applications </th>
+    //             <th>" . $RejectedCandidates . "</th>
+    //             </tr>
+    //         </table>
+    //         ";
+    // }
 }

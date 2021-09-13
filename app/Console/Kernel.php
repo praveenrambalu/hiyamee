@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\HourlyUpdate::class
+        Commands\HourlyUpdate::class,
+        Commands\WeeklyReport::class,
     ];
 
     /**
@@ -27,6 +28,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->command('hour:update')
             ->hourly();
+        $schedule->command('weekly:report')
+            ->weekly();
     }
 
     /**

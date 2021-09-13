@@ -41,7 +41,7 @@ class InterviewReminder extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Interview Reminder')
+            ->subject('Interview Reminder HiyameeX')
             ->greeting('Dear  ' . $this->name)
             ->line('This message is to remind you have an interview within One hour')
             ->line('Please check on your dashboard')

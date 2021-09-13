@@ -128,3 +128,6 @@ Route::get('/calfeed', [CandidateController::class, 'calfeed']);
 
 Route::get('/store-resume', [AdditionalFieldsController::class, 'addStorage']);
 Route::post('/store-resume', [AdditionalFieldsController::class, 'addStoragePost']);
+
+
+Route::get('/cronTest', [AdditionalFieldsController::class, 'cronTest']);
