@@ -74,8 +74,8 @@
                     <div class="footer-content">
                         <p class="m-b-0">Copyright © 2021 Hiyamee. All rights reserved.</p>
                         <span>
-                            <a href="" class="text-gray m-r-15">Term &amp; Conditions</a>
-                            <a href="" class="text-gray">Privacy &amp; Policy</a>
+                            <a href="/terms-conditions" class="text-gray m-r-15">Terms &amp; Conditions</a>
+                            <a href="/privacy-policy" class="text-gray">Privacy &amp; Policy</a>
                         </span>
                     </div>
                 </footer>

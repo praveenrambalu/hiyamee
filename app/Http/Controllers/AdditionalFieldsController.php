@@ -23,6 +23,14 @@ class AdditionalFieldsController extends Controller
             'fields' => $fields
         ]);
     }
+    public function TermsConditions()
+    {
+        return view('pages.legal.terms-conditions');
+    }
+    public function PrivacyPolicy()
+    {
+        return view('pages.legal.privacy-policy');
+    }
     public function addFieldsPost(Request $request)
     {
         if (Auth::user()->user_type != 'superadmin') {

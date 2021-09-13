@@ -109,10 +109,10 @@
                     <span class="">© 2021 Hiyamee</span>
                     <ul class="list-inline">
                         <li class="list-inline-item">
-                            <a class="text-dark text-link" href="">Terms & Conditions</a>
+                            <a class="text-dark text-link" href="/terms-conditions">Terms & Conditions</a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="text-dark text-link" href="">Privacy Policy</a>
+                            <a class="text-dark text-link" href="/privacy-policy">Privacy Policy</a>
                         </li>
                     </ul>
                 </div>

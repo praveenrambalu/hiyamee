@@ -46,6 +46,11 @@
                                 <div class="card-body">
                                     <h2 class="m-t-20">Reset Password</h2>
                                     <p class="m-b-30">Enter your email to reset password</p>
+                                    @if (session('status'))
+                                        <div class="alert alert-success" role="alert">
+                                            {{ session('status') }}
+                                        </div>
+                                    @endif
                                     <form method="POST" action="{{ route('password.email') }}">
                                         @csrf
                                         <div class="form-group">
@@ -83,10 +88,10 @@
                     <span class="">© 2021 Hiyamee</span>
                     <ul class="list-inline">
                         <li class="list-inline-item">
-                            <a class="text-dark text-link" href="">Terms & Conditions</a>
+                            <a class="text-dark text-link" href="/terms-conditions">Terms & Conditions</a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="text-dark text-link" href="">Privacy Policy</a>
+                            <a class="text-dark text-link" href="/privacy-policy">Privacy Policy</a>
                         </li>
                     </ul>
                 </div>

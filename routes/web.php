@@ -122,12 +122,16 @@ Route::group(['prefix' => '/profile', 'middleware' => ['auth']], function () {
 });
 
 
-Route::get('/calendar', [CandidateController::class, 'calendar']);
-Route::get('/calfeed', [CandidateController::class, 'calfeed']);
+Route::get('/calendar', [CandidateController::class, 'calendar'])->middleware('auth');
+Route::get('/calfeed', [CandidateController::class, 'calfeed'])->middleware('auth');
 
 
-Route::get('/store-resume', [AdditionalFieldsController::class, 'addStorage']);
-Route::post('/store-resume', [AdditionalFieldsController::class, 'addStoragePost']);
+Route::get('/store-resume', [AdditionalFieldsController::class, 'addStorage'])->middleware('auth');
+Route::post('/store-resume', [AdditionalFieldsController::class, 'addStoragePost'])->middleware('auth');
+
+
+Route::get('/terms-conditions', [AdditionalFieldsController::class, 'TermsConditions'])->middleware('auth');
+Route::get('/privacy-policy', [AdditionalFieldsController::class, 'PrivacyPolicy'])->middleware('auth');
 
 
 Route::get('/cronTest', [AdditionalFieldsController::class, 'cronTest']);
