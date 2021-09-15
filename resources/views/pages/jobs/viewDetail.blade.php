@@ -180,7 +180,7 @@
                         
                     <div class=" row align-items-center">
                         <div class="form-group col-sm-3 align-self-center">
-                            <label for="">Allocate to</label>
+                            <label for="">Scheduled to</label>
                             <select name="employee" required class="form-control">
                                 @if (count($employees)>0)
                                 @foreach ($employees as $employee)
