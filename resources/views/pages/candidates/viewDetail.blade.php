@@ -9,7 +9,7 @@
             <a href="/dashboard" class="breadcrumb-item"><i class="anticon anticon-dashboard m-r-5"></i>Dashboard</a>
             <a class="breadcrumb-item" href="/candidates">Candidates</a>
 
-            <span class="breadcrumb-item active">Detail</span>
+            <span class="breadcrumb-item active">Detail </span>
         </nav>
     </div>
 </div>
@@ -59,6 +59,7 @@
                             </div>
                         </div>
                     @endif
+
                   
 
                    </div>
@@ -121,6 +122,13 @@
                                 <br>    
                                 <br>    
                                 <button class="btn btn-primary btn-tone" type="button" data-toggle="modal" data-target="#InterViewStatus">Status Update</button>
+                                @endif
+                                @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='admin' || Auth::user()->user_type=='subadmin')
+                                    @if ($candidate->interview_outcome=='Ready')
+                                    <a href="/candidates/edit/{{$candidate->id}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                    @else
+                                    <button type="button"  onclick="swal('','Cannot allowed to edit after interview status updated','error')" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                                    @endif
                                 @endif
                             </div>
                         </div>
@@ -390,9 +398,13 @@
                         <div class="form-group col-sm-3">
                             <label for="">Buyout <span class="text-danger">*</span> </label>
                             <select name="buyout" id="" required class="form-control">
-                                <option value="{{$candidate->buyout}}">{{$candidate->buyout}}</option>
+                                @if ($candidate->buyout=="Yes")
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
+                                @else
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                                @endif
                             </select>
                         </div>
 

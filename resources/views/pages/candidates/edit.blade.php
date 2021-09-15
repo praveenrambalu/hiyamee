@@ -98,9 +98,13 @@
                         <div class="form-group col-md-6">
                             <label >Buyout <span class="text-danger">*</span> </label>
                             <select name="buyout" id="" required class="form-control">
-                                <option value="{{$candidate->buyout}}">{{$candidate->buyout}}</option>
+                                @if ($candidate->buyout=="Yes")
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
+                                @else
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                                @endif
                             </select>
                         </div>
                     </div>
