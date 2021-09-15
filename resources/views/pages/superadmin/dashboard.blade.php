@@ -11,12 +11,11 @@
 </div>
 @if (Auth::user()->user_type=='superadmin')
 <div class="row">
-    <div class="col-md-12 col-lg-4">
+    <div class="col-md-12 col-lg-12">
         <div class="card">
             <div class="card-body">
-                <div class="media align-items-center">
                     <form action="" method="get">
-                        <div class="form-group row">
+                        <div class="form-group row ">
                             <div class="col-sm-6 align-self-center">
                                 <label for="">Dashboard</label>
                                 <select name="company_id" class="form-control" id="">
@@ -33,7 +32,6 @@
                             </div>
                         </div>
                     </form>
-                </div>
             </div>
         </div>
     </div>
