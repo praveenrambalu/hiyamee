@@ -356,13 +356,17 @@
                                 <option value="Rejected">Rejected</option>
                             </select>
                         </div>
-                        <div class="form-group col-sm-6">
+                        <div class="form-group col-sm-4">
                             <label for="">Current Location <span class="text-danger">*</span> </label>
                             <input type="text" name="location" id="" value="{{$candidate->location}}" required class="form-control">
                         </div>
-                        <div class="form-group col-sm-6">
+                        <div class="form-group col-sm-4">
                             <label for="">Preferred Location <span class="text-danger">*</span> </label>
                             <input type="text" name="prelocation" id="" value="{{$candidate->prelocation}}" required class="form-control">
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label for="">Interview Completed At <small>(if not selected date will automatically picked today)</small></label>
+                            <input type="datetime-local" name="interview_completed_at" required  value="{{$candidate->interview_completed_at}}" id=""   class="form-control">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="">Current Company </label>
@@ -407,6 +411,8 @@
                                 @endif
                             </select>
                         </div>
+
+                       
 
                     </div>
                         <div class="row">

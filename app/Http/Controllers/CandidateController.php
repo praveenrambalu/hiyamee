@@ -265,7 +265,11 @@ class CandidateController extends Controller
             $candidate->notes = $candidate->notes . '<br>  ' .  $request->notes;
             $candidate->additional_notes = $candidate->additional_notes . '<br>   ' .   $request->additional_notes;
             $candidate->interviewer_id = Auth::user()->id;
-            $candidate->interview_completed_at = now();
+            if ($candidate->interview_completed_at != "" && $candidate->interview_completed_at != NUll) {
+                $candidate->interview_completed_at = $request->interview_completed_at;
+            } else {
+                $candidate->interview_completed_at = now();
+            }
             $candidate->updated_by = Auth::user()->id;
             $candidate->update_history = $candidate->update_history . ' <br> *' . now() . ' : Candidate Updated by ' . Auth::user()->name . '   with status  ' . $request->interview_outcome . ' <br>';
             if ($request->zoomlink != "") {
