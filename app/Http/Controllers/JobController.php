@@ -111,6 +111,7 @@ class JobController extends Controller
             $job->skills_required = $request->skills_required;
             $job->how_many_hires = $request->how_many_hires;
             $job->annual_ctc = $request->annual_ctc;
+            $job->experience_required = $request->experience_required;
             $job->created_by = Auth::user()->id;
             $job->linkorfile = $request->linkorfile;
             if ($request->linkorfile == 'link') {
@@ -360,6 +361,7 @@ class JobController extends Controller
         $job->how_many_hires = $request->how_many_hires;
         $job->annual_ctc = $request->annual_ctc;
         $job->zoomlink = $request->zoomlink;
+        $job->experience_required = $request->experience_required;
 
         $job->save();
 

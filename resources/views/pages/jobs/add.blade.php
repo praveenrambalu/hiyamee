@@ -80,13 +80,17 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label >Annual CTC <span class="text-danger">*</span> </label>
                             <input type="text" required class="form-control"  placeholder="Ex: 3.2 LPA" name="annual_ctc">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label >Link </label>
                             <input type="url"  class="form-control"  placeholder="Ex: https://us04web.zoom.us/j/123456789" name="zoomlink">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label >Experience Required </label>
+                            <input type="text"  class="form-control"  placeholder="Ex: 3" name="experience_required">
                         </div>
                     </div>
                     <div class="form-row">
@@ -102,6 +106,7 @@
                             <div id="linkorfile">
                             </div>
                         </div>
+                        
                     </div>
                  
                     <div class="form-group ">

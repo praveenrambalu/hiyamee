@@ -30,6 +30,8 @@
                             <th>Location</th>
                             <th>Annual CTC</th>
                             <th> Openings</th>
+                            <th> Experience Required</th>
+                            <th> Created At</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -47,6 +49,8 @@
                                     <td>{{$job->location}}</td>
                                     <td>{{$job->annual_ctc}}</td>
                                     <td>{{$job->how_many_hires}}</td>
+                                    <td>{{$job->experience_required}}</td>
+                                    <td>{{date("Y-m-d", strtotime($job->created_at))}}</td>
                                     <td>{{$job->status}}</td>
                                     <td>
                                         <a href="/jobs/{{$job->id}}"  class="btn btn-primary"><i class="fas fa-eye"></i></a>

@@ -64,6 +64,10 @@
                             <label >Link </label>
                             <input type="url" value="{{$job->zoomlink}}"  class="form-control"  placeholder="Ex: https://us04web.zoom.us/j/123456789" name="zoomlink">
                         </div>
+                        <div class="form-group col-md-4">
+                            <label >Experience Required </label>
+                            <input type="text"  class="form-control"  value="{{$job->experience_required}}" placeholder="Ex: 3" name="experience_required">
+                        </div>
                     </div>
                  
                     <div class="form-group ">

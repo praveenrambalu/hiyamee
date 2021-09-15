@@ -33,7 +33,7 @@
                             
                             <div class="d-flex align-items-center m-t-5 m-b-15">
                                 <div class="">
-                                    <span class="text-gray font-weight-semibold">{{$job->location}}</span>
+                                    <span class="text-gray font-weight-semibold">Experience Required :<span class="badge badge-default">{{$job->experience_required}}                   </span>{{$job->location}}</span>
                                     <span class="m-h-5 text-gray">-</span>
                                     <span class="text-gray">{{$job->annual_ctc}}</span>
                                 </div>
