@@ -34,6 +34,14 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item dropdown @yield('jobs')">
+                        <a class="dropdown-toggle" href="/jobs/view">
+                            <span class="icon-holder">
+                                <i class="fas fa-briefcase"></i>
+                            </span>
+                            <span class="title">Jobs <span class="fa fa-info-circle infocircle"  data-toggle="tooltip" data-placement="right" title="Manage All Jobs "></span></span>
+                        </a>
+                    </li>
                     <li class="nav-item dropdown @yield('recruiter')">
                         <a class="dropdown-toggle" href="javascript:void(0);">
                             <span class="icon-holder">
@@ -83,6 +91,7 @@
                             <span class="title">Fields <span class="fa fa-info-circle infocircle"  data-toggle="tooltip" data-placement="right" title="Manage Additional Fields  "></span></span>
                         </a>
                     </li>
+               
 
                 @break
                 @case('subadmin')
