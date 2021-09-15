@@ -79,7 +79,7 @@ class CompanyController extends Controller
             if ($company->admin_id == NULL) {
                 $existtest = User::where('email', $request->email)->first();
                 if ($existtest) {
-                    return redirect()->back()->with('Error', 'The user email already exist ! ');
+                    return redirect()->back()->with('error', 'The user email already exist ! ');
                 }
                 $user = new User;
                 $user->user_type = 'admin';
