@@ -3,6 +3,11 @@
 @section('jobs-view','active')
 
 @section('content')
+<style>
+    .ansfontcolor{
+        color:#72849a;
+    }
+</style>
 <div class="page-header">
     <div class="header-sub-title">
         <nav class="breadcrumb breadcrumb-dash">
@@ -139,60 +144,60 @@
                             <div class="col">
                                 <ul class="list-unstyled m-t-10">
                                     <li class="row">
-                                        <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <i class="m-r-10 text-primary anticon anticon-mail"></i>
                                             <span>Email: </span> 
+                                            <span class="col font-weight-semibold ansfontcolor">{{$candidate->candidate_email}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold">{{$candidate->candidate_email}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 col-12 font-weight-semibold text-dark m-b-5">
                                             <i class="m-r-10 text-primary anticon anticon-phone"></i>
                                             <span>Phone: </span> 
+                                            <span class="col font-weight-semibold ansfontcolor"> {{$candidate->candidate_phone}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold"> {{$candidate->candidate_phone}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <i class="m-r-10 text-primary fa fa-map-marker"></i>
                                             <span>Location: </span> 
+                                            <span class="col font-weight-semibold ansfontcolor"> {{$candidate->location}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold"> {{$candidate->location}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12  font-weight-semibold text-dark m-b-5">
                                             <i class="m-r-10 text-primary anticon anticon-area-chart"></i>
                                             <span>Experience: </span> 
+                                            <span class="col font-weight-semibold ansfontcolor"> {{$candidate->experience}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold"> {{$candidate->experience}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <i class="m-r-10 text-primary fas fa-chart-line"></i>
                                             <span>RExperience: </span> 
+                                            <span class="col font-weight-semibold ansfontcolor"> {{$candidate->relexperience}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold"> {{$candidate->relexperience}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <i class="m-r-10 text-primary fas fa-credit-card"></i>
                                             <span>Current CTC: </span> 
+                                            <span class="col font-weight-semibold ansfontcolor"> {{$candidate->current_ctc}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold"> {{$candidate->current_ctc}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <i class="m-r-10 text-primary fas fa-money-bill-wave"></i>
                                             <span>E CTC: </span> 
+                                            <span class="col font-weight-semibold ansfontcolor"> {{$candidate->expected_ctc}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold"> {{$candidate->expected_ctc}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <i class="m-r-10 text-primary fas fa-comments"></i>
                                             <span>N CTC: </span> 
+                                            <span class="col font-weight-semibold ansfontcolor"> {{$candidate->neg_ctc}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold"> {{$candidate->neg_ctc}}</p>
                                     </li>
                                   
                                 </ul>
@@ -205,52 +210,52 @@
                             <div class="col">
                                 <ul class="list-unstyled m-t-10">
                                     <li class="row">
-                                        <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <span>Current Company : </span> 
+                                            <span class="col font-weight-semibold ansfontcolor">{{$candidate->current_company ?? ''}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold">{{$candidate->current_company ?? ''}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <span>Notice Period : </span> 
+                                            <span class="col font-weight-semibold ansfontcolor">{{$candidate->notice_period ?? ''}}</sp>
                                         </p>
-                                        <p class="col font-weight-semibold">{{$candidate->notice_period ?? ''}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <span>Interviewer : </span> 
+                                            <span class="col font-weight-semibold ansfontcolor">{{$interviewer->name ?? ''}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold">{{$interviewer->name ?? ''}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <span>Uploaded By: </span> 
+                                            <span class="col font-weight-semibold ansfontcolor">{{$candidate_creator->name}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold">{{$candidate_creator->name}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <span>Uploaded On: </span> 
+                                            <span class="col font-weight-semibold ansfontcolor">{{date('Y-m-d', strtotime($candidate->created_at))}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold">{{date('Y-m-d', strtotime($candidate->created_at))}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <span>Current Location: </span> 
+                                            <span class="col font-weight-semibold ansfontcolor"> {{$candidate->location}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold"> {{$candidate->location}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <span>Preferred Location: </span> 
+                                            <span class="col font-weight-semibold ansfontcolor"> {{$candidate->prelocation}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold"> {{$candidate->prelocation}}</p>
                                     </li>
                                     <li class="row">
-                                        <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                        <p class="col-sm-12 font-weight-semibold text-dark m-b-5">
                                             <span>Buyout: </span> 
+                                            <span class="col font-weight-semibold ansfontcolor"> {{$candidate->buyout}}</span>
                                         </p>
-                                        <p class="col font-weight-semibold"> {{$candidate->buyout}}</p>
                                     </li>
                                 </ul>
                             </div>
