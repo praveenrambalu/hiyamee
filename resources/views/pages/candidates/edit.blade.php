@@ -34,7 +34,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label >Phone No <span class="text-danger">*</span> </label>
-                            <input type="text" required  value="{{$candidate->candidate_phone}}" class="form-control"  name="candidate_phone" placeholder="Ex : 9876543210">
+                            <input type="text" pattern="^[6-9]\d{9}$" required  value="{{$candidate->candidate_phone}}" class="form-control"  name="candidate_phone" placeholder="Ex : 9876543210">
                         </div>
                         <div class="form-group col-md-6">
                             <label >Date of Birth <span class="text-danger">*</span> </label>

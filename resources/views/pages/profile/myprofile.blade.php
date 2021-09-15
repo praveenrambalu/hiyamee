@@ -33,7 +33,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label > Phone No</label>
-                            <input type="text" class="form-control" value="{{$profile->phoneno}}"  placeholder="Ex: 9876543210" name="phoneno">
+                            <input type="text" pattern="^[6-9]\d{9}$" class="form-control" value="{{$profile->phoneno}}"  placeholder="Ex: 9876543210" name="phoneno">
                         </div>
                        
                     </div>

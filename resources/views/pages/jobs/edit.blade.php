@@ -61,8 +61,8 @@
                             <input type="text" value="{{$job->annual_ctc}}" required class="form-control"  placeholder="Ex: 3.2 LPA" name="annual_ctc">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Zoom link <span class="text-danger">*</span> </label>
-                            <input type="url" value="{{$job->zoomlink}}" required class="form-control"  placeholder="Ex: https://us04web.zoom.us/j/123456789" name="zoomlink">
+                            <label >Link </label>
+                            <input type="url" value="{{$job->zoomlink}}"  class="form-control"  placeholder="Ex: https://us04web.zoom.us/j/123456789" name="zoomlink">
                         </div>
                     </div>
                  

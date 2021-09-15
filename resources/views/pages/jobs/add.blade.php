@@ -85,20 +85,20 @@
                             <input type="text" required class="form-control"  placeholder="Ex: 3.2 LPA" name="annual_ctc">
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Zoom link <span class="text-danger">*</span> </label>
-                            <input type="url" required class="form-control"  placeholder="Ex: https://us04web.zoom.us/j/123456789" name="zoomlink">
+                            <label >Link </label>
+                            <input type="url"  class="form-control"  placeholder="Ex: https://us04web.zoom.us/j/123456789" name="zoomlink">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Feedback <span class="text-danger">*</span> </label>
+                            <label >Feedback </label>
                             <br>
                             <br>
                             <label for="linkorfilelink" class="mr-3"><input type="radio" checked name="linkorfile" value="link" id="linkorfilelink"> Link</label>
                             <label for="linkorfilefile" class="mr-3"><input type="radio" name="linkorfile" value="file" id="linkorfilefile"> File</label>
                         </div>
                         <div class="form-group col-md-6">
-                            <label >Feedback <span class="text-danger">*</span> </label>
+                            <label >Template </label>
                             <div id="linkorfile">
                             </div>
                         </div>
@@ -148,9 +148,9 @@
             function linkorfilecheck() {
                var value = $('input[name="linkorfile"]:checked').val();
                if(value==='file'){
-                $("#linkorfile").html('<input type="file" name="feedback" required  class="form-control">');
+                $("#linkorfile").html('<input type="file" name="feedback"   class="form-control">');
                }else{
-                $("#linkorfile").html('<input type="url" name="feedback" required  class="form-control">');
+                $("#linkorfile").html('<input type="url" name="feedback"   class="form-control">');
                }
             }
 

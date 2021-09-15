@@ -430,8 +430,8 @@
 
 
                         <div class="form-group col-sm-6">
-                            <label for="">Notes <span class="text-danger">*</span> </label>
-                            <textarea type="text" name="notes" id="" required class="form-control"></textarea>
+                            <label for="">Notes  </label>
+                            <textarea type="text" name="notes" id=""  class="form-control"></textarea>
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="">Additional Notes </label>

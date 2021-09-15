@@ -55,7 +55,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label >Contact No</label>
-                            <input type="text"  class="form-control" value="{{$company->contactno}}" placeholder="Ex: 987654**** " name="contactno">
+                            <input type="text"  pattern="^[6-9]\d{9}$" class="form-control" value="{{$company->contactno}}" placeholder="Ex: 987654**** " name="contactno">
                         </div>
                         <div class="form-group col-md-6">
                             <label >PinCode  <span class="text-danger">*</span> </label>
