@@ -9,6 +9,37 @@
         </nav>
     </div>
 </div>
+@if (Auth::user()->user_type=='superadmin')
+<div class="row">
+    <div class="col-md-12 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="media align-items-center">
+                    <form action="" method="get">
+                        <div class="form-group row">
+                            <div class="col-sm-6 align-self-center">
+                                <label for="">Dashboard</label>
+                                <select name="company_id" class="form-control" id="">
+                                    @if (count($AllCompanies=\App\Models\Company::all())>0)
+                                            <option value="0">Overall</option>
+                                        @foreach ($AllCompanies as $allcompany)
+                                            <option value="{{$allcompany->id}}">{{$allcompany->company_name}} - {{$allcompany->location}}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-sm-6 align-self-center">
+                                <button type="submit" class="btn btn-primary mt-4">Show Dashboard</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
     @switch(Auth::user()->user_type)
         @case('superadmin')
                 @include('pages.superadmin.superadmin')

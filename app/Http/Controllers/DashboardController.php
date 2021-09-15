@@ -32,6 +32,25 @@ class DashboardController extends Controller
             $NoOfJobs = Job::all();
             $ActiveJobs = Job::where('status', 'active')->get();
             $InActiveJobs = Job::where('status', 'inactive')->get();
+
+            if (isset($_GET['company_id'])) {
+                $company_id = $_GET['company_id'];
+                if ($company_id != 0) {
+                    $completedInterviews = Candidate::where('company_id', $company_id)->where('interview_outcome', '!=', 'Ready')->get();
+                    $remainingInterviews = Candidate::where('company_id', $company_id)->where('interview_outcome',  'Ready')->get();
+                    $rejectedInterviews = Candidate::where('company_id', $company_id)->where('interview_outcome',  'Rejected')->get();
+                    $selectedInterviews = Candidate::where('company_id', $company_id)->where('interview_outcome',  'Selected')->get();
+                    $totalCandidates = Candidate::where('company_id', $company_id)->get();
+                    $totalCompanies = Company::where('id', $company_id)->where('status', 'active')->get();
+                    $totalRecruiters = User::where('company_id', $company_id)->where('user_type', 'recruiter')->where('status', 'active')->get();
+                    $latestCandidates = Candidate::where('company_id', $company_id)->orderBy('updated_at', 'desc')->paginate(5);
+                    $Companies = Company::where('id', $company_id)->where('status', 'active')->orderBy('updated_at', 'desc')->paginate(5);
+                    $jobs = Job::where('company_id', $company_id)->where('status', 'active')->orderBy('updated_at', 'desc')->paginate(5);
+                    $NoOfJobs = Job::where('company_id', $company_id)->get();
+                    $ActiveJobs = Job::where('company_id', $company_id)->where('status', 'active')->get();
+                    $InActiveJobs = Job::where('company_id', $company_id)->where('status', 'inactive')->get();
+                }
+            }
         } else if (Auth::user()->user_type == 'admin') {
             $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
             $completedInterviews = Candidate::where('company_id', $company->id)->where('interview_outcome', '!=', 'Ready')->get();
