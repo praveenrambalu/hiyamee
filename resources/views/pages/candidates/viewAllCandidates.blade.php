@@ -56,16 +56,16 @@
                             <tr>
                                 <th>#</th>
                                 <th>Application ID</th>
+                                <th>Interview Status</th>
                                 <th>Assigned to</th>
-                                <th>Company</th>
-                                <th>Job Detail</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone No</th>
+                                <th>Job Detail</th>
+                                <th>Company</th>
                                 <th>Location</th>
                                 <th>Interview Date</th>
                                 <th>Interview Time</th>
-                                <th>Interview Status</th>
                                 {{-- <th>Current CTC</th>
                                 <th>Expected CTC</th>
                                 <th>Negotiable CTC</th> --}}
@@ -86,33 +86,6 @@
                                     <tr>
                                         <td>{{$i++}}</td>
                                         <td>{{$candidate->id}}</td>
-                                        <td>
-                                            @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='subadmin')
-                                                @if ($candidate->allocated_to==null)
-                                                    <input type="checkbox" name="candidate[]" value="{{$candidate->id}}" >
-                                                @else
-                                                    @php
-                                                        $allocated = \App\Models\User::find($candidate->allocated_to);
-                                                    @endphp
-                                                    {{$allocated->name}} <br>
-                                                    <small>{{$allocated->email}}</small>
-                                                @endif
-                                            @endif
-    
-                                        </td>
-                                        <td>
-                                            <img src="{{$company->logo ?? ''}}" alt="" class="img img-responsive" style="height:50px; width:50px;">
-                                            {{$company->company_name}}
-                                        </td>
-                                        <td>
-                                            {{$job->job_title}}
-                                        </td>
-                                        <td>{{$candidate->candidate_name}}</td>
-                                        <td>{{$candidate->candidate_email}}</td>
-                                        <td>{{$candidate->candidate_phone}}</td>
-                                        <td>{{$candidate->location}}</td>
-                                        <td>{{$candidate->interview_date}}</td>
-                                        <td>{{$candidate->interview_time}}</td>
                                         @switch($candidate->interview_outcome)
                                             @case('Ready')
                                                 <td><span class="badge badge-pill  badge-blue">Yet to be Interviewed</span></td>
@@ -129,6 +102,36 @@
                                             @default
                                             <td></td>
                                         @endswitch
+                                        <td>
+                                            @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='subadmin')
+                                                @if ($candidate->allocated_to==null)
+                                                    <input type="checkbox" name="candidate[]" value="{{$candidate->id}}" >
+                                                @else
+                                                    @php
+                                                        $allocated = \App\Models\User::find($candidate->allocated_to);
+                                                    @endphp
+                                                    {{$allocated->name}} <br>
+                                                    <small>{{$allocated->email}}</small>
+                                                @endif
+                                            @endif
+    
+                                        </td>
+                                        <td>{{$candidate->candidate_name}}</td>
+                                        <td>{{$candidate->candidate_email}}</td>
+                                        <td>{{$candidate->candidate_phone}}</td>
+                                        <td>
+                                            {{$job->job_title}}
+                                        </td>
+                                        <td>
+                                            <img src="{{$company->logo ?? ''}}" alt="" class="img img-responsive" style="height:50px; width:50px;">
+                                            {{$company->company_name}}
+                                        </td>
+                                      
+                                      
+                                        <td>{{$candidate->location}}</td>
+                                        <td>{{$candidate->interview_date}}</td>
+                                        <td>{{$candidate->interview_time}}</td>
+                                        
                                         {{-- <td>{{$candidate->current_ctc}}</td>
                                         <td>{{$candidate->expected_ctc}}</td>
                                         <td>{{$candidate->neg_ctc}}</td> --}}

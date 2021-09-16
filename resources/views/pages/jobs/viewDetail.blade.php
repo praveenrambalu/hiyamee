@@ -77,15 +77,15 @@
                                 <th>#</th>
                                 <th>Application ID</th>
                                 <th>Assign to</th>
-                                <th>Company</th>
-                                <th>Job Detail</th>
+                                <th>Interview Status</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone No</th>
+                                <th>Job Detail</th>
+                                <th>Company</th>
                                 <th>Location</th>
                                 <th>Interview Date</th>
                                 <th>Interview Time</th>
-                                <th>Interview Status</th>
                                 {{-- <th>Current CTC</th>
                                 <th>Expected CTC</th>
                                 <th>Negotiable CTC</th> --}}
@@ -120,35 +120,36 @@
                                             @endif
     
                                         </td>
+                                        @switch($candidate->interview_outcome)
+                                        @case('Ready')
+                                            <td><span class="badge badge-pill  badge-blue">Yet to be Interviewed</span></td>
+                                            @break
+                                        @case('Selected')
+                                            <td><span class="badge badge-pill  badge-cyan">{{$candidate->interview_outcome}}</span></td>
+                                            @break
+                                        @case('Interviewed')
+                                            <td><span class="badge badge-pill  badge-orange">{{$candidate->interview_outcome}}</span></td>
+                                            @break
+                                        @case('Rejected')
+                                            <td><span class="badge badge-pill  badge-red">{{$candidate->interview_outcome}}</span></td>
+                                            @break
+                                        @default
+                                        <td></td>
+                                    @endswitch
+                                    <td>{{$candidate->candidate_name}}</td>
+                                    <td>{{$candidate->candidate_email}}</td>
+                                    <td>{{$candidate->candidate_phone}}</td>
+                                    <td>{{$job->job_title}}</td>
                                         <td>
                                             <img src="{{$company->logo ?? ''}}" alt="" class="img img-responsive" style="height:50px; width:50px;">
                                             {{$company->company_name}}
                                         </td>
-                                        <td>
-                                            {{$job->job_title}}
-                                        </td>
-                                        <td>{{$candidate->candidate_name}}</td>
-                                        <td>{{$candidate->candidate_email}}</td>
-                                        <td>{{$candidate->candidate_phone}}</td>
+                                       
+                                      
                                         <td>{{$candidate->location}}</td>
                                         <td>{{$candidate->interview_date}}</td>
                                         <td>{{$candidate->interview_time}}</td>
-                                        @switch($candidate->interview_outcome)
-                                            @case('Ready')
-                                                <td><span class="badge badge-pill  badge-blue">Yet to be Interviewed</span></td>
-                                                @break
-                                            @case('Selected')
-                                                <td><span class="badge badge-pill  badge-cyan">{{$candidate->interview_outcome}}</span></td>
-                                                @break
-                                            @case('Interviewed')
-                                                <td><span class="badge badge-pill  badge-orange">{{$candidate->interview_outcome}}</span></td>
-                                                @break
-                                            @case('Rejected')
-                                                <td><span class="badge badge-pill  badge-red">{{$candidate->interview_outcome}}</span></td>
-                                                @break
-                                            @default
-                                            <td></td>
-                                        @endswitch
+                                    
                                         {{-- <td>{{$candidate->current_ctc}}</td>
                                         <td>{{$candidate->expected_ctc}}</td>
                                         <td>{{$candidate->neg_ctc}}</td> --}}
