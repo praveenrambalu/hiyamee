@@ -24,6 +24,15 @@ class JobController extends Controller
             return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');
         }
     }
+    public function selectCompaniesBySuperadmin()
+    {
+        if (Auth::user()->user_type != 'superadmin') {
+            abort(404);
+        }
+        $companies = Company::where('status', 'active')->get();
+        return view('pages.jobs.select')->with('companies', $companies);
+    }
+
     public function addJobBySuperadmin(Request $request, $id)
     {
         if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type == 'subadmin') {
