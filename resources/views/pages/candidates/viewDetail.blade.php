@@ -93,7 +93,7 @@
                             <div class="alert alert-rejected"><b >{{$candidate->interview_outcome}}</b></div>
                             @break
                         @default
-                        <div></div>
+                        <div class="alert alert-default"><b >{{$candidate->interview_outcome}}</b></div>
                     @endswitch
                 </div>
                 </div>
@@ -123,13 +123,13 @@
                                 <a href="{{$candidate->resume}}" download class="btn  btn-outline-dark">Download Resume</a> 
 
                                 <a href="/candidates/share/{{$candidate->id}}" class="btn btn-tone  btn-danger">Share Profile as PDF</a> 
-                                @if ($candidate->interview_outcome=='Ready')
+                                @if ($candidate->interview_outcome=='Ready' || $candidate->interview_outcome=='Feedback pending')
                                 <br>    
                                 <br>    
                                 <button class="btn btn-primary btn-tone" type="button" data-toggle="modal" data-target="#InterViewStatus">Status Update</button>
                                 @endif
                                 @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='admin' || Auth::user()->user_type=='subadmin')
-                                    @if ($candidate->interview_outcome=='Ready')
+                                    @if ($candidate->interview_outcome=='Ready' )
                                     <a href="/candidates/edit/{{$candidate->id}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                     @else
                                     <button type="button"  onclick="swal('','Cannot allowed to edit after interview status updated','error')" class="btn btn-warning"><i class="fas fa-edit"></i></button>
@@ -355,10 +355,11 @@
                             <label for="">Interview Outcome <span class="text-danger">*</span> </label>
                             <input type="hidden" name="id" value="{{$candidate->id}}" id="">
                             <select type="text" name="interview_outcome" required  id="" class="form-control">
-                                <option value="Ready">Ready</option>
                                 <option value="Interviewed">Interviewed</option>
-                                <option value="Selected">Selected</option>
-                                <option value="Rejected">Rejected</option>
+                                <option value="Feedback pending">Feedback pending</option>
+                                <option value="Selected">Select</option>
+                                <option value="Rejected">Reject</option>
+                                <option value="Not Interested">Not Interested</option>
                             </select>
                         </div>
                         <div class="form-group col-sm-4">
@@ -371,7 +372,7 @@
                         </div>
                         <div class="form-group col-sm-4">
                             <label for="">Interview Completed At <small>(if not selected date will automatically picked today)</small></label>
-                            <input type="datetime-local" name="interview_completed_at" required  value="{{$candidate->interview_completed_at}}" id=""   class="form-control">
+                            <input type="datetime-local" name="interview_completed_at"   value="{{$candidate->interview_completed_at}}" id=""   class="form-control">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="">Current Company </label>

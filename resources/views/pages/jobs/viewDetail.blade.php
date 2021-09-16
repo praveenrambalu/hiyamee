@@ -134,7 +134,7 @@
                                             <td><span class="badge badge-pill  badge-red">{{$candidate->interview_outcome}}</span></td>
                                             @break
                                         @default
-                                        <td></td>
+                                        <td><span class="badge badge-pill  badge-default">{{$candidate->interview_outcome}}</span></td>
                                     @endswitch
                                     <td>{{$candidate->candidate_name}}</td>
                                     <td>{{$candidate->candidate_email}}</td>

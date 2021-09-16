@@ -65,7 +65,7 @@
                                         <td><span class="badge badge-pill  badge-red">{{$candidate->interview_outcome}}</span></td>
                                         @break
                                     @default
-                                    <td></td>
+                                    <td><span class="badge badge-pill  badge-default">{{$candidate->interview_outcome}}</span></td>
                                 @endswitch
                                     <td>
                                      @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin')
