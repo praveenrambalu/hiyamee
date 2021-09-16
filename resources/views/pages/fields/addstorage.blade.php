@@ -21,7 +21,7 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label >Resumes <small>(Multiple files allowed)</small> <span class="text-danger">*</span>  </label>
+                            <label >Resumes <small>(Maximum 20 Files Allowed) </small> <span class="text-danger">*</span>  </label>
                             <input type="file" class="form-control" multiple required placeholder="Ex: FieldName" name="resume[]" >
                         </div>
                         
