@@ -101,7 +101,7 @@ class CandidateController extends Controller
 
 
             $candidate->save();
-            return redirect()->back()->with('success', 'Candidate added Successfully ');
+            return redirect()->back()->with(['success' => 'Candidate added Successfully ', 'redirect_url' => '/jobs/'.$job->id]);
         } else {
             return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
         }

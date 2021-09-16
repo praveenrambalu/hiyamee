@@ -100,7 +100,7 @@ class JobController extends Controller
                 }
             }
 
-            return redirect()->back()->with('success', 'Job Posted Successfully');
+            return redirect()->back()->with(['success' => 'Job Posted Successfully ', 'redirect_url' => '/jobs/view']);
         } else {
             return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');
         }
@@ -158,7 +158,7 @@ class JobController extends Controller
                 }
             }
 
-            return redirect()->back()->with('success', 'Job Posted Successfully');
+            return redirect()->back()->with(['success' => 'Job Posted Successfully ', 'redirect_url' => '/jobs/view']);
         } else {
             return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');
         }

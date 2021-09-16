@@ -252,21 +252,40 @@
     <!-- Core Vendors JS -->
     <script src="/assets/js/vendors.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- page js -->
     @yield('scripts')
     <!-- Core JS -->
     <script src="/assets/js/app.min.js"></script>
     @if (session('success'))
-    {{-- <script>swal('Good Job !',"@php echo session('success') @endphp" , 'success');</script> --}}
-    <script>
-    toastr["success"]("@php echo session('success') @endphp")
+    @if (session('redirect_url'))
+        <script>
+            swal({
+                title: "Good Job !",
+                text: "@php echo session('success') @endphp",
+                icon: "success",
+                buttons: ["Go Back", "Add More"],
+            })
+            .then((willDelete) => {
+                console.log(willDelete)
+                if (willDelete) {
+                } else {
+                    window.location.href="@php echo session('redirect_url') @endphp"
+                }
+            });
     </script>
+    @else
+    <script>swal('Good Job !',"@php echo session('success') @endphp" , 'success');</script>
+    @endif
+
+
     @endif
     @if (session('error'))
-    <script>
+    {{-- <script>
     toastr["error"]("@php echo session('error') @endphp")
-    </script>
-    {{-- <script>swal('Oops !',"@php echo session('error') @endphp" , 'error');</script> --}}
+    </script> --}}
+    <script>swal('Oops !',"@php echo session('error') @endphp" , 'error');</script>
     @endif
 
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
@@ -279,7 +298,6 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.1/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/cr-1.5.4/date-1.1.1/r-2.2.9/datatables.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" ></script>
     <script>
         CKEDITOR.replace( '.ckeditor' );
         $('.datatable').DataTable({
@@ -307,6 +325,17 @@
             swal($message)
         }
     </script>
+
+
+<script >
+
+        function alerting() {
+           
+        }    
+     
+
+
+</script>
 </body>
 
 </html>

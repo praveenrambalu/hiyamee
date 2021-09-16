@@ -48,7 +48,7 @@ class EmployeeController extends Controller
             $user->password = $hashed;
             $user->save();
             $user->notify(new EmployeeAssignNotification($company->company_name, $company->location, $user->name, $user->email, $password));
-            return redirect()->back()->with('success', 'Employee added successfully');
+            return redirect()->back()->with(['success' => 'Employee added successfully', 'redirect_url' => '/employees/view']);
         } else {
             return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');
         }

@@ -94,7 +94,7 @@ class CompanyController extends Controller
                 $user->notify(new AdminAssignNotification($company->company_name, $company->location, $user->name, $user->email, $password));
                 $company->admin_id = $user->id;
                 $company->save();
-                return redirect('/companies/view')->with('success', 'Admin added successfully');
+                return redirect()->back()->with(['success' => 'Admin added Successfully ', 'redirect_url' => '/companies']);
             } else {
                 return redirect('/companies')->with('error', 'Company admin already assigned');
             }

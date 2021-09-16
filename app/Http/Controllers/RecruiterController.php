@@ -38,8 +38,7 @@ class RecruiterController extends Controller
         $user->password = $hashed;
         $user->save();
         $user->notify(new RecruiterAssignNotification($user->name, $user->email, $password));
-        return redirect('/recruiter')->with('success', 'Recruiter added successfully');
-
+        return redirect()->back()->with(['success' => 'Recruiter added Successfully ', 'redirect_url' => '/recruiter/view']);
         // return view('pages.companies.add');
     }
     public function viewRecruiter()
