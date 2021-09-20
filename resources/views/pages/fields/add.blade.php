@@ -22,7 +22,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label >Field Name <small>(No Space Between Words)</small> <span class="text-danger">*</span>  </label>
-                            <input type="text" class="form-control" required placeholder="Ex: FieldName" name="name" pattern="^[a-zA-Z]*$">
+                            <input type="text" class="form-control" id="fieldname" required placeholder="Ex: FieldName" name="name" pattern="^[a-zA-Z]*$">
                         </div>
                         <div class="form-group col-md-6">
                             <label >Field Type <span class="text-danger">*</span>  </label>
@@ -79,4 +79,16 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $("#fieldname").keyup(function(){
+                var fieldvalue = $(this).val();
+                fieldvalue = fieldvalue.replace(" ", "_");
+                $(this).val(fieldvalue)
+            })
+        });
+    </script>
 @endsection
