@@ -283,42 +283,48 @@ class JobController extends Controller
                 if ($row != 1) {
 
                     if ($candidate = Candidate::find($data[0])) {
-                        $candidate->interview_outcome = $data[1];
-                        if ($data[2] != "") {
-                            $candidate->location = $data[2];
+                        $candidate->interview_outcome = $data[3];
+                        if ($data[1] != "") {
+                            $candidate->candidate_email = $data[1];
                         }
-                        if ($data[3] != "") {
-                            $candidate->prelocation = $data[3];
+                        if ($data[2] != "") {
+                            $candidate->candidate_phone = $data[1];
                         }
                         if ($data[4] != "") {
-                            $candidate->current_company = $data[4];
+                            $candidate->location = $data[4];
                         }
                         if ($data[5] != "") {
-                            $candidate->current_ctc = $data[5];
+                            $candidate->prelocation = $data[5];
                         }
                         if ($data[6] != "") {
-                            $candidate->expected_ctc = $data[6];
+                            $candidate->current_company = $data[6];
                         }
                         if ($data[7] != "") {
-                            $candidate->neg_ctc = $data[7];
+                            $candidate->current_ctc = $data[7];
                         }
                         if ($data[8] != "") {
-                            $candidate->notice_period = $data[8];
+                            $candidate->expected_ctc = $data[8];
                         }
                         if ($data[9] != "") {
-                            $candidate->experience = $data[9];
+                            $candidate->neg_ctc = $data[9];
                         }
                         if ($data[10] != "") {
-                            $candidate->relexperience = $data[10];
+                            $candidate->notice_period = $data[10];
                         }
                         if ($data[11] != "") {
-                            $candidate->buyout = $data[11];
+                            $candidate->experience = $data[11];
                         }
                         if ($data[12] != "") {
-                            $candidate->notes = $candidate->notes . '<br>  ' .  $data[12];
+                            $candidate->relexperience = $data[12];
                         }
                         if ($data[13] != "") {
-                            $candidate->additional_notes = $candidate->additional_notes . '<br>   ' .   $data[13];
+                            $candidate->buyout = $data[13];
+                        }
+                        if ($data[14] != "") {
+                            $candidate->notes = $candidate->notes . '<br>  ' .  $data[14];
+                        }
+                        if ($data[15] != "") {
+                            $candidate->additional_notes = $candidate->additional_notes . '<br>   ' .   $data[15];
                         }
 
 
