@@ -55,17 +55,29 @@
                               <select  id="filter_type" class="form-control">
                                   <option value="">None</option>
                                   <option value="filter_companies">Companies</option>
+                                  <option value="filter_jobs">Jobs</option>
                               </select>
                             </div>
 
                             <div class="form-group col-5">
-                                <div class="filter-holder companies d-none" id="filter_companies">
+                                <div class="filter-holder  d-none" id="filter_companies">
                                     <label for="">Companies</label>
                                     @if (count($filterCompanies)>0)
                                         <select  id="companies_filter" class="form-control">
                                             <option value="">-</option>
                                             @foreach ($filterCompanies as $filterCompany)
                                                 <option value="{{$filterCompany->company_name}}">{{$filterCompany->company_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+                                </div>
+                                <div class="filter-holder  d-none" id="filter_jobs">
+                                    <label for="">Jobs</label>
+                                    @if (count($filterJobs)>0)
+                                        <select  id="jobs_filter" class="form-control">
+                                            <option value="">-</option>
+                                            @foreach ($filterJobs as $filterJob)
+                                                <option value="{{$filterJob->job_title}}">{{$filterJob->job_title}}</option>
                                             @endforeach
                                         </select>
                                     @endif
@@ -293,18 +305,24 @@
 
     <script>
         $(document).ready(function(){
-            $("#filter_companies").addClass('d-none')
+           
             $("#filter_type").change(function(){
+                $("#filter_companies").addClass('d-none')
+                $("#filter_jobs").addClass('d-none')
                 var filter_type = $(this).val()
                 
                 switch (filter_type) {
                     case 'filter_companies':
                         $("#filter_companies").removeClass('d-none')
                         break;
+                    case 'filter_jobs':
+                        $("#filter_jobs").removeClass('d-none')
+                        break;
                 
                     default:
                         filter_fun('')
                         $("#filter_companies").addClass('d-none')
+                        $("#filter_jobs").addClass('d-none')
                         break;
                 }
 
@@ -316,6 +334,10 @@
     <script>
         $(document).ready(function(){
             $("#companies_filter").change(function(){
+                var filter_val = $(this).val()
+                filter_fun(filter_val)
+            });
+            $("#jobs_filter").change(function(){
                 var filter_val = $(this).val()
                 filter_fun(filter_val)
             });
