@@ -234,10 +234,13 @@
                             </span>
                         </a>
                         <ul class="dropdown-menu">
+                            <li class="@yield('jobs-add')">
+                                <a href="/jobs">Add <span class="fa fa-info-circle infocircle"  data-toggle="tooltip" data-placement="right" title="Add  jobs "></span></a>
+                            </li>
                             <li class="@yield('jobs-view')">
                                 <a href="/jobs/view">View <span class="fa fa-info-circle infocircle"  data-toggle="tooltip" data-placement="right" title="View Jobs "></span></a>
                             </li>
-
+                          
                         </ul>
                     </li>
                 @break
