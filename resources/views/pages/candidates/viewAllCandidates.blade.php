@@ -17,7 +17,10 @@
             <div class="card-body">
                 <form action="" method="get" id="filterform">
                         <div class="row">
-
+                            <div class="col-sm-12">
+                                <h4>Filter by Interview Date</h4>
+                                <hr>
+                            </div>
                             <div class="form-group col-5">
                               <label for="">From Date</label>
                               <input type="date" name="from_date" id="from_date" class="form-control" placeholder="" aria-describedby="helpId">
@@ -36,6 +39,41 @@
                             
                         </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-6">
+                              <label for="">Filter By</label>
+                              <select  id="filter_type" class="form-control">
+                                  <option value="">None</option>
+                                  <option value="filter_companies">Companies</option>
+                              </select>
+                            </div>
+
+                            <div class="form-group col-5">
+                                <div class="filter-holder companies d-none" id="filter_companies">
+                                    <label for="">Companies</label>
+                                    @if (count($filterCompanies)>0)
+                                        <select  id="companies_filter" class="form-control">
+                                            <option value="">-</option>
+                                            @foreach ($filterCompanies as $filterCompany)
+                                                <option value="{{$filterCompany->company_name}}">{{$filterCompany->company_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+                                </div>
+                            </div>
+                        
+                            
+                        </div>
             </div>
         </div>
     </div>
@@ -252,4 +290,41 @@
            });
         });
     </script>
+
+    <script>
+        $(document).ready(function(){
+            $("#filter_companies").addClass('d-none')
+            $("#filter_type").change(function(){
+                var filter_type = $(this).val()
+                
+                switch (filter_type) {
+                    case 'filter_companies':
+                        $("#filter_companies").removeClass('d-none')
+                        break;
+                
+                    default:
+                        filter_fun('')
+                        $("#filter_companies").addClass('d-none')
+                        break;
+                }
+
+
+            });
+        })
+
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("#companies_filter").change(function(){
+                var filter_val = $(this).val()
+                filter_fun(filter_val)
+            });
+        })
+
+        function filter_fun(filter_val) {
+                $("input[type='search']").val(filter_val)
+                $("input[type='search']").trigger('keyup')
+        }
+    </script>
+
 @endsection

@@ -101,7 +101,7 @@ class CandidateController extends Controller
 
 
             $candidate->save();
-            return redirect()->back()->with(['success' => 'Candidate added Successfully ', 'redirect_url' => '/jobs/'.$job->id]);
+            return redirect()->back()->with(['success' => 'Candidate added Successfully ', 'redirect_url' => '/jobs/' . $job->id]);
         } else {
             return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
         }
@@ -331,16 +331,21 @@ class CandidateController extends Controller
             if (Auth::user()->user_type == 'superadmin') {
                 $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
                 $candidates = Candidate::whereBetween('interview_date', [$start, $end])->get();
+                $filterCompanies = Company::where('status', 'active')->get();
             } else if (Auth::user()->user_type == 'subadmin') {
                 $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
                 $candidates = Candidate::whereIn('company_id', $assignarray)->whereBetween('interview_date', [$start, $end])->get();
+                $filterCompanies = Company::where('status', 'active')->whereIn('id', $assignarray)->get();
             } else if (Auth::user()->user_type == 'admin') {
                 $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+                $filterCompanies = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->get();
                 $employees = User::where('status', 'active')->where('user_type', 'employee')->where('company_id', $company->id)->get();
                 $candidates = Candidate::where('company_id', $company->id)->whereBetween('interview_date', [$start, $end])->get();
             } else if (Auth::user()->user_type == 'employee') {
+                $filterCompanies = [];
                 $candidates = Candidate::where('allocated_to', Auth::user()->id)->whereBetween('interview_date', [$start, $end])->get();
             } else if (Auth::user()->user_type == 'recruiter') {
+                $filterCompanies = [];
                 $candidates = Candidate::where('allocated_to', Auth::user()->id)->whereBetween('interview_date', [$start, $end])->get();
             } else {
                 abort(401);
@@ -349,17 +354,22 @@ class CandidateController extends Controller
             if (Auth::user()->user_type == 'superadmin') {
                 $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
                 $candidates = Candidate::all();
+                $filterCompanies = Company::where('status', 'active')->get();
             } else if (Auth::user()->user_type == 'subadmin') {
                 $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
                 $candidates = Candidate::whereIn('company_id', $assignarray)->get();
+                $filterCompanies = Company::where('status', 'active')->whereIn('id', $assignarray)->get();
             } else if (Auth::user()->user_type == 'admin') {
                 $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
                 $employees = User::where('status', 'active')->where('user_type', 'employee')->where('company_id', $company->id)->get();
+                $filterCompanies = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->get();
                 $candidates = Candidate::where('company_id', $company->id)->get();
             } else if (Auth::user()->user_type == 'employee') {
                 $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
+                $filterCompanies = [];
             } else if (Auth::user()->user_type == 'recruiter') {
                 $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
+                $filterCompanies = [];
             } else {
                 abort(401);
             }
@@ -370,7 +380,11 @@ class CandidateController extends Controller
 
 
 
-        return view('pages.candidates.viewAllCandidates')->with(['candidates' => $candidates, 'employees' => $employees]);
+        return view('pages.candidates.viewAllCandidates')->with([
+            'candidates' => $candidates,
+            'employees' => $employees,
+            'filterCompanies' => $filterCompanies
+        ]);
     }
     public function viewCandidatesbyUser(Request $request, $id)
     {
