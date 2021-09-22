@@ -58,6 +58,8 @@
                                   <option value="filter_jobs">Jobs</option>
                                   <option value="filter_users">Recruiters / Employees </option>
                                   <option value="filter_status">Interview Status</option>
+                                  <option value="filter_upload">Upload Date</option>
+                                  {{-- <option value="filter_experience">Experience</option> --}}
                               </select>
                             </div>
 
@@ -108,6 +110,14 @@
                                             
                                         </select>
                                 </div>
+                                <div class="filter-holder  d-none" id="filter_experience">
+                                    <label for="">Experience</label>
+                                        <input type="number" name="" min="0" max="50" step="0.1" id="experience_filter" class="form-control">
+                                </div>
+                                <div class="filter-holder  d-none" id="filter_upload">
+                                    <label for="">Upload Date</label>
+                                        <input type="date" id="upload_filter" class="form-control">
+                                </div>
                             </div>
                         
                             
@@ -142,6 +152,7 @@
                                 <th>Location</th>
                                 <th>Interview Date</th>
                                 <th>Interview Time</th>
+                                <th>Experience</th>
                                 {{-- <th>Current CTC</th>
                                 <th>Expected CTC</th>
                                 <th>Negotiable CTC</th> --}}
@@ -207,6 +218,9 @@
                                         <td>{{$candidate->location}}</td>
                                         <td>{{$candidate->interview_date}}</td>
                                         <td>{{$candidate->interview_time}}</td>
+                                        <td>Experience-{{$candidate->experience}}
+                                            Relevent-{{$candidate->relexperience}}
+                                        </td>
                                         
                                         {{-- <td>{{$candidate->current_ctc}}</td>
                                         <td>{{$candidate->expected_ctc}}</td>
@@ -337,6 +351,8 @@
                 $("#filter_jobs").addClass('d-none')
                 $("#filter_users").addClass('d-none')
                 $("#filter_status").addClass('d-none')
+                $("#filter_experience").addClass('d-none')
+                $("#filter_upload").addClass('d-none')
                 var filter_type = $(this).val()
                 
                 switch (filter_type) {
@@ -352,6 +368,12 @@
                     case 'filter_status':
                         $("#filter_status").removeClass('d-none')
                         break;
+                    case 'filter_experience':
+                        $("#filter_experience").removeClass('d-none')
+                        break;
+                    case 'filter_upload':
+                        $("#filter_upload").removeClass('d-none')
+                        break;
                 
                     default:
                         filter_fun('')
@@ -359,6 +381,8 @@
                         $("#filter_jobs").addClass('d-none')
                         $("#filter_users").addClass('d-none')
                         $("#filter_status").addClass('d-none')
+                        $("#filter_experience").addClass('d-none')
+                        $("#filter_upload").addClass('d-none')
                         break;
                 }
 
@@ -369,11 +393,16 @@
     </script>
     <script>
         $(document).ready(function(){
-            $("#companies_filter,#jobs_filter,#users_filter,#status_filter").change(function(){
+            $("#companies_filter,#jobs_filter,#users_filter,#status_filter,#upload_filter").change(function(){
                 var filter_val = $(this).val()
                 $("input[type='search']").val(filter_val)
                 $("input[type='search']").trigger('keyup')
             });
+            $("#experience_filter").change(function(){
+                var filter_val = $(this).val()
+                $("input[type='search']").val('Experience-'+filter_val)
+                $("input[type='search']").trigger('keyup')
+            })
            
         })
 
