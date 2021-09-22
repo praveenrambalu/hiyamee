@@ -293,7 +293,13 @@
                                         </div>
                                     </div>
                                     <span class="badge badge-pill badge-cyan font-size-12">
-                                        <span class="font-weight-semibold ">{{ count($selectedoverallcandidates) }} / {{count($overallcandidates)}}</span>
+                                        <span class="font-weight-semibold ">
+                                            @if (count($overallcandidates)!=0)
+                                                {{ number_format(count($selectedoverallcandidates) / count($overallcandidates) * 100,2) ?? '0.00'}}
+                                            @else
+                                                0.00
+                                            @endif %
+                                        </span>
                                     </span>
                                 </div>
                             </li>
