@@ -56,6 +56,8 @@
                                   <option value="">None</option>
                                   <option value="filter_companies">Companies</option>
                                   <option value="filter_jobs">Jobs</option>
+                                  <option value="filter_users">Recruiters / Employees </option>
+                                  <option value="filter_status">Interview Status</option>
                               </select>
                             </div>
 
@@ -81,6 +83,30 @@
                                             @endforeach
                                         </select>
                                     @endif
+                                </div>
+                                <div class="filter-holder  d-none" id="filter_users">
+                                    <label for="">Users</label>
+                                    @if (count($filterUsers)>0)
+                                        <select  id="users_filter" class="form-control">
+                                            <option value="">-</option>
+                                            @foreach ($filterUsers as $filterUser)
+                                                <option value="{{$filterUser->email}}">{{$filterUser->name}} - {{$filterUser->email}}</option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+                                </div>
+                                <div class="filter-holder  d-none" id="filter_status">
+                                    <label for="">Status</label>
+                                        <select  id="status_filter" class="form-control">
+                                            <option value="">-</option>
+                                            <option value="Yet to be Interviewed">Yet to be Interviewed</option>
+                                            <option value="Interviewed">Interviewed</option>
+                                            <option value="Feedback pending">Feedback pending</option>
+                                            <option value="Selected">Selected</option>
+                                            <option value="Rejected">Rejected</option>
+                                            <option value="Not Interested">Not Interested</option>
+                                            
+                                        </select>
                                 </div>
                             </div>
                         
@@ -309,6 +335,8 @@
             $("#filter_type").change(function(){
                 $("#filter_companies").addClass('d-none')
                 $("#filter_jobs").addClass('d-none')
+                $("#filter_users").addClass('d-none')
+                $("#filter_status").addClass('d-none')
                 var filter_type = $(this).val()
                 
                 switch (filter_type) {
@@ -318,11 +346,19 @@
                     case 'filter_jobs':
                         $("#filter_jobs").removeClass('d-none')
                         break;
+                    case 'filter_users':
+                        $("#filter_users").removeClass('d-none')
+                        break;
+                    case 'filter_status':
+                        $("#filter_status").removeClass('d-none')
+                        break;
                 
                     default:
                         filter_fun('')
                         $("#filter_companies").addClass('d-none')
                         $("#filter_jobs").addClass('d-none')
+                        $("#filter_users").addClass('d-none')
+                        $("#filter_status").addClass('d-none')
                         break;
                 }
 
@@ -333,20 +369,14 @@
     </script>
     <script>
         $(document).ready(function(){
-            $("#companies_filter").change(function(){
+            $("#companies_filter,#jobs_filter,#users_filter,#status_filter").change(function(){
                 var filter_val = $(this).val()
-                filter_fun(filter_val)
-            });
-            $("#jobs_filter").change(function(){
-                var filter_val = $(this).val()
-                filter_fun(filter_val)
-            });
-        })
-
-        function filter_fun(filter_val) {
                 $("input[type='search']").val(filter_val)
                 $("input[type='search']").trigger('keyup')
-        }
+            });
+           
+        })
+
     </script>
 
 @endsection
