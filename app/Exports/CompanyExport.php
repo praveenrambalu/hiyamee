@@ -26,7 +26,7 @@ class CompanyExport implements FromCollection, WithHeadings
         $companies = Company::all();
         foreach ($companies as $company) {
             $admin = User::find($company->admin_id);
-            $jobs = Job::where('company_id', $company->id)->get();
+            $jobs = Job::where('status', 'active')->where('company_id', $company->id)->get();
             $localdata = array(
                 'Name' => $company->company_name,
                 'Industry' => $company->industry,

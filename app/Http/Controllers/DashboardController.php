@@ -29,7 +29,7 @@ class DashboardController extends Controller
             $latestCandidates = Candidate::where('status', 'active')->orderBy('updated_at', 'desc')->paginate(5);
             $Companies = Company::where('status', 'active')->orderBy('updated_at', 'desc')->paginate(5);
             $jobs = Job::where('status', 'active')->orderBy('updated_at', 'desc')->paginate(5);
-            $NoOfJobs = Job::all();
+            $NoOfJobs = Job::where('status', 'active')->get();
             $ActiveJobs = Job::where('status', 'active')->get();
             $InActiveJobs = Job::where('status', 'inactive')->get();
 
@@ -46,7 +46,7 @@ class DashboardController extends Controller
                     $latestCandidates = Candidate::where('status', 'active')->where('company_id', $company_id)->orderBy('updated_at', 'desc')->paginate(5);
                     $Companies = Company::where('id', $company_id)->where('status', 'active')->orderBy('updated_at', 'desc')->paginate(5);
                     $jobs = Job::where('company_id', $company_id)->where('status', 'active')->orderBy('updated_at', 'desc')->paginate(5);
-                    $NoOfJobs = Job::where('company_id', $company_id)->get();
+                    $NoOfJobs = Job::where('status', 'active')->where('company_id', $company_id)->get();
                     $ActiveJobs = Job::where('company_id', $company_id)->where('status', 'active')->get();
                     $InActiveJobs = Job::where('company_id', $company_id)->where('status', 'inactive')->get();
                 }
@@ -116,7 +116,7 @@ class DashboardController extends Controller
             $totalRecruiters = User::where('user_type', 'recruiter')->where('status', 'active')->get();
             $latestCandidates = Candidate::where('status', 'active')->whereIn('company_id', $assignarray)->orderBy('updated_at', 'desc')->paginate(5);
             $jobs = Job::whereIn('company_id', $assignarray)->where('status', 'active')->orderBy('updated_at', 'desc')->paginate(5);
-            $NoOfJobs = Job::whereIn('company_id', $assignarray)->get();
+            $NoOfJobs = Job::where('status', 'active')->whereIn('company_id', $assignarray)->get();
             $ActiveJobs = Job::whereIn('company_id', $assignarray)->where('status', 'active')->get();
             $InActiveJobs = Job::whereIn('company_id', $assignarray)->where('status', 'inactive')->get();
         }

@@ -30,7 +30,7 @@ class JobExport implements FromCollection, WithHeadings
         // }
         $data = [];
         $company = Company::find($this->id);
-        $jobs = Job::where('company_id', $company->id)->get();
+        $jobs = Job::where('status', 'active')->where('company_id', $company->id)->get();
         foreach ($jobs as $job) {
             $job_creator = User::find($job->created_by);
             $completedInterviews = Candidate::where('status', 'active')->where('job_id', $job->id)->where('interview_outcome', '!=', 'Ready')->get();

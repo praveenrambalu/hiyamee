@@ -391,6 +391,9 @@ class JobController extends Controller
     public function editJob(Request $request, $id)
     {
         $job = Job::findOrFail($id);
+        if ($job->status != 'active') {
+            abort(404);
+        }
         $fields = AdditionalField::where('status', 'active')->get();
         return view('pages.jobs.edit')->with(['job' => $job, 'fields' => $fields]);
     }
@@ -398,6 +401,9 @@ class JobController extends Controller
     public function editJobPost(Request $request, $id)
     {
         $job = Job::findOrFail($id);
+        if ($job->status != 'active') {
+            abort(404);
+        }
         $job->employment_type = $request->employment_type;
         $job->job_title = $request->job_title;
         $job->location = $request->location;
