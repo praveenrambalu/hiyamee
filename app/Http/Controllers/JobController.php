@@ -247,7 +247,7 @@ class JobController extends Controller
 
 
         if ($job) {
-            if (Auth::user()->user_type == 'superadmin' || Auth::user()->user_type == 'admin') {
+            if (Auth::user()->user_type == 'superadmin' || Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'subadmin') {
                 $candidates = Candidate::where('status', 'active')->where('job_id', $job->id)->get();
             } else {
                 $candidates = Candidate::where('status', 'active')->where('job_id', $job->id)->where('allocated_to', Auth::user()->id)->get();
@@ -396,6 +396,35 @@ class JobController extends Controller
         }
         $fields = AdditionalField::where('status', 'active')->get();
         return view('pages.jobs.edit')->with(['job' => $job, 'fields' => $fields]);
+    }
+    public function deleteJob(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin' && Auth::user()->user_type != 'subadmin') {
+            abort(401);
+        }
+        $job = Job::findOrFail($id);
+        if (Auth::user()->user_type == 'subadmin') {
+            $assigns = CompanyAssign::where('user_id', Auth::user()->id)->where('status', 'active')->get();
+            $assignarray = [];
+            foreach ($assigns as $assign) {
+                array_push($assignarray, $assign->company_id);
+            }
+            if (!$job = Job::where('status', 'active')->whereIn('company_id', $assignarray)->where('id', $id)->first()) {
+                return redirect()->back()->with('error', 'Candidate Not Found or Forbidden Access');
+            }
+        }
+
+        if ($job->status != 'active') {
+            abort(404);
+        }
+        $candidates = Candidate::where('job_id', $job->id)->where('status', 'active')->where('interview_outcome', '!=', 'Ready')->get();
+        if (count($candidates) > 0) {
+            return redirect()->back()->with('error', 'This Job Role has the Interviewed Candidates !. ');
+        }
+
+        $job->status = 'inactive';
+        $job->save();
+        return redirect()->back()->with('success', 'Deleted Successfully');
     }
 
     public function editJobPost(Request $request, $id)

@@ -59,6 +59,7 @@ Route::group(['prefix' => '/jobs', 'middleware' => ['auth']], function () {
     Route::get('/add/{id}', [JobController::class, 'addJobBySuperadmin']);
     Route::post('/add/{id}', [JobController::class, 'addJobBySuperadminPost']);
     Route::get('/edit/{id}', [JobController::class, 'editJob']);
+    Route::get('/delete/{id}', [JobController::class, 'deleteJob']);
     Route::post('/edit/{id}', [JobController::class, 'editJobPost']);
 });
 Route::group(['prefix' => '/candidates', 'middleware' => ['auth']], function () {
