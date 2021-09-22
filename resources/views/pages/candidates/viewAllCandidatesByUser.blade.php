@@ -101,6 +101,11 @@
                                     <td class="urlclicker">{{date('Y-m-d', strtotime($candidate->created_at))}}</td>
                                     <td class="urlclicker">
                                         <a href="/candidates/{{$candidate->id}}"  class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                        @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='subadmin')
+                                            @if ($candidate->interview_outcome=='Ready')
+                                                <a href="/candidates/delete/{{$candidate->id}}"  class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                            @endif
+                                        @endif
                                     </td>
 
                                 </tr>

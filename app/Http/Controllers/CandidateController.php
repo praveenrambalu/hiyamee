@@ -448,6 +448,36 @@ class CandidateController extends Controller
 
         return view('pages.candidates.edit')->with(['candidate' => $candidate]);
     }
+    public function deleteCandidate(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin' && Auth::user()->user_type != "subadmin") {
+            abort(401);
+        }
+        $candidate = Candidate::findOrFail($id);
+        if ($candidate->status != 'active') {
+            return redirect()->back()->with('error', 'Candidate Not Found or Forbidden Access');
+            abort(404);
+        }
+
+        if ($candidate->interview_outcome != 'Ready') {
+            return redirect()->back()->with('error', 'Candidate Not Found or Forbidden Access');
+        }
+
+        if (Auth::user()->user_type == 'subadmin') {
+            $assigns = CompanyAssign::where('user_id', Auth::user()->id)->where('status', 'active')->get();
+            $assignarray = [];
+            foreach ($assigns as $assign) {
+                array_push($assignarray, $assign->company_id);
+            }
+            if (!$candidate = Candidate::where('status', 'active')->whereIn('company_id', $assignarray)->where('id', $id)->first()) {
+                return redirect()->back()->with('error', 'Candidate Not Found or Forbidden Access');
+            }
+        }
+
+        $candidate->status = 'inactive';
+        $candidate->save();
+        return redirect()->back()->with('success', 'Deleted Successfully');
+    }
 
     public function editCandidatePost(Request $request, $id)
     {

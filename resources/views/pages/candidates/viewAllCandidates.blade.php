@@ -232,9 +232,15 @@
                                         <td>
                                             <a href="/candidates/{{$candidate->id}}"  class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                             @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='admin' || Auth::user()->user_type=='subadmin')
-                                              {{-- <a href="#" onclick="swal('Not Implemented')" class="btn btn-danger"><i class="fas fa-trash"></i></a> --}}
+                                             
+                                                
                                                 @if ($candidate->interview_outcome=='Ready')
-                                                    <a href="/candidates/edit/{{$candidate->id}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                                <a href="/candidates/edit/{{$candidate->id}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                                    @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='subadmin')
+                                                        @if ($candidate->interview_outcome=='Ready')
+                                                         <a href="/candidates/delete/{{$candidate->id}}"  class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                                        @endif
+                                                    @endif
                                                 @else
                                                     <button type="button"  onclick="swal('','Cannot allowed to edit after interview status updated','error')" class="btn btn-warning"><i class="fas fa-edit"></i></button>
                                                 @endif

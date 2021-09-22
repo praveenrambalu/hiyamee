@@ -161,6 +161,11 @@
                                               {{-- <a href="#" onclick="alert('Not Implemented')" class="btn btn-danger"><i class="fas fa-trash"></i></a> --}}
                                                 @if ($candidate->interview_outcome=='Ready')
                                                     <a href="/candidates/edit/{{$candidate->id}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                                    @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='subadmin')
+                                                    @if ($candidate->interview_outcome=='Ready')
+                                                        <a href="/candidates/delete/{{$candidate->id}}"  class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                                    @endif
+                                                    @endif
                                                 @else
                                                     <a href="#" onclick="alert('Cannot allowed to edit after interview status updated. !')" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                                 @endif

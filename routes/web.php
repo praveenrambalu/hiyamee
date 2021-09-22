@@ -72,6 +72,7 @@ Route::group(['prefix' => '/candidates', 'middleware' => ['auth']], function () 
     Route::post('/bulk-status/update', [JobController::class, 'BulkStatusUpdate']);
     Route::get('/view/{id}', [CandidateController::class, 'viewCandidatesbyUser']);
     Route::get('/edit/{id}', [CandidateController::class, 'editCandidate']);
+    Route::get('/delete/{id}', [CandidateController::class, 'deleteCandidate']);
     Route::post('/edit/{id}', [CandidateController::class, 'editCandidatePost']);
     Route::get('/share/{id}', [CandidateController::class, 'shareCandidate']);
 });
