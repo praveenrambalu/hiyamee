@@ -36,15 +36,15 @@
                         @if (count($companies)>0)
                             @php $i=1; @endphp
                             @foreach ($companies as $company)
-                                <tr>
+                                <tr data-url="/jobs/add/{{$company->id}}">
                                     <td>{{$i++}}</td>
-                                    <td><img src="{{$company->logo}}" class="img img-responsive" style="height:50px; width:50px; border-radius:50%;" alt="{{$company->company_name}} Logo"></td>
-                                    <td>{{$company->company_name}}</td>
-                                    <td>{{$company->industry}}</td>
-                                    <td>{{$company->location}} - {{$company->pincode}}</td>
-                                    <td><a href="{{$company->website}}" target="_blank">{{$company->website}}</a></td>
-                                    <td><a href="mailto:{{$company->email}}" >{{$company->email}}</a> <br> <a href="tel:{{$company->contactno}}" >{{$company->contactno}}</a></td>
-                                    <td>{{$company->status}}</td>
+                                    <td class="urlclicker"><img src="{{$company->logo}}" class="img img-responsive" style="height:50px; width:50px; border-radius:50%;" alt="{{$company->company_name}} Logo"></td>
+                                    <td class="urlclicker">{{$company->company_name}}</td>
+                                    <td class="urlclicker">{{$company->industry}}</td>
+                                    <td class="urlclicker">{{$company->location}} - {{$company->pincode}}</td>
+                                    <td class="urlclicker"><a href="{{$company->website}}" target="_blank">{{$company->website}}</a></td>
+                                    <td class="urlclicker"><a href="mailto:{{$company->email}}" >{{$company->email}}</a> <br> <a href="tel:{{$company->contactno}}" >{{$company->contactno}}</a></td>
+                                    <td class="urlclicker">{{$company->status}}</td>
                                     <td>
                                         <a href="/jobs/add/{{$company->id}}"  class="btn btn-dark" title="Add Job Post"><i class="fas fa-plus"></i></a>
                                     </td>

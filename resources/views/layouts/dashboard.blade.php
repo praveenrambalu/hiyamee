@@ -43,7 +43,9 @@
     padding-left: 10px;
     color:#b7b7b7
     }
-
+.urlclicker{
+    cursor: pointer;
+}
 
     </style>
 </head>
@@ -329,12 +331,14 @@
 
 <script >
 
-        function alerting() {
-           
-        }    
      
 
-
+        $(document).ready(function(){
+            $("td.urlclicker").click(function(){
+                var urlclick = $(this).closest('tr').data('url');
+                window.location.href=urlclick
+            })
+        });
 </script>
 </body>
 

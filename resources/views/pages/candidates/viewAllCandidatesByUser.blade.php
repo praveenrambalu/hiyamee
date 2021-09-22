@@ -48,26 +48,26 @@
                                 $job =  \App\Models\Job::find($candidate->job_id);
                                 $company = \App\Models\Company::find($job->company_id);
                             @endphp
-                                <tr>
+                                <tr data-url="/candidates/{{$candidate->id}}">
                                     <td>{{$i++}}</td>
-                                    <td>{{$candidate->id}}</td>
+                                    <td class="urlclicker">{{$candidate->id}}</td>
                                     @switch($candidate->interview_outcome)
                                     @case('Ready')
-                                        <td><span class="badge badge-pill  badge-blue">Yet to be Interviewed</span></td>
+                                        <td class="urlclicker"><span class="badge badge-pill  badge-blue">Yet to be Interviewed</span></td>
                                         @break
                                     @case('Selected')
-                                        <td><span class="badge badge-pill  badge-cyan">{{$candidate->interview_outcome}}</span></td>
+                                        <td class="urlclicker"><span class="badge badge-pill  badge-cyan">{{$candidate->interview_outcome}}</span></td>
                                         @break
                                     @case('Interviewed')
-                                        <td><span class="badge badge-pill  badge-orange">{{$candidate->interview_outcome}}</span></td>
+                                        <td class="urlclicker"><span class="badge badge-pill  badge-orange">{{$candidate->interview_outcome}}</span></td>
                                         @break
                                     @case('Rejected')
-                                        <td><span class="badge badge-pill  badge-red">{{$candidate->interview_outcome}}</span></td>
+                                        <td class="urlclicker"><span class="badge badge-pill  badge-red">{{$candidate->interview_outcome}}</span></td>
                                         @break
                                     @default
-                                    <td><span class="badge badge-pill  badge-default">{{$candidate->interview_outcome}}</span></td>
+                                    <td class="urlclicker"><span class="badge badge-pill  badge-default">{{$candidate->interview_outcome}}</span></td>
                                 @endswitch
-                                    <td>
+                                    <td class="urlclicker">
                                      @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin')
                                         @if ($candidate->allocated_to==null)
                                             <input type="checkbox" name="candidate[]" value="{{$candidate->id}}" >
@@ -80,26 +80,26 @@
                                         @endif
                                     @endif
                                     </td>
-                                    <td>{{$candidate->candidate_name}}</td>
-                                    <td>{{$candidate->candidate_email}}</td>
-                                    <td>{{$candidate->candidate_phone}}</td>
-                                    <td>
+                                    <td class="urlclicker">{{$candidate->candidate_name}}</td>
+                                    <td class="urlclicker">{{$candidate->candidate_email}}</td>
+                                    <td class="urlclicker">{{$candidate->candidate_phone}}</td>
+                                    <td class="urlclicker">
                                         {{$job->job_title}}
                                     </td>
-                                    <td>
+                                    <td class="urlclicker">
                                         <img src="{{$company->logo ?? ''}}" alt="" class="img img-responsive" style="height:50px; width:50px;">
                                         {{$company->company_name}}
                                     </td>
                                  
                                    
-                                    <td>{{$candidate->location}}</td>
+                                    <td class="urlclicker">{{$candidate->location}}</td>
                                  
                                     {{-- <td>{{$candidate->current_ctc}}</td>
                                     <td>{{$candidate->expected_ctc}}</td>
                                     <td>{{$candidate->neg_ctc}}</td> --}}
-                                    <td>{{$updater->name}}</td>
-                                    <td>{{date('Y-m-d', strtotime($candidate->created_at))}}</td>
-                                    <td>
+                                    <td class="urlclicker">{{$updater->name}}</td>
+                                    <td class="urlclicker">{{date('Y-m-d', strtotime($candidate->created_at))}}</td>
+                                    <td class="urlclicker">
                                         <a href="/candidates/{{$candidate->id}}"  class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                     </td>
 

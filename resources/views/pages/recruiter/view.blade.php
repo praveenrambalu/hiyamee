@@ -36,11 +36,11 @@
                         @if (count($recruiters)>0)
                             @php $i=1; @endphp
                             @foreach ($recruiters as $recruiter)
-                                <tr>
+                                <tr data-url="/candidates/view/{{$recruiter->id}}">
                                     <td>{{$i++}}</td>
-                                    <td>{{$recruiter->name}}</td>
-                                    <td>{{$recruiter->email}}</td>
-                                    <td>{{$recruiter->phoneno}}</td>
+                                    <td class="urlclicker">{{$recruiter->name}}</td>
+                                    <td class="urlclicker">{{$recruiter->email}}</td>
+                                    <td class="urlclicker">{{$recruiter->phoneno}}</td>
                                     <td>
                                         <a href="/candidates/view/{{$recruiter->id}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
 

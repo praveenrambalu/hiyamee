@@ -33,11 +33,11 @@
                         @if (count($admins)>0)
                             @php $i=1; @endphp
                             @foreach ($admins as $admin)
-                                <tr>
+                                <tr  data-url="/admin/view/{{$admin->id}}">
                                     <td>{{$i++}}</td>
-                                    <td>{{$admin->name}}</td>
-                                    <td>{{$admin->email}}</td>
-                                    <td>{{$admin->phoneno}}</td>
+                                    <td class="urlclicker">{{$admin->name}}</td>
+                                    <td class="urlclicker">{{$admin->email}}</td>
+                                    <td class="urlclicker">{{$admin->phoneno}}</td>
                                     <td>
                                         <a href="/admin/view/{{$admin->id}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                                         <a href="/admin/edit/{{$admin->id}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
