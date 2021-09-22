@@ -47,9 +47,9 @@ class WeeklyReport extends Notification
     {
         $companies = count(Company::where('status', 'active')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
         $jobs = count(Job::where('status', 'active')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
-        $candidates = count(Candidate::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
-        $SelectedCandidates = count(Candidate::where('interview_outcome', 'Selected')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
-        $RejectedCandidates = count(Candidate::where('interview_outcome', 'Rejected')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
+        $candidates = count(Candidate::where('status', 'active')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
+        $SelectedCandidates = count(Candidate::where('status', 'active')->where('interview_outcome', 'Selected')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
+        $RejectedCandidates = count(Candidate::where('status', 'active')->where('interview_outcome', 'Rejected')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get());
 
         $data = "
             <table>

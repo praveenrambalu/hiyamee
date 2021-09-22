@@ -39,11 +39,11 @@ class EmployeeExport implements FromCollection, WithHeadings
                 break;
         }
         foreach ($recruiters as $recruiter) {
-            $completedInterviews = Candidate::where('allocated_to', $recruiter->id)->where('interview_outcome', '!=', 'Ready')->get();
-            $remainingInterviews = Candidate::where('allocated_to', $recruiter->id)->where('interview_outcome',  'Ready')->get();
-            $rejectedInterviews = Candidate::where('allocated_to', $recruiter->id)->where('interview_outcome',  'Rejected')->get();
-            $selectedInterviews = Candidate::where('allocated_to', $recruiter->id)->where('interview_outcome',  'Selected')->get();
-            $totalCandidates = Candidate::where('allocated_to', $recruiter->id)->get();
+            $completedInterviews = Candidate::where('status', 'active')->where('allocated_to', $recruiter->id)->where('interview_outcome', '!=', 'Ready')->get();
+            $remainingInterviews = Candidate::where('status', 'active')->where('allocated_to', $recruiter->id)->where('interview_outcome',  'Ready')->get();
+            $rejectedInterviews = Candidate::where('status', 'active')->where('allocated_to', $recruiter->id)->where('interview_outcome',  'Rejected')->get();
+            $selectedInterviews = Candidate::where('status', 'active')->where('allocated_to', $recruiter->id)->where('interview_outcome',  'Selected')->get();
+            $totalCandidates = Candidate::where('status', 'active')->where('allocated_to', $recruiter->id)->get();
 
             $localdata = array(
                 'Name' => $recruiter->name,

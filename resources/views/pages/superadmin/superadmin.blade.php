@@ -276,8 +276,8 @@
                         @if (count($Companies)>0)
                             @foreach ($Companies as $company)
                             @php
-                                $overallcandidates = \App\Models\Candidate::where('company_id',$company->id)->get();
-                                $selectedoverallcandidates = \App\Models\Candidate::where('company_id',$company->id)->where('interview_outcome','Selected')->get();
+                                $overallcandidates = \App\Models\Candidate::where('status', 'active')->where('company_id',$company->id)->get();
+                                $selectedoverallcandidates = \App\Models\Candidate::where('status', 'active')->where('company_id',$company->id)->where('interview_outcome','Selected')->get();
                             @endphp
                             <li class="list-group-item p-h-0">
                                 <div class="d-flex align-items-center justify-content-between">
@@ -331,7 +331,7 @@
                                 @foreach ($latestjobs as $job)
                                         @php
                                             $company = \App\Models\Company::find($job->company_id);
-                                            $applications = \App\Models\Candidate::where('job_id',$job->id)->get();
+                                            $applications = \App\Models\Candidate::where('status', 'active')->where('job_id',$job->id)->get();
                                         @endphp
                                     <tr>
                                         <td>

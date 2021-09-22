@@ -97,9 +97,9 @@ class AdditionalFieldsController extends Controller
 
         $companies = count(Company::where('status', 'active')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->get());
         $jobs = count(Job::where('status', 'active')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->get());
-        $candidates = count(Candidate::whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->get());
-        $SelectedCandidates = count(Candidate::where('interview_outcome', 'Selected')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->get());
-        $RejectedCandidates = count(Candidate::where('interview_outcome', 'Rejected')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->get());
+        $candidates = count(Candidate::where('status', 'active')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->get());
+        $SelectedCandidates = count(Candidate::where('status', 'active')->where('interview_outcome', 'Selected')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->get());
+        $RejectedCandidates = count(Candidate::where('status', 'active')->where('interview_outcome', 'Rejected')->whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->get());
 
         $data = "
         <table>

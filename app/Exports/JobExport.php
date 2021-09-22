@@ -33,11 +33,11 @@ class JobExport implements FromCollection, WithHeadings
         $jobs = Job::where('company_id', $company->id)->get();
         foreach ($jobs as $job) {
             $job_creator = User::find($job->created_by);
-            $completedInterviews = Candidate::where('job_id', $job->id)->where('interview_outcome', '!=', 'Ready')->get();
-            $remainingInterviews = Candidate::where('job_id', $job->id)->where('interview_outcome',  'Ready')->get();
-            $rejectedInterviews = Candidate::where('job_id', $job->id)->where('interview_outcome',  'Rejected')->get();
-            $selectedInterviews = Candidate::where('job_id', $job->id)->where('interview_outcome',  'Selected')->get();
-            $totalCandidates = Candidate::where('job_id', $job->id)->get();
+            $completedInterviews = Candidate::where('status', 'active')->where('job_id', $job->id)->where('interview_outcome', '!=', 'Ready')->get();
+            $remainingInterviews = Candidate::where('status', 'active')->where('job_id', $job->id)->where('interview_outcome',  'Ready')->get();
+            $rejectedInterviews = Candidate::where('status', 'active')->where('job_id', $job->id)->where('interview_outcome',  'Rejected')->get();
+            $selectedInterviews = Candidate::where('status', 'active')->where('job_id', $job->id)->where('interview_outcome',  'Selected')->get();
+            $totalCandidates = Candidate::where('status', 'active')->where('job_id', $job->id)->get();
             $localdata = array(
                 'Company Name' => $company->company_name,
                 'Industry' => $company->industry,

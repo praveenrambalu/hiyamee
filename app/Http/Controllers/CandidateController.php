@@ -35,7 +35,7 @@ class CandidateController extends Controller
         }
 
         if ($job) {
-            $candidates = Candidate::where('job_id', $job->id)->get();
+            $candidates = Candidate::where('status', 'active')->where('job_id', $job->id)->get();
             $company = Company::find($job->company_id);
             $creator = User::find($job->created_by);
             return view('pages.candidates.add')->with(['creator' => $creator, 'company' => $company, 'job' => $job, 'candidates' => $candidates]);
@@ -184,6 +184,9 @@ class CandidateController extends Controller
     public function candidateDetail(Request $request, $id)
     {
         $candidate = Candidate::find($id);
+        if ($candidate->status != 'active') {
+            abort(404);
+        }
         $job_id = $candidate->job_id;
         if (Auth::user()->user_type == 'superadmin' || Auth::user()->user_type == 'subadmin') {
             $job = Job::where('status', 'active')->where('id', $job_id)->first();
@@ -231,6 +234,9 @@ class CandidateController extends Controller
     {
         // return $request;
         $candidate = Candidate::find($id);
+        if ($candidate->status != 'active') {
+            abort(404);
+        }
         $job_id = $candidate->job_id;
         if (Auth::user()->user_type == 'superadmin') {
             $job = Job::where('status', 'active')->where('id', $job_id)->first();
@@ -306,7 +312,7 @@ class CandidateController extends Controller
                 }
             }
 
-            $checks = Candidate::where('job_id', $job_id)->where('interview_outcome', 'Ready')->get();
+            $checks = Candidate::where('status', 'active')->where('job_id', $job_id)->where('interview_outcome', 'Ready')->get();
             if (count($checks) == 0) {
                 $admin = User::find($company->admin_id);
                 $admin->notify(new InterviewsCompletedNotification($admin->name, $company->company_name, $job->job_title));
@@ -330,13 +336,13 @@ class CandidateController extends Controller
             $end = date("Y-m-d", strtotime($_GET['to_date'] . "+1 day"));
             if (Auth::user()->user_type == 'superadmin') {
                 $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
-                $candidates = Candidate::whereBetween('interview_date', [$start, $end])->get();
+                $candidates = Candidate::where('status', 'active')->whereBetween('interview_date', [$start, $end])->get();
                 $filterCompanies = Company::where('status', 'active')->get();
                 $filterJobs = Job::where('status', 'active')->get();
                 $filterUsers = User::where('status', 'active')->where('user_type', '!=', 'superadmin')->get();
             } else if (Auth::user()->user_type == 'subadmin') {
                 $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
-                $candidates = Candidate::whereIn('company_id', $assignarray)->whereBetween('interview_date', [$start, $end])->get();
+                $candidates = Candidate::where('status', 'active')->whereIn('company_id', $assignarray)->whereBetween('interview_date', [$start, $end])->get();
                 $filterCompanies = Company::where('status', 'active')->whereIn('id', $assignarray)->get();
                 $filterJobs = Job::where('status', 'active')->whereIn('company_id', $assignarray)->get();
                 $filterUsers = User::where('status', 'active')->where('user_type', '!=', 'superadmin')->get();
@@ -345,31 +351,31 @@ class CandidateController extends Controller
                 $filterCompanies = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->get();
                 $filterJobs = Job::where('status', 'active')->whereIn('company_id', $company->id)->get();
                 $employees = User::where('status', 'active')->where('user_type', 'employee')->where('company_id', $company->id)->get();
-                $candidates = Candidate::where('company_id', $company->id)->whereBetween('interview_date', [$start, $end])->get();
+                $candidates = Candidate::where('status', 'active')->where('company_id', $company->id)->whereBetween('interview_date', [$start, $end])->get();
                 $filterUsers = User::where('status', 'active')->where('user_type', 'employee')->where('company_id', $company->id)->get();
             } else if (Auth::user()->user_type == 'employee') {
                 $filterCompanies = [];
                 $filterJobs = [];
-                $candidates = Candidate::where('allocated_to', Auth::user()->id)->whereBetween('interview_date', [$start, $end])->get();
+                $candidates = Candidate::where('status', 'active')->where('allocated_to', Auth::user()->id)->whereBetween('interview_date', [$start, $end])->get();
                 $filterUsers = [];
             } else if (Auth::user()->user_type == 'recruiter') {
                 $filterCompanies = [];
                 $filterJobs = [];
                 $filterUsers = [];
-                $candidates = Candidate::where('allocated_to', Auth::user()->id)->whereBetween('interview_date', [$start, $end])->get();
+                $candidates = Candidate::where('status', 'active')->where('allocated_to', Auth::user()->id)->whereBetween('interview_date', [$start, $end])->get();
             } else {
                 abort(401);
             }
         } else {
             if (Auth::user()->user_type == 'superadmin') {
                 $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
-                $candidates = Candidate::all();
+                $candidates = Candidate::where('status', 'active')->get();
                 $filterCompanies = Company::where('status', 'active')->get();
                 $filterJobs = Job::where('status', 'active')->get();
                 $filterUsers = User::where('status', 'active')->where('user_type', '!=', 'superadmin')->get();
             } else if (Auth::user()->user_type == 'subadmin') {
                 $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
-                $candidates = Candidate::whereIn('company_id', $assignarray)->get();
+                $candidates = Candidate::where('status', 'active')->whereIn('company_id', $assignarray)->get();
                 $filterCompanies = Company::where('status', 'active')->whereIn('id', $assignarray)->get();
                 $filterJobs = Job::where('status', 'active')->whereIn('company_id', $assignarray)->get();
                 $filterUsers = User::where('status', 'active')->where('user_type', '!=', 'superadmin')->get();
@@ -377,16 +383,16 @@ class CandidateController extends Controller
                 $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
                 $employees = User::where('status', 'active')->where('user_type', 'employee')->where('company_id', $company->id)->get();
                 $filterCompanies = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->get();
-                $candidates = Candidate::where('company_id', $company->id)->get();
+                $candidates = Candidate::where('status', 'active')->where('company_id', $company->id)->get();
                 $filterJobs = Job::where('status', 'active')->whereIn('company_id', $company->id)->get();
                 $filterUsers = User::where('status', 'active')->where('user_type', 'employee')->where('company_id', $company->id)->get();
             } else if (Auth::user()->user_type == 'employee') {
-                $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
+                $candidates = Candidate::where('status', 'active')->where('allocated_to', Auth::user()->id)->get();
                 $filterCompanies = [];
                 $filterJobs = [];
                 $filterUsers = [];
             } else if (Auth::user()->user_type == 'recruiter') {
-                $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
+                $candidates = Candidate::where('status', 'active')->where('allocated_to', Auth::user()->id)->get();
                 $filterCompanies = [];
                 $filterJobs = [];
                 $filterUsers = [];
@@ -412,7 +418,7 @@ class CandidateController extends Controller
         if (Auth::user()->user_type != 'admin' && Auth::user()->user_type != 'superadmin' && Auth::user()->user_type != 'subadmin') {
             abort(401);
         }
-        $candidates = Candidate::where('allocated_to', $id)->get();
+        $candidates = Candidate::where('status', 'active')->where('allocated_to', $id)->get();
         return view('pages.candidates.viewAllCandidatesByUser')->with(['candidates' => $candidates]);
     }
     public function editCandidate(Request $request, $id)
@@ -421,6 +427,10 @@ class CandidateController extends Controller
             abort(401);
         }
         $candidate = Candidate::findOrFail($id);
+        if ($candidate->status != 'active') {
+            abort(404);
+        }
+
         if ($candidate->interview_outcome != 'Ready') {
             abort(403);
         }
@@ -445,6 +455,9 @@ class CandidateController extends Controller
             abort(401);
         }
         $candidate = Candidate::findOrFail($id);
+        if ($candidate->status != 'active') {
+            abort(404);
+        }
         if ($candidate->interview_outcome != 'Ready') {
             abort(403);
         }
@@ -491,6 +504,9 @@ class CandidateController extends Controller
 
 
         $candidate = Candidate::find($id);
+        if ($candidate->status != 'active') {
+            abort(404);
+        }
         $job_id = $candidate->job_id;
         if (Auth::user()->user_type == 'superadmin') {
             $job = Job::where('status', 'active')->where('id', $job_id)->first();
@@ -574,15 +590,15 @@ class CandidateController extends Controller
         }
 
         if (Auth::user()->user_type == 'superadmin') {
-            $candidates = Candidate::where('interview_date', '!=', NULL)->get();
+            $candidates = Candidate::where('status', 'active')->where('interview_date', '!=', NULL)->get();
         } else if (Auth::user()->user_type == 'admin') {
             $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
-            $candidates = Candidate::where('company_id', $company->id)->where('interview_date', '!=', NULL)->get();
+            $candidates = Candidate::where('status', 'active')->where('company_id', $company->id)->where('interview_date', '!=', NULL)->get();
         } else if (Auth::user()->user_type == 'subadmin') {
 
-            $candidates = Candidate::whereIn('company_id', $assignarray)->where('interview_date', '!=', NULL)->get();
+            $candidates = Candidate::where('status', 'active')->whereIn('company_id', $assignarray)->where('interview_date', '!=', NULL)->get();
         } else {
-            $candidates = Candidate::where('allocated_to', Auth::user()->id)->where('interview_date', '!=', NULL)->get();
+            $candidates = Candidate::where('status', 'active')->where('allocated_to', Auth::user()->id)->where('interview_date', '!=', NULL)->get();
         }
         $data = [];
 

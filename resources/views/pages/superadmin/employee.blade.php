@@ -154,7 +154,7 @@
                                 @foreach ($latestjobs as $job)
                                         @php
                                             $company = \App\Models\Company::find($job->company_id);
-                                            $applications = \App\Models\Candidate::where('job_id',$job->id)->get();
+                                            $applications = \App\Models\Candidate::where('status', 'active')->where('job_id',$job->id)->get();
                                         @endphp
                                     <tr>
                                         <td>

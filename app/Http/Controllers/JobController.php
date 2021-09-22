@@ -248,9 +248,9 @@ class JobController extends Controller
 
         if ($job) {
             if (Auth::user()->user_type == 'superadmin' || Auth::user()->user_type == 'admin') {
-                $candidates = Candidate::where('job_id', $job->id)->get();
+                $candidates = Candidate::where('status', 'active')->where('job_id', $job->id)->get();
             } else {
-                $candidates = Candidate::where('job_id', $job->id)->where('allocated_to', Auth::user()->id)->get();
+                $candidates = Candidate::where('status', 'active')->where('job_id', $job->id)->where('allocated_to', Auth::user()->id)->get();
             }
             $company = Company::find($job->company_id);
             $creator = User::find($job->created_by);

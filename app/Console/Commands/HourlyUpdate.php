@@ -44,6 +44,7 @@ class HourlyUpdate extends Command
         $now = date("H:i", strtotime('+1 hour'));
         $candidates = Candidate::where('interview_outcome', 'Ready')
             ->where('interview_date', $today)
+            ->where('status', 'active')
             ->where('interview_completed_at', NULL)
             ->where('interview_time', '<=', $now)
             ->distinct()->get(['allocated_to']);

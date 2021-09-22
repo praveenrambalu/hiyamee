@@ -28,18 +28,18 @@ class CandidateExport implements FromCollection, WithHeadings
         $data = [];
         switch (Auth::user()->user_type) {
             case 'superadmin':
-                $candidates = Candidate::all();
+                $candidates = Candidate::where('status', 'active')->get();
                 break;
             case 'admin':
                 if ($company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first()) {
-                    $candidates = Candidate::where('company_id', $company->id)->get();
+                    $candidates = Candidate::where('status', 'active')->where('company_id', $company->id)->get();
                 } else {
-                    $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
+                    $candidates = Candidate::where('status', 'active')->where('allocated_to', Auth::user()->id)->get();
                 }
                 break;
 
             default:
-                $candidates = Candidate::where('allocated_to', Auth::user()->id)->get();
+                $candidates = Candidate::where('status', 'active')->where('allocated_to', Auth::user()->id)->get();
                 break;
         }
         foreach ($candidates as $candidate) {
