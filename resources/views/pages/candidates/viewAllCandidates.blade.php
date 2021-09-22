@@ -191,7 +191,7 @@
                                             @default
                                             <td class="urlclicker"><span class="badge badge-pill  badge-default">{{$candidate->interview_outcome}}</span></td>
                                         @endswitch
-                                        <td class="urlclicker">
+                                        <td >
                                             @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='subadmin')
                                                 @if ($candidate->allocated_to==null)
                                                     <input type="checkbox" name="candidate[]" value="{{$candidate->id}}" >

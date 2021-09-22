@@ -106,7 +106,7 @@
                                     <tr data-url="/candidates/{{$candidate->id}}">
                                         <td>{{$i++}}</td>
                                         <td class="urlclicker">{{$candidate->id}}</td>
-                                        <td class="urlclicker">
+                                        <td >
                                             @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin')
                                                 @if ($candidate->allocated_to==null)
                                                     <input type="checkbox" name="candidate[]" value="{{$candidate->id}}" >
