@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AdditionalField;
 use App\Models\Candidate;
 use App\Models\Company;
+use App\Models\CompanyAssign;
 use App\Models\FieldList;
 use App\Models\Job;
 use App\Models\User;
@@ -26,19 +27,37 @@ class JobController extends Controller
     }
     public function selectCompaniesBySuperadmin()
     {
-        if (Auth::user()->user_type != 'superadmin') {
+        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type != 'subadmin') {
             abort(404);
         }
         $companies = Company::where('status', 'active')->get();
+        if (Auth::user()->user_type == 'subadmin') {
+            $assigns = CompanyAssign::where('user_id', Auth::user()->id)->where('status', 'active')->get();
+            $assignarray = [];
+            foreach ($assigns as $assign) {
+                array_push($assignarray, $assign->company_id);
+            }
+
+
+            $companies = Company::where('status', 'active')->whereIn('id', $assignarray)->get();
+        }
         return view('pages.jobs.select')->with('companies', $companies);
     }
 
     public function addJobBySuperadmin(Request $request, $id)
     {
-        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type == 'subadmin') {
+        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type != 'subadmin') {
             abort(401);
         }
-        $company = Company::where('id', $id)->where('status', 'active')->first();
+        if (Auth::user()->user_type == 'superadmin') {
+            $company = Company::where('id', $id)->where('status', 'active')->first();
+        } else if (Auth::user()->user_type == 'subadmin') {
+            if ($existtest = CompanyAssign::where('user_id', Auth::user()->id)->where('company_id', $id)->first()) {
+                $company = Company::where('id', $id)->where('status', 'active')->first();
+            } else {
+                return redirect()->back()->with('error', 'Sorry the Company is inactive or not assigned');
+            }
+        }
         if ($company) {
             $fields = AdditionalField::where('status', 'active')->get();
             return view('pages.jobs.add')->with(['company' => $company, 'fields' => $fields]);
@@ -48,7 +67,7 @@ class JobController extends Controller
     }
     public function addJobBySuperadminPost(Request $request, $id)
     {
-        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type == 'subadmin') {
+        if (Auth::user()->user_type != 'superadmin' &&  Auth::user()->user_type != 'subadmin') {
             abort(401);
         }
         $company = Company::where('id', $id)->where('status', 'active')->first();
@@ -171,6 +190,15 @@ class JobController extends Controller
             $company = Company::where('id', Auth::user()->company_id)->where('status', 'active')->first();
         } else if (Auth::user()->user_type == 'superadmin') {
             $jobs = Job::where('status', 'active')->get();
+            return view('pages.jobs.view-jobs')->with(['jobs' => $jobs]);
+        } else if (Auth::user()->user_type == 'subadmin') {
+            $assigns = CompanyAssign::where('user_id', Auth::user()->id)->where('status', 'active')->get();
+            $assignarray = [];
+            foreach ($assigns as $assign) {
+                array_push($assignarray, $assign->company_id);
+            }
+
+            $jobs = Job::where('status', 'active')->whereIn('company_id', $assignarray)->get();
             return view('pages.jobs.view-jobs')->with(['jobs' => $jobs]);
         } else {
             abort(404);

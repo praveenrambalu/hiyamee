@@ -122,6 +122,25 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item dropdown @yield('jobs')">
+                        <a class="dropdown-toggle" href="javascript:void(0);">
+                            <span class="icon-holder">
+                                <i class="fas fa-briefcase"></i>
+                            </span>
+                            <span class="title">Jobs</span>
+                            <span class="arrow">
+                                <i class="arrow-icon"></i>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="@yield('jobs-add')">
+                                <a href="/jobs/admin/select">Add <span class="fa fa-info-circle infocircle"  data-toggle="tooltip" data-placement="right" title="Add  jobs "></span></a>
+                            </li>
+                            <li class="@yield('jobs-view')">
+                                <a href="/jobs/view">View <span class="fa fa-info-circle infocircle"  data-toggle="tooltip" data-placement="right" title="View Jobs "></span></a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item dropdown @yield('recruiter')">
                         <a class="dropdown-toggle" href="javascript:void(0);">
                             <span class="icon-holder">

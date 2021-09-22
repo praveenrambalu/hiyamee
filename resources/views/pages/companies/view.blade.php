@@ -52,9 +52,12 @@
                                     <td>{{$company->status}}</td>
                                     <td>
                                         <a href="/jobs/view/{{$company->id}}"  class="btn btn-primary" title="View Jobs"><i class="fas fa-eye"></i></a>
+                                        @if (Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='subadmin' )
+                                            
                                         @if (Auth::user()->user_type=='superadmin')
                                             
                                         <a href="/companies/edit/{{$company->id}}"  class="btn btn-warning" title="Edit Company"><i class="fas fa-edit"></i></a>
+                                        @endif
                                         <a href="/jobs/add/{{$company->id}}"  class="btn btn-dark" title="Add Job Post"><i class="fas fa-plus"></i></a>
                                        
                                         {{-- <a href="#" onclick="alert('Not Implemented')" class="btn btn-danger" title=""><i class="fas fa-trash"></i></a> --}}

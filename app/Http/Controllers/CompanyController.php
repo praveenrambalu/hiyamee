@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\CompanyAssign;
 use App\Models\User;
 use App\Notifications\AdminAssignNotification;
 use Illuminate\Http\Request;
@@ -112,6 +113,17 @@ class CompanyController extends Controller
         }
 
         $companies = Company::where('status', 'active')->get();
+        if (Auth::user()->user_type == 'subadmin') {
+            $assigns = CompanyAssign::where('user_id', Auth::user()->id)->where('status', 'active')->get();
+            $assignarray = [];
+            foreach ($assigns as $assign) {
+                array_push($assignarray, $assign->company_id);
+            }
+
+
+            $companies = Company::where('status', 'active')->whereIn('id', $assignarray)->get();
+        }
+
         return view('pages.companies.view')->with('companies', $companies);
     }
     public function editCompany(Request $request, $id)
