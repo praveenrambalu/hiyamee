@@ -286,8 +286,8 @@ class JobController extends Controller
                     $etc = 1;
                 }
                 $dbcand->allocated_to = $request->employee;
-                $dbcand->interview_date = $request->interview_date;
-                $dbcand->interview_time = $request->interview_time;
+                // $dbcand->interview_date = $request->interview_date;
+                // $dbcand->interview_time = $request->interview_time;
                 $dbcand->update_history = $dbcand->update_history . ' <br> *' . now() . ' : Candidate Allocated to ' . $employee->name . ' By ' . Auth::user()->name;
                 $dbcand->save();
             }
@@ -296,7 +296,7 @@ class JobController extends Controller
                 $names = $names . ' etc.';
             }
 
-            $employee->notify(new CandidatesAssigned($employee->name, $count, $names, $request->interview_date));
+            $employee->notify(new CandidatesAssigned($employee->name, $count, $names, $dbcand->interview_date));
 
             return redirect()->back()->with('success', 'The candidates allocated Successfully ');
         } else {

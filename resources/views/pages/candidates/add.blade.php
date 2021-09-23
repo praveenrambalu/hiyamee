@@ -172,7 +172,31 @@
                         </div>
                     </div>
 
-
+                  @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin' || Auth::user()->user_type=='subadmin')
+                        
+                    <div class=" form-row">
+                        <div class="form-group col-sm-4 align-self-center">
+                            <label for="">Scheduled to</label>
+                            <select name="employee"  class="form-control">
+                                <option value="">---Select Later---</option>
+                                @if (count($employees)>0)
+                                @foreach ($employees as $employee)
+                                <option value="{{$employee->id}}">{{$employee->name}} - {{$employee->email}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                        </div>
+                        <div class="form-group col-sm-4 align-self-center">
+                            <label for="">Interview Date <span class="text-danger">*</span></label>
+                            <input type="date" name="interview_date" class="form-control" required id="">
+                        </div>
+                        <div class="form-group col-sm-4 align-self-center">
+                            <label for="">Interview Time <span class="text-danger">*</span></label>
+                            <input type="time" name="interview_time" class="form-control" required id="">
+                        </div>
+                      
+                    </div>
+                    @endif
                 
                     <button type="submit" class="btn btn-primary">Add Candidate</button>
                 </form>

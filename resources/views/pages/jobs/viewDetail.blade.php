@@ -76,6 +76,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Application ID</th>
+                                <th>Select</th>
                                 <th>Assign to</th>
                                 <th>Interview Status</th>
                                 <th>Name</th>
@@ -106,11 +107,14 @@
                                     <tr data-url="/candidates/{{$candidate->id}}">
                                         <td>{{$i++}}</td>
                                         <td class="urlclicker">{{$candidate->id}}</td>
+                                        <td>
+                                            @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='subadmin' || Auth::user()->user_type=='superadmin')
+                                            <input type="checkbox" name="candidate[]" value="{{$candidate->id}}" >
+                                            @endif
+                                        </td>
                                         <td >
                                             @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin')
-                                                @if ($candidate->allocated_to==null)
-                                                    <input type="checkbox" name="candidate[]" value="{{$candidate->id}}" >
-                                                @else
+                                                @if ($candidate->allocated_to!=null)
                                                     @php
                                                         $allocated = \App\Models\User::find($candidate->allocated_to);
                                                     @endphp
@@ -185,7 +189,7 @@
                     @if (Auth::user()->user_type=='admin' || Auth::user()->user_type=='superadmin')
                         
                     <div class=" row align-items-center">
-                        <div class="form-group col-sm-3 align-self-center">
+                        <div class="form-group col-sm-5 align-self-center">
                             <label for="">Scheduled to</label>
                             <select name="employee" required class="form-control">
                                 @if (count($employees)>0)
@@ -195,14 +199,7 @@
                                     @endif
                                 </select>
                         </div>
-                        <div class="form-group col-sm-3 align-self-center">
-                            <label for="">Interview Date</label>
-                            <input type="date" name="interview_date" class="form-control" required id="">
-                        </div>
-                        <div class="form-group col-sm-3 align-self-center">
-                            <label for="">Interview Time</label>
-                            <input type="time" name="interview_time" class="form-control" required id="">
-                        </div>
+                        
                         <div class="form-group col-sm-3 align-self-center">
                             <button type="submit" class="btn btn-primary">Allocate </button>
                         </div>

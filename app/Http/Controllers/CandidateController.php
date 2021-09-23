@@ -20,10 +20,13 @@ class CandidateController extends Controller
 {
     public function addCandidate(Request $request, $id)
     {
+        $employees = [];
         if (Auth::user()->user_type == 'superadmin' || Auth::user()->user_type == 'subadmin') {
             $job = Job::where('status', 'active')->where('id', $id)->first();
+            $employees = User::where('status', 'active')->where('user_type', 'recruiter')->get();
         } else if (Auth::user()->user_type == 'admin') {
             $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+            $employees = User::where('status', 'active')->where('user_type', 'employee')->where('company_id', $company->id)->get();
             $job = Job::where('status', 'active')->where('company_id', $company->id)->where('id', $id)->first();
         } else if (Auth::user()->user_type == 'employee') {
             $company = Company::where('id', Auth::user()->company_id)->where('status', 'active')->first();
@@ -38,7 +41,7 @@ class CandidateController extends Controller
             $candidates = Candidate::where('status', 'active')->where('job_id', $job->id)->get();
             $company = Company::find($job->company_id);
             $creator = User::find($job->created_by);
-            return view('pages.candidates.add')->with(['creator' => $creator, 'company' => $company, 'job' => $job, 'candidates' => $candidates]);
+            return view('pages.candidates.add')->with(['creator' => $creator, 'company' => $company, 'job' => $job, 'candidates' => $candidates, 'employees' => $employees]);
         } else {
             return redirect('/dashboard')->with('error', 'Sorry the Job is inactive or not found');
         }
@@ -81,6 +84,12 @@ class CandidateController extends Controller
             $candidate->buyout = $request->buyout;
             $candidate->location = $request->location;
             $candidate->prelocation = $request->prelocation;
+            if ($request->employee != "") {
+                # code...
+                $candidate->allocated_to = $request->employee;
+            }
+            $candidate->interview_date = $request->interview_date;
+            $candidate->interview_time = $request->interview_time;
             $candidate->job_position = $job->job_title;
             $candidate->job_company = $company->company_name;
             $candidate->uploaded_by = Auth::user()->id;
