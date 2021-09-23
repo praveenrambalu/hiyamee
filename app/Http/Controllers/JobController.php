@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Notifications\CandidatesAssigned;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class JobController extends Controller
 {
@@ -221,6 +222,45 @@ class JobController extends Controller
             return view('pages.jobs.view')->with(['company' => $company, 'jobs' => $jobs]);
         } else {
             return redirect('/dashboard')->with('error', 'Sorry the Company is inactive or not assigned');
+        }
+    }
+    public function viewJobsCompanyAjax(Request $request, $id)
+    {
+        if (Auth::user()->user_type != 'superadmin') {
+            $company = Company::where('status', 'active')->where('id', $id)->first();
+        } else if (Auth::user()->user_type == 'subadmin') {
+            if (!$assign = CompanyAssign::where('user_id', Auth::user()->id)->where('company_id', $id)->where('status', 'active')->first()) {
+                return response()->json('Unauthorized', 401);
+            }
+        } else if (Auth::user()->user_type == 'recruiter') {
+            if (!$candidates = Candidate::where('status', 'active')->where('allocated_to', Auth::user()->id)->where('company_id', $id)->first()) {
+                return response()->json('Unauthorized', 401);
+            }
+        } else if (Auth::user()->user_type == 'admin') {
+            $company = Company::where('admin_id', Auth::user()->id)->where('status', 'active')->first();
+            if ($id != $company->id) {
+                return response()->json('Unauthorized', 401);
+            }
+        } else if (Auth::user()->user_type == 'employee') {
+            if ($id != Auth::user()->company_id) {
+                return response()->json('Unauthorized', 401);
+            }
+        } else {
+            return response()->json('Unauthorized', 401);
+        }
+
+        // if (Auth::user()->user_type == "subadmin") {
+        //     if (!$assigns = CompanyAssign::where('user_id', Auth::user()->id)->where('company_id', $company->id)->where('status', 'active')->first()) {
+        //         return response()->json('Unauthorized', 401);
+        //     }
+        // }
+
+        if ($company) {
+            $jobs = Job::where('company_id', $company->id)->where('status', 'active')->get();
+
+            return view('pages.jobs.viewajax')->with(['jobs' => $jobs]);
+        } else {
+            return response()->json('Not Found', 404);
         }
     }
     public function viewJobDetail(Request $request, $id)

@@ -18,21 +18,71 @@
                 <form action="" method="get" id="filterform">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4>Filter by Interview Date</h4>
+                                <h4>Filter Candidates</h4>
                                 <hr>
                             </div>
-                            <div class="form-group col-5">
-                              <label for="">From Date</label>
+                            <div class="form-group col-2">
+                                <label for="">Companies</label>
+                                <input type="hidden" name="filter" value="true">
+                                @if (count($filterCompanies)>0)
+                                    <select  id="main_companies_filter" name="company" class="form-control">
+                                        <option value="">-</option>
+                                        @foreach ($filterCompanies as $filterCompany)
+                                            <option value="{{$filterCompany->id}}">{{$filterCompany->company_name}}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                            </div>
+                            <div class="form-group col-2">
+                                <label for="">Job Role</label>
+                                    <select  id="main_jobs_filter" name="job" class="form-control">
+                                    </select>
+                            </div>
+                            <div class="form-group col-2">
+                                <label for="">Users</label>
+                                @if (count($filterUsers)>0)
+                                    <select  id="main_users_filter" name="user" class="form-control">
+                                        <option value="">-</option>
+                                        @foreach ($filterUsers as $filterUser)
+                                            <option value="{{$filterUser->id}}">{{$filterUser->name}} - {{$filterUser->email}}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                            </div>
+                            <div class="form-group col-2">
+                                <label for="">Status</label>
+                                    <select  id="main_status_filter" name="status" class="form-control">
+                                        <option value="">-</option>
+                                        <option value="Ready">Yet to be Interviewed</option>
+                                        <option value="Interviewed">Interviewed</option>
+                                        <option value="Feedback pending">Feedback pending</option>
+                                        <option value="Selected">Selected</option>
+                                        <option value="Rejected">Rejected</option>
+                                        <option value="Not Interested">Not Interested</option>
+                                        
+                                    </select>
+                            </div>
+                            <div class="form-group col-2">
+                                <label for="">Min Experience</label>
+                                <input type="number" min="0" max="70" step="0.1" name="experience" id="main_experience_filter" class="form-control">
+
+                            </div>
+                            <div class="form-group col-2">
+                              <label for="">Uploaded On</label>
+                              <input type="date" name="uploadedon"  class="form-control" placeholder="" aria-describedby="helpId">
+                            </div>
+                            <div class="form-group col-2">
+                              <label for="">Interview From Date</label>
                               <input type="date" name="from_date" id="from_date" class="form-control" placeholder="" aria-describedby="helpId">
                             </div>
-                            <div class="form-group col-5">
-                              <label for="">To Date</label>
+                            <div class="form-group col-2">
+                              <label for="">Interview To Date</label>
                               <input type="date" name="to_date" id="to_date" class="form-control" placeholder="" aria-describedby="helpId">
                                 <p class="text-danger" id="filter-error"></p>
                             </div>
                             <div class="form-group col-2">
-                                <button type="button" id="filterbtn" class="btn btn-primary mt-4">Filter</button>
-                                @if (isset($_GET['from_date']))
+                                <button type="button" id="filterbtn" class="btn btn-dark mt-4">Filter</button>
+                                @if (isset($_GET['filter']))
                                 <a href="/candidates" class="btn btn-danger mt-4">Clear Filter</a>
                                 @endif
                             </div>
@@ -45,7 +95,7 @@
 </div>
 
 
-<div class="row">
+<div class="row d-none">
     <div class="col-md-12 col-lg-12">
         <div class="card">
             <div class="card-body">
@@ -126,6 +176,8 @@
         </div>
     </div>
 </div>
+
+
 <div class="row">
     <div class="col-md-12 col-lg-12">
         <div class="card">
@@ -342,11 +394,39 @@
                             $("#filter-error").show();
                         }, 3000);
                     }
+                }else{
+                    let isFilter = confirm("Filter without Interview Dates?");
+                    if (isFilter) {
+                        $("#filterform").submit()
+                    }
                 }
 
            });
         });
     </script>
+    <script>
+        $(document).ready(function(){
+            $("#main_companies_filter").change(function(){
+                var main_company_id = $(this).val();
+                if (main_company_id!="") {
+                    var ajaxurl = '/jobs/viewajax/'+main_company_id
+                    $.ajax({
+                        url: ajaxurl, 
+                        success: function(result){
+                            $("#main_jobs_filter").html(result);
+			            }, 
+                        error: function(result) { 
+                            console.log(result)
+                            swal("Oops !",`${result['responseJSON']}`,'error');
+                        } 
+			        });
+                }else{
+                   $("#main_jobs_filter").html('') 
+                }
+            });
+        })
+    </script>
+
 
     <script>
         $(document).ready(function(){

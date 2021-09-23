@@ -53,6 +53,7 @@ Route::group(['prefix' => '/jobs', 'middleware' => ['auth']], function () {
     Route::post('/', [JobController::class, 'addJobPost']);
     Route::get('/view', [JobController::class, 'viewJobs']);
     Route::get('/view/{id}', [JobController::class, 'viewJobsCompany']);
+    Route::get('/viewajax/{id}', [JobController::class, 'viewJobsCompanyAjax']);
     Route::get('/{id}', [JobController::class, 'viewJobDetail']);
     Route::post('/{id}', [JobController::class, 'allocateCandidates']);
     Route::get('/admin/select', [JobController::class, 'selectCompaniesBySuperadmin']);
