@@ -164,6 +164,8 @@ class CandidateController extends Controller
                         $candidate->location = $data[14];
                         $candidate->prelocation = $data[15];
                         $candidate->resume = $data[16];
+                        $candidate->interview_date = $data[17];
+                        $candidate->interview_time = $data[18];
 
                         $candidate->job_position = $job->job_title;
                         $candidate->job_company = $company->company_name;
