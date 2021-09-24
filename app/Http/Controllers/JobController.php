@@ -226,7 +226,7 @@ class JobController extends Controller
     }
     public function viewJobsCompanyAjax(Request $request, $id)
     {
-        if (Auth::user()->user_type != 'superadmin') {
+        if (Auth::user()->user_type == 'superadmin') {
             $company = Company::where('status', 'active')->where('id', $id)->first();
         } else if (Auth::user()->user_type == 'subadmin') {
             if (!$assign = CompanyAssign::where('user_id', Auth::user()->id)->where('company_id', $id)->where('status', 'active')->first()) {
